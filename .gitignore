@@ -1,0 +1,17 @@
+**/node_modules
+*.log
+bootstrap*.*
+*.xml
+*.png
+*.ico
+*.svg
+/uploads
+exports
+site.webmanifest
+.env
+*.csv
+*.xls
+*.xlsx
+/users_guides
+.credentials.*
+test/testui/screenshots
