@@ -1,9 +1,13 @@
-//dodělat logy
-
 // spouštění, aby nepadalo
-// vazba na SQL db
-// logování
+// vazba na postgresql
 // přihlašování
+
+
+// instalace node.js do ubuntu: https://github.com/nodesource/distributions/blob/master/README.md
+// postgresql by mělo být na každém ubuntu
+// vkládání dat do db pomocí: https://stackoverflow.com/questions/2987433/how-to-import-csv-file-data-into-a-postgresql-table
+
+'use strict';
 
 const createError = require('http-errors');
 const express = require('express');
@@ -38,10 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
   stream: process.env.REQUEST_LOG_FILE ?
   rfs.createStream(process.env.REQUEST_LOG_FILE, {
-  size: '3K', // rotate every 100kB written
-  interval: '7d', // rotate daily
-  compress: 'gzip', // compress rotated files
-  path: 'log'
+  size: '10M', // rotate every 10M written
+  interval: '7d', // rotate weekly
+  path: 'log' // path to log files
   })
 : process.stdout
 }));
