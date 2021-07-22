@@ -1,11 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const homeCtrl = require('../controllers/homeCtrl');
+const baseCtrl = require('../controllers/baseCtrl');
 
-/* GET home page. */
+// basepage
 router.route('/')
-  // domácí stránka
-  .get(homeCtrl.home);
+  .get(baseCtrl.home)
 
+  // Useful links
+router.route('/links')
+  .get(baseCtrl.links)
+
+// Analysis upload
+router.route('/analysis')
+  .get(baseCtrl.analysis)
+
+// Db search
+router.route('/dbsearch')
+  .get(baseCtrl.dbsearch)
 
 module.exports = router;

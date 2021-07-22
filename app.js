@@ -1,7 +1,16 @@
+// testy
 // spouštění, aby nepadalo
 // vazba na postgresql
 // přihlašování
+// loga 2. LF
+// favicon
+// struktura dle zadání
 
+// web je dnalab.cz
+
+// mozzila/chrome
+
+// validace, pretifikace
 
 // instalace node.js do ubuntu: https://github.com/nodesource/distributions/blob/master/README.md
 // postgresql by mělo být na každém ubuntu
@@ -37,6 +46,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// directory with bootstrap
+app.use('/assets/vendor/bootstrap', express.static(
+  path.join(__dirname, 'node_modules', 'bootstrap', 'dist')));
+// directory with jquery for bootstrap
+app.use('/assets/vendor/jquery', express.static(
+  path.join(__dirname, 'node_modules', 'jquery', 'dist')));
+// directory with js for bootstrap
+  app.use('/assets/vendor/popper.js', express.static(
+  path.join(__dirname, 'node_modules', 'popper.js', 'dist', 'umd')));
+// directory with icons
+app.use('/assets/vendor/feather-icons', express.static(
+    path.join(__dirname, 'node_modules', 'feather-icons', 'dist')));
 
 // logování s rotací souborů
 app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
