@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 const baseCtrl = require('../controllers/baseCtrl');
@@ -6,16 +8,34 @@ const baseCtrl = require('../controllers/baseCtrl');
 router.route('/')
   .get(baseCtrl.home)
 
-  // Useful links
-router.route('/links')
-  .get(baseCtrl.links)
+// In-house db
+router.route('/in-house-db')
+  .get(baseCtrl.inhousedb)
+  
+// Annotation
+router.route('/annotation')
+  .get(baseCtrl.annotation)
 
-// Analysis upload
-router.route('/analysis')
-  .get(baseCtrl.analysis)
+// Filter
+router.route('/filter')
+  .get(baseCtrl.filter)
 
-// Db search
-router.route('/dbsearch')
-  .get(baseCtrl.dbsearch)
+// Merge
+router.route('/merge')
+  .get(baseCtrl.merge)
+
+// Beos
+router.route('/beos')
+  .get(baseCtrl.beos)
+
+// Fastqs
+router.route('/fastqs')
+  .get(baseCtrl.fastqs)
+
+// Bam-crams
+router.route('/bam-crams')
+  .get(baseCtrl.bamcrams)
+
+
 
 module.exports = router;

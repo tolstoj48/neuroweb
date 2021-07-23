@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "testing": "mocha ",
+    "all-tests": "npm run test && cd testui && npm run test",
+    "test": "npm-run-all --serial test-models test-api",
+    "test-models": "mocha models.test --timeout 120000",
+    "test-api": "mocha restApiNoAuthentication.test --timeout 120000"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cheerio": "^1.0.0-rc.9",
+    "mocha": "^7.2.0",
+    "npm-run-all": "^4.1.5",
+    "supertest": "^6.1.3"
+  }
+}
