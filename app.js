@@ -1,5 +1,6 @@
 
-//rems, správně váýznamnově html
+// flash přidávání do to-do-listu
+//pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
 // testy
 // spouštění, aby nepadalo
 // vazba na postgresql
@@ -12,7 +13,7 @@
 
 // mozzila/chrome
 
-// validace, pretifikace
+// validace, pretifikace, správně váýznamnově html
 
 // instalace node.js do ubuntu: https://github.com/nodesource/distributions/blob/master/README.md
 // postgresql by mělo být na každém ubuntu

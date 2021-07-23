@@ -1,11 +1,10 @@
 {
-  "name": "testui",
+  "name": "test-content",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "content.test.js",
   "scripts": {
-    "test": "mocha ui.test",
-    "test-ui-login": "mocha ui.test.login"
+    "test": "mocha content.test"
   },
   "author": "",
   "license": "ISC",

@@ -9,7 +9,7 @@ const assert = chai.assert;
 
 const puppeteer = require("puppeteer");
 
-describe("Neuroweb UI tests", function () {
+describe("Neuroweb - UI", function () {
   this.timeout(10000);
   let browser;
   let page;
@@ -91,7 +91,7 @@ it("should get incorrect link", async function () {
   await page.goto("http://localhost:3000/incorrect-url");
   // h4 titulek 404
   assert.include(
-    await page.$eval('body >pre', el => el.textContent),
+    await page.$eval('body > pre', el => el.textContent),
     "ENOENT: no such file or directory"
   );
 });
