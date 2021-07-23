@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "testing": "mocha ",
     "all-tests": "npm run test && cd testui && npm run test",
     "test": "npm-run-all --serial test-models test-api",
     "test-models": "mocha models.test --timeout 120000",

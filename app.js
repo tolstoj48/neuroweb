@@ -1,3 +1,5 @@
+
+//rems, správně váýznamnově html
 // testy
 // spouštění, aby nepadalo
 // vazba na postgresql

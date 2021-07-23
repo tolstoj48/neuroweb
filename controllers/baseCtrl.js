@@ -59,7 +59,7 @@ module.exports.fastqs = (req, res) => {
 module.exports.bamcrams = (req, res) => { 
   res.render('bam-crams', { 
     layout: 'index',
-    title: 'NGL - BEOs',
+    title: 'NGL - BAM-CRAMs',
   });
 }
 
