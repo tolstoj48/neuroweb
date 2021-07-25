@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env REQUEST_LOG_FILE=log-file.log REQUEST_LOG_FORMAT=common DEBUG=neuroweb:* nodemon ./bin/www"
+    "start-dev": "cross-env ENV=development REQUEST_LOG_FILE=log-file.log REQUEST_LOG_FORMAT=common DEBUG=neuroweb:* nodemon ./bin/www",
+    "start-prod": "cross-env REQUEST_LOG_FILE=log-file.log REQUEST_LOG_FORMAT=common DEBUG=neuroweb:* nodemon ./bin/www"
   },
   "dependencies": {
     "bootstrap": "^5.0.2",

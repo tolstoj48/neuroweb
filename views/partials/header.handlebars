@@ -1,17 +1,18 @@
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fs-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fs-5">
   <div class="container-fluid">
-  <a class="navbar-brand" href="/"><i data-feather="home"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/"><i data-feather="home"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link active" href="/in-house-db">In-house database</a>
-      </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link active dropdown-toggle" href="/vcfs" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav ms-auto" id="menuBar">
+        <li class="nav-item">
+          <a class="nav-link active" href="/in-house-db">In-house database</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="/vcfs" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
             VCFs
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -20,11 +21,12 @@
             <li><a class="dropdown-item" href="/merge">Merge</a></li>
           </ul>
         </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="/beos">BEOs</a>
-      </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link active dropdown-toggle" href="/qa" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item">
+          <a class="nav-link active" href="/beds">BEDs</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="/qa" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
             Quality control
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -32,7 +34,10 @@
             <li><a class="dropdown-item" href="/bam-crams">BAM/CRAMs</a></li>
           </ul>
         </li>
-    </ul>
-  </div>
+        <li class="nav-item">
+          <a class="nav-link active" href="/ngs-com">NGS comments</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

@@ -1,6 +1,6 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+<main class="container">
+  <div class="alert alert-danger mt-3" role="alert">
+    <h2>{{error}}</h2>
+    {{error.stack}}
+  </div>
+</main>

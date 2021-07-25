@@ -11,7 +11,7 @@ router.route('/')
 // In-house db
 router.route('/in-house-db')
   .get(baseCtrl.inhousedb)
-  
+
 // Annotation
 router.route('/annotation')
   .get(baseCtrl.annotation)
@@ -25,8 +25,8 @@ router.route('/merge')
   .get(baseCtrl.merge)
 
 // Beos
-router.route('/beos')
-  .get(baseCtrl.beos)
+router.route('/beds')
+  .get(baseCtrl.beds)
 
 // Fastqs
 router.route('/fastqs')
@@ -35,6 +35,10 @@ router.route('/fastqs')
 // Bam-crams
 router.route('/bam-crams')
   .get(baseCtrl.bamcrams)
+
+// NGS comments
+router.route('/ngs-com')
+  .get(baseCtrl.ngscom)
 
 
 

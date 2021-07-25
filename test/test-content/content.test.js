@@ -16,12 +16,12 @@ describe("Neuroweb - content", function () {
 
   before(async function () {
     browser = await puppeteer.launch({
-      sloMo: 500, 
+      sloMo: 500,
       headless: false,
       args: [`--window-size=1920,1080`],
       defaultViewport: {
-        width:1920,
-        height:1080
+        width: 1920,
+        height: 1080
       }
     })
     page = await browser.newPage()

@@ -1,65 +1,75 @@
 'use strict';
 
+const data = require('../data/listToDo');
+
 // Render page with useful links
-module.exports.home = (req, res) => { 
-  res.render('main', { 
+module.exports.home = (req, res) => {
+  res.render('main', {
     layout: 'index',
     title: 'NGL - HUB',
+    listToDo: data.listToDo,
   });
 }
 
 // Render page with db search
-module.exports.inhousedb = (req, res) => { 
-  res.render('inhousedb', { 
+module.exports.inhousedb = (req, res) => {
+  res.render('inhousedb', {
     layout: 'index',
     title: 'NGL - in-house database',
   });
 }
 
 // Render annotation page
-module.exports.annotation = (req, res) => { 
-  res.render('annotation', { 
+module.exports.annotation = (req, res) => {
+  res.render('annotation', {
     layout: 'index',
     title: 'NGL - Annotation',
   });
 }
 
 // Render filter page
-module.exports.filter = (req, res) => { 
-  res.render('filter', { 
+module.exports.filter = (req, res) => {
+  res.render('filter', {
     layout: 'index',
     title: 'NGL - Filter',
   });
 }
 
 // Render merge page
-module.exports.merge = (req, res) => { 
-  res.render('merge', { 
+module.exports.merge = (req, res) => {
+  res.render('merge', {
     layout: 'index',
     title: 'NGL - Merge',
   });
 }
 
 // Render beos page
-module.exports.beos = (req, res) => { 
-  res.render('beos', { 
+module.exports.beds = (req, res) => {
+  res.render('beds', {
     layout: 'index',
-    title: 'NGL - BEOs',
+    title: 'NGL - BEDs',
   });
 }
-
-// Render beos page
-module.exports.fastqs = (req, res) => { 
-  res.render('fastqs', { 
+// Render fastqs page
+module.exports.fastqs = (req, res) => {
+  res.render('fastqs', {
     layout: 'index',
     title: 'NGL - FASTQs',
   });
 }
 // Render bam-crams page
-module.exports.bamcrams = (req, res) => { 
-  res.render('bam-crams', { 
+module.exports.bamcrams = (req, res) => {
+  res.render('bam-crams', {
     layout: 'index',
     title: 'NGL - BAM-CRAMs',
+  });
+}
+
+// Render ngs-com page
+module.exports.ngscom = (req, res) => {
+  res.render('ngs-com', {
+    layout: 'index',
+    title: 'NGL - NGS Comments',
   });
 }
 

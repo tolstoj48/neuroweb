@@ -1,4 +1,6 @@
 
+// fajfka, křížek, rozpracováno
+
 // flash přidávání do to-do-listu
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
 // testy
@@ -8,6 +10,8 @@
 // loga 2. LF
 // favicon
 // struktura dle zadání
+// ngs comments - vytvočit, editovat, smazat pro admina - nějaký zašoupávátka
+
 
 // web je dnalab.cz
 
@@ -29,6 +33,7 @@ const logger = require('morgan');
 const rfs = require('rotating-file-stream');
 
 const indexRouter = require('./routes/indexRouter');
+const taskRouter = require('./routes/taskRouter');
 const usersRouter = require('./routes/usersRouter');
 
 const handlebars = require('express-handlebars');
@@ -56,41 +61,45 @@ app.use('/assets/vendor/bootstrap', express.static(
 app.use('/assets/vendor/jquery', express.static(
   path.join(__dirname, 'node_modules', 'jquery', 'dist')));
 // directory with js for bootstrap
-  app.use('/assets/vendor/popper.js', express.static(
+app.use('/assets/vendor/popper.js', express.static(
   path.join(__dirname, 'node_modules', 'popper.js', 'dist', 'umd')));
 // directory with icons
 app.use('/assets/vendor/feather-icons', express.static(
-    path.join(__dirname, 'node_modules', 'feather-icons', 'dist')));
+  path.join(__dirname, 'node_modules', 'feather-icons', 'dist')));
 
 // logování s rotací souborů
 app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
   stream: process.env.REQUEST_LOG_FILE ?
-  rfs.createStream(process.env.REQUEST_LOG_FILE, {
-  size: '10M', // rotate every 10M written
-  interval: '7d', // rotate weekly
-  path: 'log' // path to log files
-  })
-: process.stdout
+    rfs.createStream(process.env.REQUEST_LOG_FILE, {
+      size: '10M', // rotate every 10M written
+      interval: '7d', // rotate weekly
+      path: 'log' // path to log files
+    })
+    : process.stdout
 }));
 
 // || Routery
 app.use('/', indexRouter);
+app.use('/tasks/', taskRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(function (req, res, next) {
+  next(createError(404, 'Stránka nebyla nalezena!'));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    layout: 'index',
+    title: 'NGL - Error',
+  });
 });
 
 module.exports = app;

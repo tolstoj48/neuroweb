@@ -1,27 +1,28 @@
 <main class="container">
   <h1 class="mt-2">To do list</h1>
-<table class="table table-hover mt-5" id="to-do-list">
-  <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">To do task</th>
-      <th scope="col">Who wants it</th>
-      <th scope="col">Done?</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Default</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">Primary</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-  </tbody>
-</table>
-</main>
+  <a href="/tasks/new-task" class="btn btn-lg btn-outline-success strong mt-3">+ Create a new task</a>
+  <table class="table table-hover mt-3" id="to-do-list">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">To do task</th>
+        <th scope="col">Who wants it</th>
+        <th scope="col">Done</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each listToDo}}
+      <tr>
+        <th scope="row">{{this.date}}</th>
+        <td>{{this.task}}</td>
+        <td>{{this.from}}</td>
+        <td>{{this.done}}</td>
+        <td>
+          <i class="me-2 text-info" data-feather="edit"></i>
+          <i class="text-primary" data-feather="trash-2"></i>
+        </td>
+      </tr>
+        {{/each}}
+    </tbody>
+  </table>

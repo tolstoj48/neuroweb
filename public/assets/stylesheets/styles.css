@@ -1,3 +1,12 @@
-li{
+#menuBar > li{
   padding-right:4rem;
+  font-weight: 600;
+ }
+ 
+ #to-do-list > tbody > tr:nth-child(odd) {
+   background-color: #f7d3cf;
+ }
+
+ .strong {
+   font-weight: 600;
  }

@@ -16,12 +16,12 @@ describe("Neuroweb - UI", function () {
 
   before(async function () {
     browser = await puppeteer.launch({
-      sloMo: 500, 
+      sloMo: 500,
       headless: false,
       args: [`--window-size=1920,1080`],
       defaultViewport: {
-        width:1920,
-        height:1080
+        width: 1920,
+        height: 1080
       }
     })
     page = await browser.newPage()
@@ -33,25 +33,25 @@ describe("Neuroweb - UI", function () {
   });
 
   it("should visit and check ui of the homepage", async function () {
-      await page.goto("http://localhost:3000");
-      // Homepage
-      await page.waitForSelector('a[href="/"]');
-      // In-house db
-      await page.waitForSelector('a[href="/in-house-db"]');
-      // Annotation
-      await page.waitForSelector('a[href="/annotation"]');
-      // Filter
-      await page.waitForSelector('a[href="/filter"]');
-      // Merge
-      await page.waitForSelector('a[href="/merge"]');
-      // Beos
-      await page.waitForSelector('a[href="/beos"]');
-      // Faszqs
-      await page.waitForSelector('a[href="/fastqs"]');
-      // Bam-crams
-      await page.waitForSelector('a[href="/bam-crams"]');
+    await page.goto("http://localhost:3000");
+    // Homepage
+    await page.waitForSelector('a[href="/"]');
+    // In-house db
+    await page.waitForSelector('a[href="/in-house-db"]');
+    // Annotation
+    await page.waitForSelector('a[href="/annotation"]');
+    // Filter
+    await page.waitForSelector('a[href="/filter"]');
+    // Merge
+    await page.waitForSelector('a[href="/merge"]');
+    // Beos
+    await page.waitForSelector('a[href="/beos"]');
+    // Faszqs
+    await page.waitForSelector('a[href="/fastqs"]');
+    // Bam-crams
+    await page.waitForSelector('a[href="/bam-crams"]');
   })
-  
+
   it("should check correct links and click them, ensure the correct urls of the links", async function () {
     await page.goto("http://localhost:3000");
     // Homepage
@@ -87,22 +87,22 @@ describe("Neuroweb - UI", function () {
   })
 
 
-it("should get incorrect link", async function () {
-  await page.goto("http://localhost:3000/incorrect-url");
-  // h4 titulek 404
-  assert.include(
-    await page.$eval('body > pre', el => el.textContent),
-    "ENOENT: no such file or directory"
-  );
-});
+  it("should get incorrect link", async function () {
+    await page.goto("http://localhost:3000/incorrect-url");
+    // h4 titulek 404
+    assert.include(
+      await page.$eval('body > pre', el => el.textContent),
+      "ENOENT: no such file or directory"
+    );
+  });
 
-//
- // it("should visit and check ui of the login page", async function () {
- //   await page.goto("http://localhost:3033/prihlasit", { 'waitUntil' : 'domcontentloaded' });
- //   await page.waitForSelector('#username');
- //   await page.waitForSelector('#password');
- //   // login button
- //   await page.waitForSelector('body > main > div > div > div > div > div > form > div > button');
- // })
+  //
+  // it("should visit and check ui of the login page", async function () {
+  //   await page.goto("http://localhost:3033/prihlasit", { 'waitUntil' : 'domcontentloaded' });
+  //   await page.waitForSelector('#username');
+  //   await page.waitForSelector('#password');
+  //   // login button
+  //   await page.waitForSelector('body > main > div > div > div > div > div > form > div > button');
+  // })
 
 })
