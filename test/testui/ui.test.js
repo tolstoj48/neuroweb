@@ -10,7 +10,7 @@ const assert = chai.assert;
 const puppeteer = require("puppeteer");
 
 describe("Neuroweb - UI", function () {
-  this.timeout(10000);
+  this.timeout(15000);
   let browser;
   let page;
 
@@ -45,7 +45,7 @@ describe("Neuroweb - UI", function () {
     // Merge
     await page.waitForSelector('a[href="/merge"]');
     // Beos
-    await page.waitForSelector('a[href="/beos"]');
+    await page.waitForSelector('a[href="/beds"]');
     // Faszqs
     await page.waitForSelector('a[href="/fastqs"]');
     // Bam-crams
@@ -72,10 +72,10 @@ describe("Neuroweb - UI", function () {
     await page.click('a[href="/vcfs"]');
     await page.click('a[href="/merge"]');
     assert.equal(await page.url(), "http://localhost:3000/merge")
-    // Beos
+    // Beds
     await page.click('a[href="/qa"]');
-    await page.click('a[href="/beos"]');
-    assert.equal(await page.url(), "http://localhost:3000/beos")
+    await page.click('a[href="/beds"]');
+    assert.equal(await page.url(), "http://localhost:3000/beds")
     // Faszqs
     await page.click('a[href="/qa"]');
     await page.click('a[href="/fastqs"]');
@@ -91,8 +91,8 @@ describe("Neuroweb - UI", function () {
     await page.goto("http://localhost:3000/incorrect-url");
     // h4 titulek 404
     assert.include(
-      await page.$eval('body > pre', el => el.textContent),
-      "ENOENT: no such file or directory"
+      await page.$eval('body .alert', el => el.textContent),
+      "Stránka nebyla nalezena!"
     );
   });
 

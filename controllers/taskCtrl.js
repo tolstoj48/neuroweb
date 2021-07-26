@@ -17,7 +17,7 @@ module.exports.postNewTask = async (req, res, next) => {
   if(!saved) {
     next(createError(400, 'Data nebyla uložena do db!'));
   }
-  //req.flash("success", "New task has been created!");
+  req.flash("success", "New task has been created!");
   res.redirect(`/`);
 }
 

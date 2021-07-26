@@ -1,4 +1,4 @@
-<main class="container">
+<% layout("layouts/index") %>
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8 col-md-6">
       <form class="mt-3 needs-validation" novalidate action="/tasks/new-task" method="POST">
@@ -30,7 +30,6 @@
       </form>
     </div>
   </div>
-</main>
 <!-- Short script to autoinsert today's date into date input -->
 <script>
   document.getElementById("date").value = new Date().toISOString().substr(0, 10);

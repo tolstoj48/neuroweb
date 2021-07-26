@@ -1,6 +1,6 @@
-<main class="container">
+<% layout("layouts/index") %>
   <h1 class="mt-2">To do list</h1>
-  <a href="/tasks/new-task" class="btn btn-lg btn-outline-success strong mt-3">+ Create a new task</a>
+  <a href="/tasks/new-task" class="btn btn-lg btn-outline-primary strong mt-3">+ Create a new task</a>
   <table class="table table-hover mt-3" id="to-do-list">
     <thead>
       <tr>
@@ -12,17 +12,17 @@
       </tr>
     </thead>
     <tbody>
-      {{#each data}}
+      <% for (let task of data) { %>
       <tr>
-        <td>{{ date }}</td>
-        <td>{{ to_do_task }}</td>
-        <td>{{ who_wants_it }}</td>
-        <td>{{ done }}</td>
+        <td><%= task.date %></td>
+        <td><%= task.to_do_task %></td>
+        <td><%= task.who_wants_it %></td>
+        <td><%= task.done %></td>
                 <td>
           <i class="me-2 text-info" data-feather="edit"></i>
           <i class="text-primary" data-feather="trash-2"></i>
         </td>
       </tr>
-        {{/each}}
+      <% } %>
     </tbody>
   </table>

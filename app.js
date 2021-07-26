@@ -39,9 +39,9 @@ const indexRouter = require('./routes/indexRouter');
 const taskRouter = require('./routes/taskRouter');
 const usersRouter = require('./routes/usersRouter');
 
-const handlebars = require('express-handlebars');
-
 const app = express();
+
+const engine = require("ejs-mate");
 
 //mongo sanitize SQL
 const sanitize = require("express-mongo-sanitize");
@@ -115,19 +115,16 @@ const sessionOptions = {
 }
 
 
+// esj engine
+app.engine("ejs", engine);
+// import ejs
+app.set("view engine", "ejs");
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.set('views', path.join(__dirname, 'views/layouts'));
-app.set('view engine', 'handlebars');
-
-app.engine('handlebars', handlebars({
-  layoutsDir: __dirname + '/views/layouts',
-}));
 
 app.use(logger('common'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // directory with bootstrap
 app.use('/assets/vendor/bootstrap', express.static(
@@ -162,6 +159,17 @@ app.use(methodOverride("_method"));
 
 // flash use
 app.use(flash())
+
+// ukládání proměnných dostupných v každém res.locals objektu pro vyzužití
+app.use((req, res, next) => {
+  // dostupné díky passportu - jméno a mail uživatele po přihlášení, na každém requestu a díky tomuto i pro template
+  //res.locals.currentUser = req.user
+  res.locals.success = req.flash("success")
+  res.locals.error = req.flash("error")
+  next()
+})
+
+app.use(cookieParser());
 
 // || Routery
 app.use('/', indexRouter);
