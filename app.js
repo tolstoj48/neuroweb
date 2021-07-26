@@ -1,7 +1,9 @@
-
+// dodělat db zisk dat, patch a smazání to do task
 // fajfka, křížek, rozpracováno
+// flash přidávání do to-do-listu - session mongoDb integrace
+// testovat základní funkčnost
+// secret do zvláštního souboru
 
-// flash přidávání do to-do-listu
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
 // testy
 // spouštění, aby nepadalo
@@ -11,6 +13,7 @@
 // favicon
 // struktura dle zadání
 // ngs comments - vytvočit, editovat, smazat pro admina - nějaký zašoupávátka
+
 
 
 // web je dnalab.cz
@@ -39,6 +42,78 @@ const usersRouter = require('./routes/usersRouter');
 const handlebars = require('express-handlebars');
 
 const app = express();
+
+//mongo sanitize SQL
+const sanitize = require("express-mongo-sanitize");
+
+// session setup
+const session = require("express-session");
+// flash
+const flash = require("connect-flash");
+// mongodb pro sessions
+const MongoDBStore = require("connect-mongo");
+// db url
+const dbUrl = "mongodb://localhost:27017/neuroweb";
+
+
+// protection against sql injection
+app.use(sanitize());
+
+// method override pro metody jiné než post a get
+const methodOverride = require("method-override")
+// mongoose knihovna pro mongo db
+const mongoose = require("mongoose");
+
+
+// připojení k db jménem test a v promisu pak ověření, že došlo k připojení k db
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  // nutné kůli importu velkých objemů dat - třeba 50000 - v milisekundách
+  connectTimeoutMS: 3000,
+})
+  .then(() => {
+    // ne v testovacím prostředí
+    if (process.env.NODE_ENV !== "test") console.log("Mongo DB connection open!")
+  })
+  .catch(err => {
+    console.log("Mongo DB error of connection")
+    console.log(err)
+  })
+
+// mongo pro session setup
+const store = MongoDBStore.create({
+  mongoUrl: dbUrl,
+  secret: "thisIsSecret",
+  // pokud se nezmění data, není nutné je updateovat session
+  touchAfter: 24 * 60 * 60, // v sekundách
+})
+
+store.on("error", function (e) {
+  console.log("Session store error")
+})
+
+
+//session setup
+const sessionOptions = {
+  store,
+  // doporučuje se, aby se hůře odhadovalo změnit si name cookie
+  name: "neurowebSessJmeno",
+  secret: "thisIsAnotherSecret",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    // cookies jen přes http a ne pomocí JS
+    httpOnly: true,
+    // cookies přes https
+    //secure: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  }
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -77,6 +152,16 @@ app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
     })
     : process.stdout
 }));
+
+
+// use session setup
+app.use(session(sessionOptions));
+
+// užít method override
+app.use(methodOverride("_method"));
+
+// flash use
+app.use(flash())
 
 // || Routery
 app.use('/', indexRouter);

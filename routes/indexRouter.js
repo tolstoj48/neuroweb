@@ -3,10 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const baseCtrl = require('../controllers/baseCtrl');
+// catchAsync - error handler pro async functions
+const catchAsync = require("../utilities/catchAsyncUtil");
 
 // basepage
 router.route('/')
-  .get(baseCtrl.home)
+  .get(catchAsync(baseCtrl.home))
 
 // In-house db
 router.route('/in-house-db')

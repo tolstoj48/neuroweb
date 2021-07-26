@@ -1,13 +1,22 @@
 'use strict';
 
-const data = require('../data/listToDo');
+const Task = require("../models/taskModel");
 
 // Render page with useful links
-module.exports.home = (req, res) => {
+module.exports.home = async (req, res) => {
+  let dataDb = await Task.find();
+  let data = [];
+  for (let element of dataDb ) {
+    data.push(element)
+  }
+
+  console.log(data);
+  console.log(data[1].date);
+  console.log(data.length);
   res.render('main', {
     layout: 'index',
     title: 'NGL - HUB',
-    listToDo: data.listToDo,
+    data
   });
 }
 

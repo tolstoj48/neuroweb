@@ -12,13 +12,13 @@
       </tr>
     </thead>
     <tbody>
-      {{#each listToDo}}
+      {{#each data}}
       <tr>
-        <th scope="row">{{this.date}}</th>
-        <td>{{this.task}}</td>
-        <td>{{this.from}}</td>
-        <td>{{this.done}}</td>
-        <td>
+        <td>{{ date }}</td>
+        <td>{{ to_do_task }}</td>
+        <td>{{ who_wants_it }}</td>
+        <td>{{ done }}</td>
+                <td>
           <i class="me-2 text-info" data-feather="edit"></i>
           <i class="text-primary" data-feather="trash-2"></i>
         </td>
