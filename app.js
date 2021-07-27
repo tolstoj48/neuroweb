@@ -1,4 +1,4 @@
-// testovat základní funkčnost
+// testovat základní funkčnost - ui, validaci, schema
 // secret do zvláštního souboru
 
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
