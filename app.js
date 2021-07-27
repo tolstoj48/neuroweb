@@ -1,6 +1,3 @@
-// dodělat db zisk dat, patch a smazání to do task
-// fajfka, křížek, rozpracováno
-// flash přidávání do to-do-listu - session mongoDb integrace
 // testovat základní funkčnost
 // secret do zvláštního souboru
 

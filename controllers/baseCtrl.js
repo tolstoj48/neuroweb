@@ -4,7 +4,7 @@ const Task = require("../models/taskModel");
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
-  let data = await Task.find();
+  let data = await Task.find().sort({ date: 'asc', test: -1 });
   res.render('main', {
     layout: 'index',
     title: 'NGL - HUB',

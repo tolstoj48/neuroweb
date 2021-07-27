@@ -34,7 +34,8 @@ const taskNewSchema = Joi.object({
   who_wants_it: Joi.string().trim().max(50).allow(null, "").escapeHTML(),
   done: Joi.string().trim().max(10).valid(
     "true",
-    "false")
+    "false", 
+    "in process")
     .escapeHTML(),
 });
 
