@@ -4,9 +4,19 @@
  }
  
  #to-do-list > tbody > tr:nth-child(odd) {
-   background-color: #f7d3cf;
+   background-color: #fdf6e4;
+   color: rgb(44, 32, 32);
+  }
+  
+  #to-do-list > tbody > tr:nth-child(even) {
+    background-color: #f0db9c;
+    color: rgb(44, 32, 32);
  }
-
+ 
+ #menuBar > li > ul > li > a {
+  font-weight: 600;
+ }
+ 
  .strong {
    font-weight: 600;
  }

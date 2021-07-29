@@ -1,4 +1,4 @@
-// testovat základní funkčnost - ui, validaci, schema, všechny typy errorů a větvě
+// testovat základní funkčnost - validaci, schema, všechny typy errorů a větvě
 // secret do zvláštního souboru
 
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
