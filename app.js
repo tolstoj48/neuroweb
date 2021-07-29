@@ -1,4 +1,4 @@
-// testovat základní funkčnost - ui, validaci, schema
+// testovat základní funkčnost - ui, validaci, schema, všechny typy errorů a větvě
 // secret do zvláštního souboru
 
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
@@ -10,7 +10,7 @@
 // favicon
 // struktura dle zadání
 // ngs comments - vytvočit, editovat, smazat pro admina - nějaký zašoupávátka
-
+//
 
 
 // web je dnalab.cz

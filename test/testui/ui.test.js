@@ -1,11 +1,10 @@
 "use strict"
 
-// obsahy stran
-// přihlášení
-// funkcionality
+//The to do task DB must be withou any task to get tested properly!
 
 const chai = require("chai");
 const assert = chai.assert;
+const expect = chai.expect;
 
 const puppeteer = require("puppeteer");
 
@@ -96,6 +95,96 @@ describe("Neuroweb - UI", function () {
     );
   });
 
+  it("should get to the main page from new task form", async function() {
+    await page.goto("http://localhost:3000");
+    await page.click('a[href="/tasks/new-task"]');
+    await page.waitForSelector('a[href="/"]');
+    await page.click('#backBtn');
+    await page.waitForSelector('a[href="/"]');
+    expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
+  });
+
+  it("should create a new task", async function() {
+    await page.goto("http://localhost:3000");
+    await page.click('a[href="/tasks/new-task"]');
+    await page.waitForSelector('a[href="/"]');
+    await page.focus('#to-do-task');
+    await page.keyboard.type('Hello');
+    await page.focus('#who-wants-it');
+    await page.keyboard.type('Hello');
+    await page.click('#submitBtn');
+  });
+
+  it("should check new task in the list has been created", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    expect(await page.content()).to.include(`<td>\n            Hello\n          </td>`);
+  } );
+
+  it("should edit task from the list", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    await page.click(".edit");
+    // Delete all the content from input
+    await page.focus('#to-do-task');
+    await page.keyboard.down('Control');
+    await page.keyboard.press('A');
+    await page.keyboard.up('Control');
+    await page.keyboard.press('Backspace');
+    await page.keyboard.type('peklo');
+    // Delete all the content from the input
+    await page.focus('#who-wants-it');
+    await page.keyboard.down('Control');
+    await page.keyboard.press('A');
+    await page.keyboard.up('Control');
+    await page.keyboard.press('Backspace');
+    await page.keyboard.type('peklo');
+    await page.click('#submitBtn');
+  });
+
+  it("should check edits on edited task in the list", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    expect(await page.content()).to.include(`<td>\n            peklo\n          </td>`);
+  } );
+
+  it("should get to the main page from edit task form", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    await page.click(".edit");
+    await page.waitForSelector('a[href="/"]');
+    await page.click('#backBtn');
+    await page.waitForSelector('a[href="/"]');
+    expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
+  });
+
+  it("should get to the main page from delete task form", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    await page.click(".delete");
+    await page.waitForSelector('a[href="/"]');
+    await page.click('#backBtn');
+    await page.waitForSelector('a[href="/"]');
+    expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
+  });
+
+  it("should delete task from the list", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    await page.click(".delete");
+    await page.click('#deleteBtn'); 
+  });
+
+  it("should check edits on edited task in the list", async function() {
+    await page.goto("http://localhost:3000");
+    await page.waitForSelector('a[href="/"]');
+    expect(await page.content()).to.not.include(`<td>\n            peklo\n          </td>`);
+  } );
+
+
+  // back na vytvoření, editaci, delete
+  // delete, editaci
+  
   //
   // it("should visit and check ui of the login page", async function () {
   //   await page.goto("http://localhost:3033/prihlasit", { 'waitUntil' : 'domcontentloaded' });
