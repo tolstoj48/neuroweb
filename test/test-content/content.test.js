@@ -38,8 +38,8 @@ describe("Neuroweb - content", function () {
       headless: false,
       args: [`--window-size=1920,1080`],
       defaultViewport: {
-        width: 1920,
-        height: 1080
+        width: 1200,
+        height: 800
       }
     })
     page = await browser.newPage()
@@ -63,13 +63,15 @@ describe("Neuroweb - content", function () {
   });
 
   it("should test editing: /edit/:taskId", async function () {
-    await page.goto("http://localhost:3000/tasks/edit/60fea503d0bae02a4450251c");
+    await page.goto("http://localhost:3000");
+    await page.click(".edit");
     await page.waitForSelector('legend');
     await testContent(page, [`<legend>Edit an existing task</legend>`], testedContentArray);
   });
 
   it("should test deleting: /delete/:taskId", async function () {
-    await page.goto("http://localhost:3000/tasks/delete/60fea503d0bae02a4450251c");
+    await page.goto("http://localhost:3000");
+    await page.click(".delete");
     await page.waitForSelector('legend');
     await testContent(page, [`<legend>Confirm the delete of the task</legend>`], testedContentArray);  
   });

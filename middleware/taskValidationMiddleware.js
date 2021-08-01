@@ -9,7 +9,6 @@ const createError = require('http-errors');
 module.exports.validateNewTask = (req, res, next) => {
   let validatedObj = req.body;
   let error = false;
-  console.log(validatedObj);
 
   validatedObj = taskNewSchema.validate(validatedObj).value;
   error = taskNewSchema.validate(validatedObj).error;

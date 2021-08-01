@@ -1,7 +1,5 @@
 "use strict"
 
-//The to do task DB must be withou any task to get tested properly!
-
 const chai = require("chai");
 const assert = chai.assert;
 const expect = chai.expect;
@@ -19,8 +17,8 @@ describe("Neuroweb - UI", function () {
       headless: false,
       args: [`--window-size=1920,1080`],
       defaultViewport: {
-        width: 1920,
-        height: 1080
+        width: 1200,
+        height: 800
       }
     })
     page = await browser.newPage()

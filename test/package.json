@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all-tests": "cd test-content && npm run test && cd .. && cd testui && npm run test"
+    "all-tests": "cd test-content && npm run test && cd .. && cd testui && npm run test && cd .. && cd test-model && npm run test"
   },
   "author": "",
   "license": "ISC",

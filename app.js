@@ -1,4 +1,4 @@
-// testovat základní funkčnost - validaci, schema, všechny typy errorů a větvě
+// testovat základní funkčnost - validaci joi, všechny typy errorů a větvě, dodělat content - maže a pak v novém samozřejmě neexistuje... musí vzít něco z tabulky puppeteer
 // secret do zvláštního souboru
 
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
@@ -175,17 +175,18 @@ app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404, 'Stránka nebyla nalezena!'));
+  next(createError(404, 'The page hasn´t been found!'));
 });
 
-// error handler
+// Error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
+  // Set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error =  err;
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
+  console.log(err.status);
   res.render('error', {
     layout: 'index',
     title: 'NGL - Error',
