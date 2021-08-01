@@ -89,7 +89,7 @@ describe("Neuroweb - UI", function () {
     // h4 titulek 404
     assert.include(
       await page.$eval('body .alert', el => el.textContent),
-      "Stránka nebyla nalezena!"
+      "The page hasn´t been found!"
     );
   });
 
