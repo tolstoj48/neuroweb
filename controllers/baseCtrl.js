@@ -69,7 +69,7 @@ module.exports.bamcrams = (req, res) => {
 
 // Render ngs-com page
 module.exports.ngscom = async (req, res) => {
-  let data = await Comment.find();
+  const data = await Comment.find();
   res.render('ngs-com', {
     layout: 'index',
     title: 'NGL - NGS Comments',

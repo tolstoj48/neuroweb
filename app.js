@@ -1,5 +1,7 @@
 // secret do zvláštního souboru
 
+// testování comments
+
 // microservice??? - task/comments aspoň ve views svoje složky
 
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat... - // vazba na postgresql
