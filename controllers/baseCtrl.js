@@ -1,6 +1,7 @@
 'use strict';
 
 const Task = require("../models/taskModel");
+const Comment = require("../models/commentModel");
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
@@ -67,10 +68,12 @@ module.exports.bamcrams = (req, res) => {
 }
 
 // Render ngs-com page
-module.exports.ngscom = (req, res) => {
+module.exports.ngscom = async (req, res) => {
+  let data = await Comment.find();
   res.render('ngs-com', {
     layout: 'index',
     title: 'NGL - NGS Comments',
+    data
   });
 }
 

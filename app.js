@@ -1,17 +1,15 @@
-// testovat základní funkčnost - validaci joi, všechny typy errorů a větvě, dodělat content - maže a pak v novém samozřejmě neexistuje... musí vzít něco z tabulky puppeteer
 // secret do zvláštního souboru
 
-//pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat...
+// microservice??? - task/comments aspoň ve views svoje složky
+
+//pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat... - // vazba na postgresql
 // testy
 // spouštění, aby nepadalo
-// vazba na postgresql
 // přihlašování
-// loga 2. LF
-// favicon
+// loga 2. LF - ája
 // struktura dle zadání
 // ngs comments - vytvočit, editovat, smazat pro admina - nějaký zašoupávátka
-//
-
+// vložení obrázku <%- include("../partials/logo-2lf") %>
 
 // web je dnalab.cz
 
@@ -34,7 +32,7 @@ const rfs = require('rotating-file-stream');
 
 const indexRouter = require('./routes/indexRouter');
 const taskRouter = require('./routes/taskRouter');
-const usersRouter = require('./routes/usersRouter');
+const commentsRouter = require('./routes/commentsRouter');
 
 const app = express();
 
@@ -171,7 +169,7 @@ app.use(cookieParser());
 // || Routery
 app.use('/', indexRouter);
 app.use('/tasks/', taskRouter);
-app.use('/users', usersRouter);
+app.use('/ngs-com/', commentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -186,7 +184,6 @@ app.use(function (err, req, res, next) {
 
   // Render the error page
   res.status(err.status || 500);
-  console.log(err.status);
   res.render('error', {
     layout: 'index',
     title: 'NGL - Error',

@@ -3,8 +3,8 @@
 const chai = require('chai')
       ,chaiHttp = require('chai-http')
       ,expect = chai.expect
-      ,reqValidationSchema = require("../../utilities/reqValidationSchema")
-      ,{ taskNewSchema } = reqValidationSchema
+      ,taskReqValidationSchema = require("../../utilities/taskReqValidationSchema")
+      ,{ taskNewSchema } = taskReqValidationSchema
 
 chai.use(chaiHttp);
 

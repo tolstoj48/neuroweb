@@ -1,4 +1,6 @@
-const mongoose = require("mongoose")
+"use strict";
+
+const mongoose = require("mongoose");
 
 // Definition of new schema
 const taskSchema = new mongoose.Schema({

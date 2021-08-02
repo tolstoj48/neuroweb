@@ -4,7 +4,7 @@ const Task = require("../models/taskModel");
 
 // Render new task form
 module.exports.new = (req, res) => {
-  res.render('new-task', {
+  res.render('tasks/new-task', {
     layout: 'index',
     title: 'NGL - Create a new task',
   });
@@ -31,7 +31,8 @@ module.exports.editTask = async(req, res) => {
     req.flash("error", "The task does not exist!");
     return res.redirect("/");
   }
-  res.render("edit-task", {
+  req.flash("success", "The task has been updated!");
+  res.render("tasks/edit-task", {
     layout: 'index' ,
     title: 'NGL - Edit an existing task',
     task: detailTaskData 
@@ -66,7 +67,7 @@ module.exports.confirmDeleteTask = async (req, res) => {
     req.flash("error", "The task does not exist!");
     return res.redirect("/");
   }
-  res.render("confirm-delete-task", {
+  res.render("tasks/confirm-delete-task", {
     layout: 'index' ,
     title: 'NGL - Confirm the delete of the task',
     task: detailTaskData 

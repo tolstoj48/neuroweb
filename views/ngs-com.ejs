@@ -1,2 +1,27 @@
 <% layout("layouts/index") %>
-<h1>NGS comments</h1>
+  <h1>NGS comments</h1>
+  <a href="/ngs-com/new-comment" class="btn btn-lg btn-outline-primary strong mt-3">+ Create a new comment</a>
+  <div class="accordion mt-3" id="accordionExample">
+    <% for (let comment of data) { %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#<%= comment.name %>" aria-expanded="false" aria-controls="<%= comment.name %>">
+            <%= comment.name %>
+          </button>
+        </h2>
+        <div id="<%= comment.name %>" class="accordion-collapse collapse" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample" style="">
+          <div class="accordion-body">
+            <strong> <%= comment.content %> </strong>
+            <div>
+              <a class="edit" href="/ngs-com/edit/<%= comment._id %>"><i class="me-3 text-primary"
+                  data-feather="edit"></i></a>
+              <a class="delete" href="/ngs-com/delete/<%= comment._id %>"><i class="text-danger"
+                  data-feather="trash-2"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>

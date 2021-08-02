@@ -1,7 +1,7 @@
 'use strict';
 
-const reqValidationSchema = require("../utilities/reqValidationSchema");
-const { taskNewSchema } = reqValidationSchema;
+const taskReqValidationSchema = require("../utilities/taskReqValidationSchema");
+const { taskNewSchema } = taskReqValidationSchema;
 
 const createError = require('http-errors');
 
