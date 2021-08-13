@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 const chai = require("chai");
 const assert = chai.assert;
@@ -6,7 +6,7 @@ const expect = chai.expect;
 
 const puppeteer = require("puppeteer");
 
-describe("Neuroweb - UI", function () {
+describe("Neuroweb - UI General and Task", function () {
   this.timeout(15000);
   let browser;
   let page;
@@ -17,8 +17,8 @@ describe("Neuroweb - UI", function () {
       headless: false,
       args: [`--window-size=1920,1080`],
       defaultViewport: {
-        width: 1200,
-        height: 800
+        width: 1920,
+        height: 1080
       }
     })
     page = await browser.newPage()
@@ -177,11 +177,7 @@ describe("Neuroweb - UI", function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.not.include(`<td>\n            peklo\n          </td>`);
-  } );
-
-
-  // back na vytvoření, editaci, delete
-  // delete, editaci
+  });
   
   //
   // it("should visit and check ui of the login page", async function () {

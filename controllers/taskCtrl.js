@@ -22,7 +22,7 @@ module.exports.postNewTask = async (req, res, next) => {
 }
 
 // Edit existing task page
-module.exports.editTask = async(req, res) => {
+module.exports.editTask = async (req, res) => {
   // Save parametr
   let { taskId } = req.params;
   // Search given task by id from db and the clicked link
@@ -31,7 +31,6 @@ module.exports.editTask = async(req, res) => {
     req.flash("error", "The task does not exist!");
     return res.redirect("/");
   }
-  req.flash("success", "The task has been updated!");
   res.render("tasks/edit-task", {
     layout: 'index' ,
     title: 'NGL - Edit an existing task',

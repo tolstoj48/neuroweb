@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all-tests": "cd test-content && npm run test && cd .. && cd testui && npm run test && cd .. && cd test-model && npm run test && cd .. && cd test-joi-validation && npm run test"
+    "all-tests": "cd test-content && npm run test && cd .. && cd testui && npm run test-uis && cd .. && cd test-model && npm run test && cd .. && cd test-joi-validation && npm run test"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {
+    "faker": "^5.5.3"
+  }
 }

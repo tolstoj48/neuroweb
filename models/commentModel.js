@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const mongoose = require("mongoose");
 
@@ -11,7 +11,7 @@ const commentSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        maxLength: [3000, "Field should be max. 3000 characters."]
+        maxLength: [10000, "Field should be max. 3000 characters."]
     },
 });
 

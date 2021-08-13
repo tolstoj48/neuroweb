@@ -1,5 +1,3 @@
-// secret do zvláštního souboru
-
 // testování comments
 
 // microservice??? - task/comments aspoň ve views svoje složky
@@ -10,10 +8,9 @@
 // přihlašování
 // loga 2. LF - ája
 // struktura dle zadání
-// ngs comments - vytvočit, editovat, smazat pro admina - nějaký zašoupávátka
 // vložení obrázku <%- include("../partials/logo-2lf") %>
 
-// web je dnalab.cz
+// web dnalab.cz
 
 // mozzila/chrome
 
@@ -36,33 +33,37 @@ const indexRouter = require('./routes/indexRouter');
 const taskRouter = require('./routes/taskRouter');
 const commentsRouter = require('./routes/commentsRouter');
 
+// Credentials
+const { credentials } = require("./config")
+
 const app = express();
 
 const engine = require("ejs-mate");
 
-//mongo sanitize SQL
+// Mongo sanitize SQL
 const sanitize = require("express-mongo-sanitize");
 
-// session setup
+// Session setup
 const session = require("express-session");
-// flash
+// Flash
 const flash = require("connect-flash");
-// mongodb pro sessions
+// Mongodb for sessions
 const MongoDBStore = require("connect-mongo");
-// db url
+// Db url
 const dbUrl = "mongodb://localhost:27017/neuroweb";
 
 
-// protection against sql injection
+
+// Protection against sql injection
 app.use(sanitize());
 
-// method override pro metody jiné než post a get
-const methodOverride = require("method-override")
-// mongoose knihovna pro mongo db
+// Method override for other methods than post and get
+const methodOverride = require("method-override");
+// Mongoose for mongoDb
 const mongoose = require("mongoose");
 
 
-// připojení k db jménem test a v promisu pak ověření, že došlo k připojení k db
+// Connection to db
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -80,31 +81,31 @@ mongoose.connect(dbUrl, {
     console.log(err)
   })
 
-// mongo pro session setup
+// Mongo pro session setup
 const store = MongoDBStore.create({
   mongoUrl: dbUrl,
-  secret: "thisIsSecret",
-  // pokud se nezmění data, není nutné je updateovat session
-  touchAfter: 24 * 60 * 60, // v sekundách
+  secret: credentials.secretMongoDBStore,
+  // If no changes no need to update session
+  touchAfter: 24 * 60 * 60, // in seconds
 })
 
 store.on("error", function (e) {
-  console.log("Session store error")
+  if (e) console.log("Session store error");
 })
 
 
-//session setup
+//Session setup
 const sessionOptions = {
   store,
-  // doporučuje se, aby se hůře odhadovalo změnit si name cookie
+  // Chnage cookie name is better
   name: "neurowebSessJmeno",
-  secret: "thisIsAnotherSecret",
+  secret: credentials.secretSession,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // cookies jen přes http a ne pomocí JS
+    // Cookies only through http and not in JS
     httpOnly: true,
-    // cookies přes https
+    // Cookies through https
     //secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
@@ -112,31 +113,31 @@ const sessionOptions = {
 }
 
 
-// esj engine
+// Esj engine
 app.engine("ejs", engine);
-// import ejs
+// Import ejs
 app.set("view engine", "ejs");
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('common'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-// directory with bootstrap
+// Directory with bootstrap
 app.use('/assets/vendor/bootstrap', express.static(
   path.join(__dirname, 'node_modules', 'bootstrap', 'dist')));
-// directory with jquery for bootstrap
+// Directory with jquery for bootstrap
 app.use('/assets/vendor/jquery', express.static(
   path.join(__dirname, 'node_modules', 'jquery', 'dist')));
-// directory with js for bootstrap
+// Directory with js for bootstrap
 app.use('/assets/vendor/popper.js', express.static(
   path.join(__dirname, 'node_modules', 'popper.js', 'dist', 'umd')));
-// directory with icons
+// Directory with icons
 app.use('/assets/vendor/feather-icons', express.static(
   path.join(__dirname, 'node_modules', 'feather-icons', 'dist')));
 
-// logování s rotací souborů
+// Logging with file rotation
 app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
   stream: process.env.REQUEST_LOG_FILE ?
     rfs.createStream(process.env.REQUEST_LOG_FILE, {
@@ -148,18 +149,18 @@ app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
 }));
 
 
-// use session setup
+// Use session setup
 app.use(session(sessionOptions));
 
-// užít method override
+// Use method override
 app.use(methodOverride("_method"));
 
-// flash use
+// Use flash
 app.use(flash())
 
-// ukládání proměnných dostupných v každém res.locals objektu pro vyzužití
+// Saving data accessible in all templates
 app.use((req, res, next) => {
-  // dostupné díky passportu - jméno a mail uživatele po přihlášení, na každém requestu a díky tomuto i pro template
+  // Thanks to passport is accessible name and user mail after login
   //res.locals.currentUser = req.user
   res.locals.success = req.flash("success")
   res.locals.error = req.flash("error")
@@ -168,12 +169,16 @@ app.use((req, res, next) => {
 
 app.use(cookieParser());
 
-// || Routery
+// Tiny MCE editor
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
+
+// || Routers
 app.use('/', indexRouter);
 app.use('/tasks/', taskRouter);
 app.use('/ngs-com/', commentsRouter);
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404, 'The page hasn´t been found!'));
 });
@@ -182,7 +187,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // Set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error =  err;
+  res.locals.error = err;
 
   // Render the error page
   res.status(err.status || 500);

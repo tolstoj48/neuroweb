@@ -1,14 +1,18 @@
-"use strict";
+'use strict';
 
 const chai = require('chai')
       ,chaiHttp = require('chai-http')
       ,expect = chai.expect
       ,taskReqValidationSchema = require("../../utilities/taskReqValidationSchema")
+      ,commentReqValidationSchema = require("../../utilities/commentReqValidationSchema")
       ,{ taskNewSchema } = taskReqValidationSchema
+      , { commentNewSchema } = commentReqValidationSchema
+      ,{ makeString } = require("./utilities/makeString")
 
 chai.use(chaiHttp);
 
-describe("JOI validation test", function () {
+
+describe("JOI validation test - Task", function () {
 
     it("should successfully validate data", function () {
       const validatedObj = taskNewSchema.validate({
@@ -59,11 +63,11 @@ describe("JOI validation test", function () {
         .and.have.property("message", '"date" is required');
     })
 
-    it("should throw Error - to long to_do_task", function () {
+    it("should throw Error - too long to_do_task", function () {
       const validatedObj = taskNewSchema.validate({
         "date": "2021-08-10",
         "who_wants_it": "svjiotrof",
-        "to_do_task": "nicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělánínicneděláníniělánínicneděláníniělánínicnedělánínicnedělánínicnedělánínicnedělánínicnedělání",
+        "to_do_task": "svjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofsvjiotrofvjiotrofsvjiotrofsvjiotrofsvjiotrofvjiotrofsvjiotrofsvjiotrofsvjiotrofvjiotrofsvjiotrofsvjiotrofsvjiotrofvjiotrofsvjiotrofsvjiotrofsvjiotrof",
         "done": "true"
       }).value;
       const error = taskNewSchema.validate(validatedObj).error;
@@ -96,5 +100,39 @@ describe("JOI validation test", function () {
       expect(error).to.exist
         .and.be.instanceof(Error)
         .and.have.property("message", '"done" must be one of [true, false, in process]');
+    })
+  });
+
+
+describe("JOI validation test - Comment", function () {
+
+    it("should successfully validate data", function () {
+      const validatedObj = commentNewSchema.validate({
+        "name": "2021-08-31",
+        "content": "svjiotrof",
+      }).value;
+      const error = commentNewSchema.validate(validatedObj).error;
+      expect(error).to.be.undefined;
+    })
+
+    it("should throw Error - long name", function () {
+      const validatedObj = commentNewSchema.validate({
+        "name": makeString(155),
+        "content": "svjiotrof",
+      }).value;
+      const error = commentNewSchema.validate(validatedObj).error;
+      expect(error).to.exist
+        .and.be.instanceof(Error)
+        .and.have.property("message", '"name" length must be less than or equal to 150 characters long');
+    })
+
+    it("should throw Error - missing name", function () {
+      const validatedObj = commentNewSchema.validate({
+        "content": "svjiotrof",
+      }).value;
+      const error = commentNewSchema.validate(validatedObj).error;
+      expect(error).to.exist
+        .and.be.instanceof(Error)
+        .and.have.property("message", '"name" is required');
     })
   });

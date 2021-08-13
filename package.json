@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start-dev": "cross-env ENV=development REQUEST_LOG_FILE=log-file.log REQUEST_LOG_FORMAT=common DEBUG=neuroweb:* nodemon ./bin/www",
-    "start-prod": "cross-env REQUEST_LOG_FILE=log-file.log REQUEST_LOG_FORMAT=common DEBUG=neuroweb:* nodemon ./bin/www"
+    "start-prod": "cross-env ENV=production REQUEST_LOG_FILE=log-file.log REQUEST_LOG_FORMAT=common DEBUG=neuroweb:* nodemon ./bin/www",
+    "lint": "eslint * */**"
   },
   "dependencies": {
     "bootstrap": "^5.0.2",
@@ -26,7 +27,8 @@
     "morgan": "~1.9.1",
     "popper.js": "^1.16.1",
     "rotating-file-stream": "^2.1.5",
-    "sanitize-html": "^2.4.0"
+    "sanitize-html": "^2.4.0",
+    "tinymce": "^5.8.2"
   },
   "devDependencies": {
     "eslint": "^7.31.0",

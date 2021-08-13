@@ -31,7 +31,6 @@ module.exports.editComment = async(req, res) => {
     req.flash("error", "The comment does not exist!");
     return res.redirect("/ngs-com");
   }
-  req.flash("success", "The comment has been updated!");
   res.render("comments/edit-comment", {
     layout: 'index' ,
     title: 'NGL - Edit an existing comment',
