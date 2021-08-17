@@ -1,4 +1,5 @@
-// testování comments
+// hledání - vyhledávání zároveň na obou sloupcích???
+
 
 // microservice??? - task/comments aspoň ve views svoje složky
 
@@ -6,9 +7,7 @@
 // testy
 // spouštění, aby nepadalo
 // přihlašování
-// loga 2. LF - ája
 // struktura dle zadání
-// vložení obrázku <%- include("../partials/logo-2lf") %>
 
 // web dnalab.cz
 
@@ -32,6 +31,7 @@ const rfs = require('rotating-file-stream');
 const indexRouter = require('./routes/indexRouter');
 const taskRouter = require('./routes/taskRouter');
 const commentsRouter = require('./routes/commentsRouter');
+const geneRouter = require('./routes/geneRouter');
 
 // Credentials
 const { credentials } = require("./config")
@@ -177,6 +177,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 app.use('/', indexRouter);
 app.use('/tasks/', taskRouter);
 app.use('/ngs-com/', commentsRouter);
+app.use('/in-house-db/', geneRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {

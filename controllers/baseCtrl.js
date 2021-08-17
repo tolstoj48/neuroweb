@@ -2,6 +2,8 @@
 
 const Task = require("../models/taskModel");
 const Comment = require("../models/commentModel");
+const Gene = require("../models/geneModel");
+const { getMaxListeners } = require("../models/taskModel");
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
@@ -14,10 +16,13 @@ module.exports.home = async (req, res) => {
 }
 
 // Render page with db search
-module.exports.inhousedb = (req, res) => {
+module.exports.inhousedb = async (req, res) => {
+  let data = await Gene.find();
   res.render('inhousedb', {
     layout: 'index',
     title: 'NGL - in-house database',
+    data,
+    searched: false,
   });
 }
 
@@ -69,7 +74,7 @@ module.exports.bamcrams = (req, res) => {
 
 // Render ngs-com page
 module.exports.ngscom = async (req, res) => {
-  const data = await Comment.find();
+  const data = await Comment.find().sort({ name: 'asc', test: -1 });
   res.render('ngs-com', {
     layout: 'index',
     title: 'NGL - NGS Comments',

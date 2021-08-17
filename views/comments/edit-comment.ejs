@@ -1,7 +1,8 @@
 <% layout("layouts/index") %>
   <div class="row justify-content-center">
     <div class="col-10">
-      <form class="mt-3 needs-validation" novalidate action="/ngs-com/edit/<%= comment._id %>?_method=PATCH" method="POST">
+      <form class="mt-3 needs-validation" novalidate action="/ngs-com/edit/<%= comment._id %>?_method=PATCH"
+        method="POST">
         <fieldset>
           <legend>Edit an existing comment</legend>
           <div class="form-group">
@@ -10,12 +11,13 @@
           </div>
           <div class="form-group">
             <label for="content" class="form-label mt-3">Description:</label>
-            <textarea class="form-control" id="content" name="content"
-              placeholder="The description of the comment..." rows="10" maxlength="10000"> <%= comment.content %> </textarea>
+            <textarea class="form-control" id="content" name="content" placeholder="The description of the comment..."
+              rows="10" maxlength="10000"> <%= comment.content %> </textarea>
           </div>
         </fieldset>
         <div class="row justify-content-center">
-          <a id="backBtn" class="btn btn-lg btn-outline-warning strong mt-3 mb-3 me-4 col-5" href="/ngs-com">Back without
+          <a id="backBtn" class="btn btn-lg btn-outline-warning strong mt-3 mb-3 me-4 col-5" href="/ngs-com">Back
+            without
             changes</a>
           <button id="submitBtn" class="btn btn-lg btn-outline-success strong mt-3 mb-3 col-5">Save the changes</button>
         </div>
