@@ -33,7 +33,64 @@ const geneSchema = new mongoose.Schema({
     },
     InterVarAutomated: {
       type: String
-    }
+    },
+    Clinvar: {
+      type: String
+    },
+    MultiAllelic: {
+      type: String
+    },
+    HomVar: {
+      type: String
+    },
+    HetRef: {
+      type: String
+    },
+    HetOther: {
+      type: String
+    },
+    HomRef: {
+      type: String
+    },
+    NoCall: {
+      type: String
+    },
+    OtherGt: {
+      type: String
+    },
+    Var: {
+      type: String
+    },
+    Called: {
+      type: String
+    },
+    Qual: {
+      type: String
+    },
+    Ac: {
+      type: String
+    },
+    Af: {
+      type: String
+    },
+    HomVarSamples: {
+      type: String
+    },
+    HetRefSamples: {
+      type: String
+    },
+    HetOtherSamples: {
+      type: String
+    },
+    HomRefSamples: {
+      type: String
+    },
+    NoCallSamples: {
+      type: String
+    },
+    OtherGtSamples: {
+      type: String
+    },
   });
 
 const Gene = mongoose.model("Gene", geneSchema);

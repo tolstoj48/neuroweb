@@ -17,11 +17,11 @@ module.exports.home = async (req, res) => {
 
 // Render page with db search
 module.exports.inhousedb = async (req, res) => {
-  let data = await Gene.find();
+  const numberOfDbEntries = await Gene.countDocuments({});
   res.render('inhousedb', {
     layout: 'index',
     title: 'NGL - in-house database',
-    data,
+    numberOfDbEntries,
     searched: false,
   });
 }

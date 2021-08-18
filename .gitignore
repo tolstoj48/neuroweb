@@ -16,3 +16,4 @@ site.webmanifest
 .credentials.*
 test/testui/screenshots
 test/test-try
+original-inhousedb.ejs

@@ -1,4 +1,4 @@
-// hledání - vyhledávání zároveň na obou sloupcích???
+// nasimulovat počet znaků do posledních sloupců???
 
 
 // microservice??? - task/comments aspoň ve views svoje složky

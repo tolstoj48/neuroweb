@@ -3,7 +3,7 @@
 <% layout("layouts/index") %>
   <h1 class="mt-2">In house database</h1>
   <a href="/in-house-db/import" class="btn btn-lg btn-outline-primary strong mt-3">+ Import data</a>
-  <%- include("../partials/searchDb") %>
+  <%- include("../partials/search-db") %>
   <table class="table table-hover mt-3 mb-5" id="to-do-list">
     <thead>
       <tr>
@@ -17,6 +17,25 @@
         <th scope="col">GeneRefGene</th>
         <th scope="col">AfGnomad</th>
         <th scope="col">InterVarAutomated</th>
+        <th scope="col">Clinvar</th>
+        <th scope="col">MultiAllelic</th>
+        <th scope="col">HomVar</th>
+        <th scope="col">HetRef</th>
+        <th scope="col">HetOther</th>
+        <th scope="col">HomRef</th>
+        <th scope="col">NoCall</th>
+        <th scope="col">OtherGt</th>
+        <th scope="col">Var</th>
+        <th scope="col">Called</th>
+        <th scope="col">Qual</th>
+        <th scope="col">Ac</th>
+        <th scope="col">Af</th>
+        <th scope="col">HomVarSamples</th>
+        <th scope="col">HetRefSamples</th>
+        <th scope="col">HetOtherSamples</th>
+        <th scope="col">HomRefSamples</th>
+        <th scope="col">NoCallSamples</th>
+        <th scope="col">OtherGtSamples</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +70,66 @@
           </td>
           <td>
             <%= gene.InterVarAutomated %>
+          </td>
+          <td>
+            <%= gene.InterVarAutomated %>
+          </td>
+          <td>
+            <%= gene.Clinvar %>
+          </td>
+          <td>
+            <%= gene.MultiAllelic %>
+          </td>
+          <td>
+            <%= gene.HomVar %>
+          </td>
+          <td>
+            <%= gene.HetRef %>
+          </td>
+          <td>
+            <%= gene.HetOther %>
+          </td>
+          <td>
+            <%= gene.HomRef %>
+          </td>
+          <td>
+            <%= gene.NoCall %>
+          </td>
+          <td>
+            <%= gene.OtherGt %>
+          </td>
+          <td>
+            <%= gene.Var %>
+          </td>
+          <td>
+            <%= gene.Called %>
+          </td>
+          <td>
+            <%= gene.Qual %>
+          </td>
+          <td>
+            <%= gene.Ac %>
+          </td>
+          <td>
+            <%= gene.Af %>
+          </td>
+          <td>
+            <%= gene.HomVarSamples %>
+          </td>
+          <td>
+            <%= gene.HetRefSamples %>
+          </td>
+          <td>
+            <%= gene.HetOtherSamples %>
+          </td>
+          <td>
+            <%= gene.HomRefSamples %>
+          </td>
+          <td>
+            <%= gene.NoCallSamples %>
+          </td>
+          <td>
+            <%= gene.OtherGtSamples %>
           </td>
         </tr>
         <% } %>
