@@ -1,24 +1,24 @@
 'use strict';
 
-const BaseJoi = require("joi");
+const BaseJoi = require('joi');
 
-const sanitizeHtml = require("sanitize-html");
+const sanitizeHtml = require('sanitize-html');
 
 // JOI setup
 const extension = (joi) => ({
-  type: "string",
+  type: 'string',
   base: joi.string(),
   messages: {
-      "string.escapeHTML": `{{#label}} can´t include HTML!`
+      'string.escapeHTML': `{{#label}} can´t include HTML!`
   },
   rules: {
       escapeHTML: {
           validate(value, helpers) {
               const clean = sanitizeHtml(value, {
-                  allowedTags: ["br", "<a>"],
+                  allowedTags: ['br', '<a>'],
                   allowedAttributes: {},
               })
-              if (clean !== value) return helpers.error("string.escapeHTML", { value })
+              if (clean !== value) return helpers.error('string.escapeHTML', { value })
               return clean
           }
       }
@@ -30,7 +30,7 @@ const Joi = BaseJoi.extend(extension);
 // JOI validation of newly created comment
 const commentNewSchema = Joi.object({
   name: Joi.string().trim().max(150).required().escapeHTML(),
-  content: Joi.string().trim().max(10000).allow(null, ""),
+  content: Joi.string().trim().max(10000).allow(null, ''),
 });
 
 module.exports = { commentNewSchema };

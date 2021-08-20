@@ -1,6 +1,6 @@
 'use strict';
 
-const faker = require("faker");
+const faker = require('faker');
 
 module.exports.makeString = (charLimit) => {
   let str = faker.lorem.paragraph()

@@ -1,6 +1,6 @@
 'use strict';
 
-const Task = require("../models/taskModel");
+const Task = require('../models/taskModel');
 
 // Render new task form
 module.exports.new = (req, res) => {
@@ -17,7 +17,7 @@ module.exports.postNewTask = async (req, res, next) => {
   if(!saved) {
     next(createError(400, 'Task has not been saved in the db'));
   }
-  req.flash("success", "New task has been created!");
+  req.flash('success', 'New task has been created!');
   res.redirect(`/`);
 }
 
@@ -28,10 +28,10 @@ module.exports.editTask = async (req, res) => {
   // Search given task by id from db and the clicked link
   const detailTaskData = await Task.findById( taskId );
   if (!detailTaskData) {
-    req.flash("error", "The task does not exist!");
-    return res.redirect("/");
+    req.flash('error', 'The task does not exist!');
+    return res.redirect('/');
   }
-  res.render("tasks/edit-task", {
+  res.render('tasks/edit-task', {
     layout: 'index' ,
     title: 'NGL - Edit an existing task',
     task: detailTaskData 
@@ -54,7 +54,7 @@ module.exports.updateTask = async (req, res, next) => {
   if (!taskDb) {
     next(createError(400, 'Task has not been updated in the db!'));
   }
-  req.flash("success", "The task has been updated!");
+  req.flash('success', 'The task has been updated!');
   res.redirect(`/`);
 }
 
@@ -63,10 +63,10 @@ module.exports.confirmDeleteTask = async (req, res) => {
   const  { taskId } = req.params;
   const detailTaskData = await Task.findById( taskId );
   if (!detailTaskData) {
-    req.flash("error", "The task does not exist!");
-    return res.redirect("/");
+    req.flash('error', 'The task does not exist!');
+    return res.redirect('/');
   }
-  res.render("tasks/confirm-delete-task", {
+  res.render('tasks/confirm-delete-task', {
     layout: 'index' ,
     title: 'NGL - Confirm the delete of the task',
     task: detailTaskData 
@@ -77,7 +77,7 @@ module.exports.confirmDeleteTask = async (req, res) => {
 module.exports.deleteTask = async (req, res) => {
   const  { taskId } = req.params
   await Task.findByIdAndDelete(taskId)
-  req.flash("success", "The task has been deleted!")
-  res.redirect("/")
+  req.flash('success', 'The task has been deleted!')
+  res.redirect('/')
 }
 

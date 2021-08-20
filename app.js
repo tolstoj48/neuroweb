@@ -36,23 +36,23 @@ const commentsRouter = require('./routes/commentsRouter');
 const geneRouter = require('./routes/geneRouter');
 
 // Credentials
-const { credentials } = require("./config")
+const { credentials } = require('./config')
 
 const app = express();
 
-const engine = require("ejs-mate");
+const engine = require('ejs-mate');
 
 // Mongo sanitize SQL
-const sanitize = require("express-mongo-sanitize");
+const sanitize = require('express-mongo-sanitize');
 
 // Session setup
-const session = require("express-session");
+const session = require('express-session');
 // Flash
-const flash = require("connect-flash");
+const flash = require('connect-flash');
 // Mongodb for sessions
-const MongoDBStore = require("connect-mongo");
+const MongoDBStore = require('connect-mongo');
 // Db url
-const dbUrl = "mongodb://localhost:27017/neuroweb";
+const dbUrl = 'mongodb://localhost:27017/neuroweb';
 
 
 
@@ -60,9 +60,9 @@ const dbUrl = "mongodb://localhost:27017/neuroweb";
 app.use(sanitize());
 
 // Method override for other methods than post and get
-const methodOverride = require("method-override");
+const methodOverride = require('method-override');
 // Mongoose for mongoDb
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 
 // Connection to db
@@ -76,10 +76,10 @@ mongoose.connect(dbUrl, {
 })
   .then(() => {
     // ne v testovacím prostředí
-    if (process.env.NODE_ENV !== "test") console.log("Mongo DB connection open!")
+    if (process.env.NODE_ENV !== 'test') console.log('Mongo DB connection open!')
   })
   .catch(err => {
-    console.log("Mongo DB error of connection")
+    console.log('Mongo DB error of connection')
     console.log(err)
   })
 
@@ -91,8 +91,8 @@ const store = MongoDBStore.create({
   touchAfter: 24 * 60 * 60, // in seconds
 })
 
-store.on("error", function (e) {
-  if (e) console.log("Session store error");
+store.on('error', function (e) {
+  if (e) console.log('Session store error');
 })
 
 
@@ -100,7 +100,7 @@ store.on("error", function (e) {
 const sessionOptions = {
   store,
   // Chnage cookie name is better
-  name: "neurowebSessJmeno",
+  name: 'neurowebSessJmeno',
   secret: credentials.secretSession,
   resave: false,
   saveUninitialized: false,
@@ -116,9 +116,9 @@ const sessionOptions = {
 
 
 // Esj engine
-app.engine("ejs", engine);
+app.engine('ejs', engine);
 // Import ejs
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 
@@ -155,7 +155,7 @@ app.use(logger(process.env.REQUEST_LOG_FORMAT || 'dev', {
 app.use(session(sessionOptions));
 
 // Use method override
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 
 // Use flash
 app.use(flash())
@@ -164,8 +164,8 @@ app.use(flash())
 app.use((req, res, next) => {
   // Thanks to passport is accessible name and user mail after login
   //res.locals.currentUser = req.user
-  res.locals.success = req.flash("success")
-  res.locals.error = req.flash("error")
+  res.locals.success = req.flash('success')
+  res.locals.error = req.flash('error')
   next()
 })
 

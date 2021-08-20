@@ -32,13 +32,10 @@
                 <p class="text-success mt-3 strong"> The searched category has been: <em>"<%= searchedCategory %>"</em>
                 </p>
                 <p class="text-success mt-3 strong"> The searched expression has been: <em>"<%= searchedExp%>"</em></p>
-                <p class="text-success mt-3 strong"> The number of found positions: <%= numberOfFoundPositions %>
+                <p class="text-success mt-3 strong"> The number of found positions: <em> <%= numberOfFoundPositions %> </em>
                 </p>
                 <p class="text-success mt-3 strong"> The fulltext search in the results: * <%-
                     include("../partials/search-on-results") %>
-                </p>
-                <p class="text-success mt-3 strong"> The number of fulltext search results:
-                <div id="number-of-fulltext-results" class="d-inline"></div>
                 </p>
                 <p>* Searches all the rows and columns including the detailed data content. Search is case insensitive.
                 </p>

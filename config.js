@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 // Save variable node_env to dev by default
-const env = process.env.NODE_ENV || "development"
+const env = process.env.NODE_ENV || 'development'
 
 // Login data
 const credentials = require(`./.credentials.${env}.json`)

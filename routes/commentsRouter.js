@@ -3,9 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const commentCtrl = require('../controllers/commentCtrl.js');
-const { isLoggedIn, validateNewComment } = require("../middleware/commentsValidationMiddleware");
+const { isLoggedIn, validateNewComment } = require('../middleware/commentsValidationMiddleware');
 // catchAsync - error handler pro async functions
-const catchAsync = require("../utilities/catchAsyncUtil");
+const catchAsync = require('../utilities/catchAsyncUtil');
 
 
 // Basepage
@@ -16,14 +16,14 @@ router.route('/new-comment')
   .post(validateNewComment, catchAsync(commentCtrl.postNewComment))
 
 // Edit comment page
-router.route("/edit/:commentId")
+router.route('/edit/:commentId')
 // Edit comment info page
   .get(catchAsync(commentCtrl.editComment))
 // Patch comment
   .patch(validateNewComment, catchAsync(commentCtrl.updateComment))
 
 // Delete comment page
-router.route("/delete/:commentId")
+router.route('/delete/:commentId')
 // Delete comment
   .get(catchAsync(commentCtrl.confirmDeleteComment))
 // Delete the comment

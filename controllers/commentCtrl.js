@@ -1,6 +1,6 @@
 'use strict';
 
-const comment = require("../models/commentModel");
+const comment = require('../models/commentModel');
 
 // Render new comment form
 module.exports.new = (req, res) => {
@@ -17,7 +17,7 @@ module.exports.postNewComment = async (req, res, next) => {
   if(!saved) {
     next(createError(400, 'comment has not been saved in the db'));
   }
-  req.flash("success", "New comment has been created!");
+  req.flash('success', 'New comment has been created!');
   res.redirect(`/ngs-com`);
 }
 
@@ -28,10 +28,10 @@ module.exports.editComment = async(req, res) => {
   // Search given comment by id from db and the clicked link
   const detailcommentData = await comment.findById( commentId );
   if (!detailcommentData) {
-    req.flash("error", "The comment does not exist!");
-    return res.redirect("/ngs-com");
+    req.flash('error', 'The comment does not exist!');
+    return res.redirect('/ngs-com');
   }
-  res.render("comments/edit-comment", {
+  res.render('comments/edit-comment', {
     layout: 'index' ,
     title: 'NGL - Edit an existing comment',
     comment: detailcommentData 
@@ -52,7 +52,7 @@ module.exports.updateComment = async (req, res, next) => {
   if (!commentDb) {
     next(createError(400, 'comment has not been updated in the db!'));
   }
-  req.flash("success", "The comment has been updated!");
+  req.flash('success', 'The comment has been updated!');
   res.redirect(`/ngs-com`);
 }
 
@@ -61,10 +61,10 @@ module.exports.confirmDeleteComment = async (req, res) => {
   const  { commentId } = req.params;
   const detailCommentData = await comment.findById( commentId );
   if (!detailCommentData) {
-    req.flash("error", "The comment does not exist!");
-    return res.redirect("/");
+    req.flash('error', 'The comment does not exist!');
+    return res.redirect('/');
   }
-  res.render("comments/confirm-delete-comment", {
+  res.render('comments/confirm-delete-comment', {
     layout: 'index' ,
     title: 'NGL - Confirm the delete of the comment',
     comment: detailCommentData 
@@ -75,7 +75,7 @@ module.exports.confirmDeleteComment = async (req, res) => {
 module.exports.deleteComment = async (req, res) => {
   const  { commentId } = req.params
   await comment.findByIdAndDelete(commentId)
-  req.flash("success", "The comment has been deleted!")
-  res.redirect("/ngs-com")
+  req.flash('success', 'The comment has been deleted!')
+  res.redirect('/ngs-com')
 }
 

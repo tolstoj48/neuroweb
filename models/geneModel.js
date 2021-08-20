@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // Definition of new schema
 const geneSchema = new mongoose.Schema({
@@ -93,6 +93,6 @@ const geneSchema = new mongoose.Schema({
     },
   });
 
-const Gene = mongoose.model("Gene", geneSchema);
+const Gene = mongoose.model('Gene', geneSchema);
 
 module.exports = Gene;

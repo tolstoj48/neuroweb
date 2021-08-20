@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const baseCtrl = require('../controllers/baseCtrl');
 // catchAsync - error handler pro async functions
-const catchAsync = require("../utilities/catchAsyncUtil");
+const catchAsync = require('../utilities/catchAsyncUtil');
 
 // basepage
 router.route('/')

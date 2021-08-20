@@ -1,9 +1,8 @@
 'use strict';
 
-const Task = require("../models/taskModel");
-const Comment = require("../models/commentModel");
-const Gene = require("../models/geneModel");
-const { getMaxListeners } = require("../models/taskModel");
+const Task = require('../models/taskModel');
+const Comment = require('../models/commentModel');
+const Gene = require('../models/geneModel');
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
