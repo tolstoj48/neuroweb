@@ -1,3 +1,17 @@
+/* Basic font color */
+main {
+  color: white;
+}
+
+/* Feather icon - home coloring */
+.navbar-dark .navbar-brand {
+  color: black;
+}
+
+.navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link {
+  color: black;
+}
+
 .btn-close {
   background: transparent url('data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2396'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e') center/1em auto no-repeat;
  }
@@ -18,7 +32,6 @@
   font-weight: 600;
  }
  
- 
  #menuBar > li > ul > li > a {
    font-weight: 600;
   }
@@ -34,22 +47,22 @@
    color: rgb(44, 32, 32);
 }
 
-
 /* Table for gene positions */
 #gene-positions { 
   border-collapse: collapse; 
 }
 
 #gene-positions th { 
-  font-weight: 400; 
+  color: #fdf6e4;
+  font-weight: 200;
 }
 
-#gene-positions > tbody > tr:nth-child(odd) {
+#gene-positions > tbody > tr:nth-child(2n+1) {
   background-color: #fdf6e4;
   color: rgb(44, 32, 32);
  }
  
- #gene-positions > tbody > tr:nth-child(even) {
+ #gene-positions > tbody > tr:nth-child(4n+1) {
    background-color: #f0db9c;
    color: rgb(44, 32, 32);
 }
@@ -65,10 +78,37 @@
 
 /* Strong and underlined text in th in inhouse db search result table */
 .highlighted {
-  text-decoration: underline;
 }
 
 /* Detail link in the table for more information */
 .detail-info {
   cursor: pointer;
 }
+
+/* Detail button in inhouse db */
+.btn-danger {
+  background-color: rgb(218, 90, 152);
+}
+
+.hidden-content {
+  background-color: rgb(224, 195, 209);
+  color: rgb(44, 32, 32);
+}
+
+/* Search buttons inhouse db */
+#searchGnomenBtn{
+  color: rgb(255, 192, 1);
+}
+
+#searchGnomenBtn:hover{
+  color: rgb(255, 255, 255);
+}
+
+#searchGeneRefGeneBtn{
+  color: rgb(255, 192, 1);
+}
+
+#searchGeneRefGeneBtn:hover{
+  color: rgb(255, 255, 255);
+}
+

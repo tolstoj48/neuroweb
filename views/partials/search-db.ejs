@@ -29,12 +29,12 @@
               <h5 class="mt-4"><strong>The number of the entries in the in-house db: <%= numberOfDbEntries %> </strong>
               </h5>
               <% if (searched) { %>
-                <p class="text-success mt-3 strong"> The searched category has been: <em>"<%= searchedCategory %>"</em>
+                <p class="mt-3 strong"> The searched category has been: <em>"<%= searchedCategory %>"</em>
                 </p>
-                <p class="text-success mt-3 strong"> The searched expression has been: <em>"<%= searchedExp%>"</em></p>
-                <p class="text-success mt-3 strong"> The number of found positions: <em> <%= numberOfFoundPositions %> </em>
+                <p class="mt-3 strong"> The searched expression has been: <em>"<%= searchedExp%>"</em></p>
+                <p class="mt-3 strong"> The number of found positions: <em> <%= numberOfFoundPositions %> </em>
                 </p>
-                <p class="text-success mt-3 strong"> The fulltext search in the results: * <%-
+                <p class="mt-3 strong"> The fulltext search in the results: * <%-
                     include("../partials/search-on-results") %>
                 </p>
                 <p>* Searches all the rows and columns including the detailed data content. Search is case insensitive.

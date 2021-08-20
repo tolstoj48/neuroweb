@@ -3,7 +3,7 @@
   <a href="/in-house-db/import" class="btn btn-lg btn-outline-primary strong mt-3">+ Import data</a>
   <%- include("../partials/search-db") %>
     <div class="table-responsive">
-      <table class="table table-hover mt-3 mb-5" id="gene-positions">
+      <table class="table mt-3 mb-5" id="gene-positions">
         <thead>
           <tr>
             <th scope="col">Detail</th>
@@ -16,24 +16,24 @@
             <th scope="col">Gene</th>
             <th scope="col">AfGnomad</th>
             <th scope="col">Clinvar</th>
-            <th class="highlighted" scope="col"><strong>HomVar</strong></th>
-            <th class="highlighted" scope="col"><strong>HetRef</strong></th>
-            <th class="highlighted" scope="col"><strong>HetOther</strong></th>
-            <th class="highlighted" scope="col"><strong>HomRef</strong></th>
-            <th class="highlighted" scope="col"><strong>NoCall</strong></th>
-            <th class="highlighted" scope="col"><strong>OtherGt</strong></th>
+            <th class="highlighted" scope="col">HomVar</th>
+            <th class="highlighted" scope="col">HetRef</th>
+            <th class="highlighted" scope="col">HetOther</th>
+            <th class="highlighted" scope="col">HomRef</th>
+            <th class="highlighted" scope="col">NoCall</th>
+            <th class="highlighted" scope="col">OtherGt</th>
             <th scope="col">Var</th>
             <th scope="col">Called</th>
             <th scope="col">Qual</th>
             <th scope="col">Ac</th>
-            <th class="highlighted" scope="col"><strong>Af</strong></th>
+            <th class="highlighted" scope="col">Af</th>
           </tr>
         </thead>
         <tbody>
           <% for (let gene of data) { %>
             <tr class="searched-row">
               <td>
-                <a class="btn btn-info" data-bs-toggle="collapse" href="#<%= gene.GNomen %>" role="button"> ... </p>
+                <a class="btn btn-danger" data-bs-toggle="collapse" href="#<%= gene.GNomen %>" role="button"> ... </p>
               </td>
               <td>
                 <%= gene.Chr %>
@@ -96,7 +96,7 @@
                 <%= gene.Af %>
               </td>
             </tr>
-            <tr id="<%= gene.GNomen %>" class="collapse searched-hidden-row">
+            <tr id="<%= gene.GNomen %>" class="collapse searched-hidden-row hidden-content">
               <td colspan="21">
                 <div>
                   <p><strong>FuncRefGene: </strong> <%=gene.FuncRefGene%>
