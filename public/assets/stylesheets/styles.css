@@ -23,6 +23,7 @@
    font-weight: 600;
   }
 
+/* Table for to do list */
 #to-do-list > tbody > tr:nth-child(odd) {
   background-color: #fdf6e4;
   color: rgb(44, 32, 32);
@@ -31,4 +32,43 @@
  #to-do-list > tbody > tr:nth-child(even) {
    background-color: #f0db9c;
    color: rgb(44, 32, 32);
+}
+
+
+/* Table for gene positions */
+#gene-positions { 
+  border-collapse: collapse; 
+}
+
+#gene-positions th { 
+  font-weight: 400; 
+}
+
+#gene-positions > tbody > tr:nth-child(odd) {
+  background-color: #fdf6e4;
+  color: rgb(44, 32, 32);
+ }
+ 
+ #gene-positions > tbody > tr:nth-child(even) {
+   background-color: #f0db9c;
+   color: rgb(44, 32, 32);
+}
+
+#gene-positions tr { 
+  border: none; 
+}
+
+#gene-positions td {
+  border-right: solid 1px rgb(44, 32, 32) ; 
+  border-left: solid 1px rgb(44, 32, 32);
+}
+
+/* Strong and underlined text in th in inhouse db search result table */
+.highlighted {
+  text-decoration: underline;
+}
+
+/* Detail link in the table for more information */
+.detail-info {
+  cursor: pointer;
 }

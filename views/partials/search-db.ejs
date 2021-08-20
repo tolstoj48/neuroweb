@@ -1,6 +1,6 @@
-<div class="container d-flex justify-content-center align-items-center">
+<div class="container d-flex justify-content-center align-items-center mt-3">
   <div class="row col-12">
-    <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-3">
+    <div class="col-10 offset-md-1">
       <div class="card shadow">
         <div class="card-body">
           <div class="d-flex flex-column">
@@ -20,18 +20,29 @@
                 <div class="row justify-content-center">
                   <div class="form-group row">
                     <input class="col-6 me-3" type="search" id="searchGeneRefGene" name="searchGeneRefGene"
-                      placeholder="gene.Refgene" maxlength="200">
+                      placeholder="Gene" maxlength="200">
                     <button id="searchGeneRefGeneBtn" class="btn btn-outline-primary col-5 strong">Search
-                      geneRef</button>
+                      Gene</button>
                   </div>
                 </div>
               </form>
-              <h5 class="mt-4"><strong>The number of the entries in the in-house db: <%= numberOfDbEntries %> </strong></h5>
+              <h5 class="mt-4"><strong>The number of the entries in the in-house db: <%= numberOfDbEntries %> </strong>
+              </h5>
               <% if (searched) { %>
-              <h6 class="text-warning mt-3 strong"> The searched category has been: <em>"<%= searchedCategory %>"</em></h6>
-              <h6 class="text-warning mt-3 strong"> The searched expression has been: <em>"<%= searchedExp%>"</em></h6>
-              <h6 class="text-warning mt-3 strong"> The number of found positions: <%= numberOfFoundPositions %></h6>
-              <% } %>
+                <p class="text-success mt-3 strong"> The searched category has been: <em>"<%= searchedCategory %>"</em>
+                </p>
+                <p class="text-success mt-3 strong"> The searched expression has been: <em>"<%= searchedExp%>"</em></p>
+                <p class="text-success mt-3 strong"> The number of found positions: <%= numberOfFoundPositions %>
+                </p>
+                <p class="text-success mt-3 strong"> The fulltext search in the results: * <%-
+                    include("../partials/search-on-results") %>
+                </p>
+                <p class="text-success mt-3 strong"> The number of fulltext search results:
+                <div id="number-of-fulltext-results" class="d-inline"></div>
+                </p>
+                <p>* Searches all the rows and columns including the detailed data content. Search is case insensitive.
+                </p>
+                <% } %>
             </div>
           </div>
         </div>

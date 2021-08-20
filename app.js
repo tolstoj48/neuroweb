@@ -1,5 +1,7 @@
-// nasimulovat počet znaků do posledních sloupců???
 
+// acordeon. v zakladu nechat sl: Chr, Start, End, Ref, Alt, gNomen, Gene (generefgene), AF GnomAD, ClinVar, AF, AC, Qual, HOM-VAR, HET-REF, HET-OHER,HOM-REF, NO-CALL, OTHER-GT, VAR, CALLED (boldem HOM-VAR, HET-REF, HET-OHER,HOM-REF, NO-CALL, OTHER-GT, AF)
+// vyskakovaci sl.: Gene Function, InterVar, MultiAllelic a sl se samples
+// může se stát, že bude gNomen dvakrát stejný? - id pro vyskakovací obsah založené na něm
 
 // microservice??? - task/comments aspoň ve views svoje složky
 
