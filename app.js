@@ -1,9 +1,13 @@
+// mazání dat z db tlačítka
+
 // microservice??? - task/comments aspoň ve views svoje složky
 
 //pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat... - // vazba na postgresql
 // testy
 // spouštění, aby nepadalo
 // přihlašování
+// schema gene a všechny validace a v db se musí jmenovat tak, jak mi zadala ája, domluvit na oddělovačícch
+
 // struktura dle zadání
 
 // web dnalab.cz
@@ -159,9 +163,10 @@ app.use(flash())
 app.use((req, res, next) => {
   // Thanks to passport is accessible name and user mail after login
   //res.locals.currentUser = req.user
-  res.locals.success = req.flash('success')
-  res.locals.error = req.flash('error')
-  next()
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  res.locals.uploadFlag = false;
+  next();
 })
 
 app.use(cookieParser());

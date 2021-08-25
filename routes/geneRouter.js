@@ -7,10 +7,17 @@ const geneCtrl = require('../controllers/geneCtrl.js');
 const catchAsync = require('../utilities/catchAsyncUtil');
 
 
-// Search gene page
+// Search inhouse db
 router.route('/search')
   // Search gene
-  .get(geneCtrl.searchGene)
+  .get(catchAsync(geneCtrl.searchGene));
+
+// Importing data to inhouse db
+router.route('/import-data')
+  // Get import data page
+  .get(geneCtrl.importDataMainPage)
+  // Post data and validate them
+  .post(catchAsync(geneCtrl.importData));
 
 
 module.exports = router;

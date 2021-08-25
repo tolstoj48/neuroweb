@@ -36,12 +36,17 @@ no">
     <!-- Feather icons -->
     <script src="/assets/vendor/feather-icons/feather.js"></script>
     <!-- Script element sourcing TinyMCE -->
-   <script type="application/javascript" src= "/tinymce/tinymce.min.js"></script>
-   <!-- Script element sourcing the TinyMCE configuration -->
-   <script type="application/javascript" src= "/assets/javascripts/my-tinymce-config.js"></script>
-    <script>
-      feather.replace();
-    </script>
+    <script type="application/javascript" src="/tinymce/tinymce.min.js"></script>
+    <!-- Script element sourcing the TinyMCE configuration -->
+    <script type="application/javascript" src="/assets/javascripts/my-tinymce-config.js"></script>
+    <!-- Upload script only for the  inhouse db importing - uploadFlag-->
+    <% if (uploadFlag) {%>
+      <script src="/assets/javascripts/ajax-upload.js"></script>
+      <% } %>
+    <!-- Feather icons script to work -->
+        <script>
+          feather.replace();
+        </script>
 </body>
 
 </html>
