@@ -26,20 +26,12 @@ const allowedFiles = ".csv";
 const uploadFlag = true;
 
 
-// Import new db
-module.exports.importDb = (req, res) => {
-  res.render('comments/new-comment', {
-    layout: 'index',
-    title: 'NGL - import data to in-house db',
-  });
-}
-
-// Search db for genomin position
+// Search db for gNomen position
 module.exports.searchGene = async (req, res) => {
   const { searchGnomen, searchGeneRefGene } = req.query;
   let data = '';
   // What has been searched for -> information for the search result in the view needed
-  let searchedCategory = searchGnomen ? 'gNomen' : 'gene.Refgene';
+  let searchedCategory = searchGnomen ? 'gNomen' : 'Gene_refGene';
   // Expression for the result of the search in the view
   let searchedExp = searchGnomen ? searchGnomen : searchGeneRefGene;
   // Trimed expression in the case user use whitespaces at the beginning and end of the searched expression
@@ -47,20 +39,20 @@ module.exports.searchGene = async (req, res) => {
 
   if (searchGnomen == '' || searchGnomen == ' ') {
     // Fulltext search - GNomen - needs non existent and empty
-    const dataNoGNomen = await Gene.find({ GNomen: { '$exists': false } });
-    const dataEmptyNoGNomen = await Gene.find({ GNomen: '' });
+    const dataNoGNomen = await Gene.find({ gNomen: { '$exists': false } });
+    const dataEmptyNoGNomen = await Gene.find({ gNomen: '' });
     data = dataNoGNomen.concat(dataEmptyNoGNomen);
     // Setup information for the search result - searched category
     searchedCategory = 'gNomen';
   } else if (searchGnomen) {
-    data = await Gene.find({ GNomen: { '$regex': `${searchGnomen.trim()}`, '$options': 'i' } });
+    data = await Gene.find({ gNomen: { '$regex': `${searchGnomen.trim()}`, '$options': 'i' } });
   } else if (searchGeneRefGene == '' || searchGeneRefGene == ' ') {
     // Fulltext search - GeneRefGene - needs non existent and empty
     const dataNoGeneRefGene = await Gene.find({ GeneRefGene: { '$exists': false } });
     const dataEmptyGeneRefGene = await Gene.find({ GeneRefGene: '' });
     data = dataNoGeneRefGene.concat(dataEmptyGeneRefGene);
     // Setup information for the search result - searched category
-    searchedCategory = 'gene.Refgene';
+    searchedCategory = 'Gene_refGene';
   } else if (searchGeneRefGene) {
     // Fulltext search - geneRefGene
     data = await Gene.find({ GeneRefGene: { '$regex': `${searchGeneRefGene.trim()}`, '$options': 'i' } });
@@ -182,11 +174,11 @@ module.exports.importData = async (req, res, next) => {
 
       // If there are no errors, then import the data to the db
       if (arr.length == 0) {
-        // Basic parsing and import to the in-house db *** DODĚLAT
+        // Basic parsing and import to the in-house db
         if (jsonArray.length > 0) {
           await parseAndImport.pAndI(jsonArray)
         } else {
-          // Delete, flash, redirect uploaded file *** DODěLAT
+          // Delete, flash, redirect uploaded file
           deleteFlashRedirect.dFR(
             res,
             req,
@@ -198,7 +190,7 @@ module.exports.importData = async (req, res, next) => {
         }
       } else {
         console.log(arr)
-        // // Delete, flash, redirect uploaded file *** DODěLAT
+        // // Delete, flash, redirect uploaded file
         deleteFlashRedirect.dFR(
           res,
           req,
@@ -209,7 +201,7 @@ module.exports.importData = async (req, res, next) => {
         // ukončení fs.access
         return
       }
-      // Delete, flash, redirect uploaded file *** DODěLAT
+      // Delete, flash, redirect uploaded file
       deleteFlashRedirect.dFR(
         res,
         req,
@@ -219,4 +211,26 @@ module.exports.importData = async (req, res, next) => {
       )
     })
   })
+}
+
+// Import new db
+module.exports.deleteDataConfirmPage = (req, res) => {
+  res.render('genes/delete-confirm', {
+    layout: 'index',
+    title: 'NGL - delete all the data from in-house db',
+  });
+}
+
+// Import new db
+module.exports.deleteData = async (req, res) => {
+  // Delete all the data from in-house db
+  await Gene.remove({});
+  req.flash('succes', 'The in-house db has been cleared!');
+  const numberOfDbEntries = await Gene.countDocuments({});
+  res.render('inhousedb', {
+    layout: 'index',
+    title: 'NGL - in-house database',
+    numberOfDbEntries,
+    searched: false
+  });
 }

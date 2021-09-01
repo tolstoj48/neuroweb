@@ -38,7 +38,7 @@ describe("Initialize", function () {
 describe("Model Test", function () {
   this.timeout(15000);
   before(function (done) {
-    // Connection to db called test and promise to verify, that connection to db works
+    // Connection to db CALLED test and promise to verify, that connection to db works
     mockgoose.prepareStorage().then(function () {
       mongoose.connect("mongodb://localhost:27017/testingDb", {
         useNewUrlParser: true,

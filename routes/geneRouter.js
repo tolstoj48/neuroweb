@@ -19,5 +19,13 @@ router.route('/import-data')
   // Post data and validate them
   .post(catchAsync(geneCtrl.importData));
 
+//Delete data
+router.route('/delete-data-confirm')
+  //Get delete data confirm page
+  .get(geneCtrl.deleteDataConfirmPage)
+
+router.route('/delete-data')  
+  //Get deleze data confirm
+  .get(catchAsync(geneCtrl.deleteData));
 
 module.exports = router;

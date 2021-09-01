@@ -1,11 +1,15 @@
 
 // Own error
 const createError = require('http-errors');
+// Model import
+const Gene = require('../models/geneModel');
+// Custom App error
+const AppError = require("../utilities/appErrorUtil")
 
 module.exports.pAndI = (jsonArray) => {
   jsonArray.forEach( async (geneObj) => {
     try {
-      // uložení nové žopl do db
+      // Save new position to the db
       let newGenePosition = await new Gene(geneObj);
       let saved = await newGenePosition.save();
       if (!saved) {

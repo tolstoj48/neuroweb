@@ -1,6 +1,7 @@
 <% layout("layouts/index") %>
   <h1 class="mt-2">In-house database</h1>
   <a href="/in-house-db/import-data" class="btn btn-lg btn-outline-primary strong mt-3">+ Import data</a>
+  <a href="/in-house-db/delete-data-confirm" class="btn btn-lg btn-outline-primary strong mt-3">+ Delete data</a>
   <%- include("../partials/search-db") %>
 </main>
 <div class="d-flex justify-content-center">
@@ -16,26 +17,27 @@
             <th scope="col">Alt</th>
             <th scope="col">gNomen</th>
             <th scope="col">Gene</th>
-            <th scope="col">AfGnomad</th>
-            <th scope="col">Clinvar</th>
-            <th class="highlighted" scope="col">HomVar</th>
-            <th class="highlighted" scope="col">HetRef</th>
-            <th class="highlighted" scope="col">HetOther</th>
-            <th class="highlighted" scope="col">HomRef</th>
-            <th class="highlighted" scope="col">NoCall</th>
-            <th class="highlighted" scope="col">OtherGt</th>
-            <th scope="col">Var</th>
-            <th scope="col">Called</th>
-            <th scope="col">Qual</th>
-            <th scope="col">Ac</th>
-            <th class="highlighted" scope="col">Af</th>
+            <th scope="col">AF_GNOMAD</th>
+            <th scope="col">clinvar</th>
+            <th class="highlighted" scope="col">HOM_VAR</th>
+            <th class="highlighted" scope="col">HET_REF</th>
+            <th class="highlighted" scope="col">HET_OTHER</th>
+            <th class="highlighted" scope="col">HOM_REF</th>
+            <th class="highlighted" scope="col">NO_CALL</th>
+            <th class="highlighted" scope="col">OTHER_GT</th>
+            <th scope="col">VAR</th>
+            <th scope="col">CALLED</th>
+            <th scope="col">QUAL</th>
+            <th scope="col">AC</th>
+            <th class="highlighted" scope="col">AF</th>
           </tr>
         </thead>
         <tbody>
           <% for (let gene of data) { %>
             <tr class="searched-row">
               <td>
-                <a class="btn btn-danger" data-bs-toggle="collapse" href="#<%= gene.GNomen %>" role="button"> ... </p>
+                <% gene.gNomen = gene.gNomen.replace(/[:><]/g, "-") %>
+                <a class="btn btn-danger" data-bs-toggle="collapse" href="#<%= gene.gNomen %>" role="button"> ... </p>
               </td>
               <td>
                 <%= gene.Chr %>
@@ -53,69 +55,69 @@
                 <%= gene.Alt %>
               </td>
               <td>
-                <%= gene.GNomen %>
+                <%= gene.gNomen %>
               </td>
               <td>
-                <%= gene.GeneRefGene %>
+                <%= gene.Gene_refGene %>
               </td>
               <td>
-                <%= gene.AfGnomad %>
+                <%= gene.AF_GNOMAD %>
               </td>
               <td>
-                <%= gene.Clinvar %>
+                <%= gene.clinvar %>
               </td>
               <td>
-                <%= gene.HomVar %>
+                <%= gene.HOM_VAR %>
               </td>
               <td>
-                <%= gene.HetRef %>
+                <%= gene.HET_REF %>
               </td>
               <td>
-                <%= gene.HetOther %>
+                <%= gene.HET_OTHER %>
               </td>
               <td>
-                <%= gene.HomRef %>
+                <%= gene.HOM_REF %>
               </td>
               <td>
-                <%= gene.NoCall %>
+                <%= gene.NO_CALL %>
               </td>
               <td>
-                <%= gene.OtherGt %>
+                <%= gene.OTHER_GT %>
               </td>
               <td>
-                <%= gene.Var %>
+                <%= gene.VAR %>
               </td>
               <td>
-                <%= gene.Called %>
+                <%= gene.CALLED %>
               </td>
               <td>
-                <%= gene.Qual %>
+                <%= gene.QUAL %>
               </td>
               <td>
-                <%= gene.Ac %>
+                <%= gene.AC %>
               </td>
               <td>
-                <%= gene.Af %>
+                <%= gene.AF %>
               </td>
             </tr>
-            <tr id="<%= gene.GNomen %>" class="collapse searched-hidden-row hidden-content">
+            <tr id="<%= gene.gNomen %>" class="collapse searched-hidden-row hidden-content">
               <td colspan="21">
                 <div>
-                  <p><strong>FuncRefGene: </strong> <%=gene.FuncRefGene%>
+                  <p><strong>Func.RefGene: </strong> <%=gene.Func_refGene%>
                   </p>
-                  <p><strong>InterVarAutomated: </strong> <%= gene.InterVarAutomated %>
+                  <p><strong>InterVar_automated: </strong> <%= gene.InterVar_automated %>
                   </p>
-                  <p><strong>HomVarSamples: </strong> <%= gene.HomVarSamples %>
+                  <p><strong>HOM_VAR_samples: </strong> <%= gene.HOM_VAR_samples %>
                   </p>
-                  <p><strong>HetRefSamples: </strong> <%= gene.HetRefSamples %>
+                  <p><strong>HET_REF_samples: </strong> <%= gene.HET_REF_samples %>
                   </p>
-                  <p><strong>HetOtherSamples: </strong> <%= gene.HetOtherSamples %>
+                  <p><strong>HET_OTHER_samples: </strong> <%= gene.HET_OTHER_samples %>
                   </p>
-                  <p><strong>HomRefSamples: </strong> <%= gene.HomRefSamples %>
+                  <p><strong>HOM_REF_samples: </strong> <%= gene.HOM_REF_samples %>
                   </p>
-                  <p><strong>NoCallSamples: </strong> <%= gene.NoCallSamples %>
+                  <p><strong>NO_CALL_samples: </strong> <%= gene.NO_CALL_samples %>
                   </p>
-                  <p><strong>OtherGtSamples: </strong> <%= gene.OtherGtSamples %>
+                  <p><strong>OTHER_GT_samples: </strong> <%= gene.OTHER_GT_samples %>
                   </p>
                 </div>
               </td>

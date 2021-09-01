@@ -19,76 +19,76 @@ const geneSchema = new mongoose.Schema({
     Alt: {
       type: String,
     },
-    GNomen: {
+    gNomen: {
       type: String,
     },
-    FuncRefGene: {
+    Func_refGene: {
       type: String
     },
-    GeneRefGene: {
+    Gene_refGene: {
       type: String
     },
-    AfGnomad: {
+    AF_GNOMAD: {
       type: String
     },
-    InterVarAutomated: {
+    InterVar_automated: {
       type: String
     },
-    Clinvar: {
+    clinvar: {
       type: String
     },
-    MultiAllelic: {
+    MULTI_ALLELIC: {
       type: String
     },
-    HomVar: {
+    HOM_VAR: {
       type: String
     },
-    HetRef: {
+    HET_REF: {
       type: String
     },
-    HetOther: {
+    HET_OTHER: {
       type: String
     },
-    HomRef: {
+    HOM_REF: {
       type: String
     },
-    NoCall: {
+    NO_CALL: {
       type: String
     },
-    OtherGt: {
+    OTHER_GT: {
       type: String
     },
-    Var: {
+    VAR: {
       type: String
     },
-    Called: {
+    CALLED: {
       type: String
     },
-    Qual: {
+    QUAL: {
       type: String
     },
-    Ac: {
+    AC: {
       type: String
     },
-    Af: {
+    AF: {
       type: String
     },
-    HomVarSamples: {
+    HOM_VAR_samples: {
       type: String
     },
-    HetRefSamples: {
+    HET_REF_samples: {
       type: String
     },
-    HetOtherSamples: {
+    HET_OTHERSamples: {
       type: String
     },
-    HomRefSamples: {
+    HOM_REF_samples: {
       type: String
     },
-    NoCallSamples: {
+    NO_CALL_samples: {
       type: String
     },
-    OtherGtSamples: {
+    OTHER_GT_samples: {
       type: String
     },
   });
