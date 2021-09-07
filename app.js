@@ -1,6 +1,13 @@
-// microservice??? - task/comments aspoň ve views svoje složky
+// kb?
 
-//pro začátek provést propojení do mongodb a zkusit rychlost, jak to bude běhat... - // vazba na postgresql
+// quality control - seznam souborů z nějaké složky a klik otevření v prohlížeči - dodělat
+// přihlašování, hashování uživatelů - otestovat
+
+// spouštení sktiptů - popis nějakýho cyklu - ? import -> po importu spuštění shell scriptu - pak nějaký výsledek a změna na webu? je možný získat teda ten skript, který to spouští?
+// jaká je celá ta architektura?
+
+// otestovat - celou in-housedb, přihlašování, spouštění sktiptů
+
 // testy
 // spouštění, aby nepadalo
 // přihlašování
@@ -23,6 +30,11 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+// passport 
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/userModel");
+
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const rfs = require('rotating-file-stream');
@@ -31,6 +43,7 @@ const indexRouter = require('./routes/indexRouter');
 const taskRouter = require('./routes/taskRouter');
 const commentsRouter = require('./routes/commentsRouter');
 const geneRouter = require('./routes/geneRouter');
+const userRouter = require('./routes/usersRouter');
 
 // Credentials
 const { credentials } = require('./config')
@@ -111,7 +124,6 @@ const sessionOptions = {
   }
 }
 
-
 // Esj engine
 app.engine('ejs', engine);
 // Import ejs
@@ -157,10 +169,22 @@ app.use(methodOverride('_method'));
 // Use flash
 app.use(flash())
 
+// passport, musí být pod app.use session a celé je nutné pro perzistentní přihlášení uživatele
+app.use(passport.initialize())
+app.use(passport.session())
+
+// vlastní strategie - autentikce pomocí User modelu, authenticate je z mongoose modelu
+passport.use(new LocalStrategy(User.authenticate()))
+// jak ukládáme uživatele v session
+passport.serializeUser(User.serializeUser())
+// jak uživatele vytahujeme ze session
+passport.deserializeUser(User.deserializeUser())
+
+
 // Saving data accessible in all templates
 app.use((req, res, next) => {
   // Thanks to passport is accessible name and user mail after login
-  //res.locals.currentUser = req.user
+  res.locals.currentUser = req.user
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.uploadFlag = false;
@@ -178,6 +202,7 @@ app.use('/', indexRouter);
 app.use('/tasks/', taskRouter);
 app.use('/ngs-com/', commentsRouter);
 app.use('/in-house-db/', geneRouter);
+app.use('/', userRouter);
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {

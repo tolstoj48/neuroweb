@@ -1,11 +1,24 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const passport = require('passport')
+const router = express.Router()
+const catchAsync = require('../utilities/catchAsyncUtil')
+const { isLoggedIn } = require('../middleware/isLoggedIn')
+// || CONTROLLER
+const usersCtrl = require('../controllers/usersCtrl')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// register page
+router.route('/register')
+  .get(isLoggedIn, usersCtrl.register)
+  .post(isLoggedIn, catchAsync(usersCtrl.newUser))
 
-module.exports = router;
+// login view
+router.route('/login')
+  .get(usersCtrl.login)
+  .post(passport.authenticate('local', {failureFlash: true, failureRedirect: '/login'}), usersCtrl.authentication)
+
+
+router.get('/logout', isLoggedIn, usersCtrl.logout)
+
+module.exports = router

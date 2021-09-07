@@ -21,7 +21,7 @@ const multer = require("multer")
 
 
 // Validation and views setup
-const fileS = 60000000;
+const fileS = 60000000000;
 const allowedFiles = ".csv";
 const uploadFlag = true;
 

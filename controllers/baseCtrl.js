@@ -3,6 +3,7 @@
 const Task = require('../models/taskModel');
 const Comment = require('../models/commentModel');
 const Gene = require('../models/geneModel');
+const createError = require('http-errors');
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
@@ -58,11 +59,23 @@ module.exports.beds = (req, res) => {
 }
 // Render fastqs page
 module.exports.fastqs = (req, res) => {
-  res.render('fastqs', {
-    layout: 'index',
-    title: 'NGL - FASTQs',
-  });
-}
+  const fs = require('fs');
+  const testFolder = './data';
+  let data = [];
+
+  fs.readdir(testFolder, (err, files) => {
+    files.forEach(file => {
+      data.push(file)
+    })
+    res.render('fastqs', {
+      layout: 'index',
+      title: 'NGL - FASTQs',
+      data,
+    })
+
+  })
+};
+
 // Render bam-crams page
 module.exports.bamcrams = (req, res) => {
   res.render('bam-crams', {

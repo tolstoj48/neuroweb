@@ -1,0 +1,28 @@
+<% layout ("layouts/index")%>
+<div class="container d-flex justify-content-center align-items-center mt-2">
+  <div class="row col-10">
+      <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 id="title">Registration of a new user</h5>
+          <form action="/register" method="POST" class="needs-validation" novalidate>
+            <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            <div class="invalid-feedback">
+              Must be correct email format.
+            </div>
+            <label for="password" class="form-label">Heslo</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+            <div class="d-grid mt-2">
+              <button class="btn btn-success btn-block">Register new user</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
