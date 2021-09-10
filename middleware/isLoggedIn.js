@@ -7,5 +7,6 @@ module.exports.isLoggedIn = (req, res, next) => {
         req.flash('error', 'You have to be logged in!');
         return res.redirect('/login');
     }
+    //if (req.isAuthenticated() && req.path === '/login') res.redirect('/');
     next();
 }

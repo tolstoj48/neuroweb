@@ -1,12 +1,10 @@
-// pokud je už přihlášen, tak nesmí na loginu se objevovat znovu přihlášení možnost
+// dodělat testy: joi validation na uživatele, model uživatel???(nevím), UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
 
 // spouštení skriptů - popis nějakýho cyklu - ? import -> po importu spuštění shell scriptu - pak nějaký výsledek a změna na webu? je možný získat teda ten skript, který to spouští?
 // jaká je celá ta architektura?
 // koncovka VC a bez mezer v názvu
 
-// otestovat - celou in-housedb, přihlašování, spouštění sktiptů
-
-// testy - vše je za logováním, inhousedb, user vytvoření a poslání dat - vč. chyb, stahování souborů ze složky
+// testy - login a logout ui, neoprávněný přístup všude, inhousedb - import, delete data, nový uživatel, autorizace search všechny funkcionality, user vytvoření a poslání dat - vč. chyb, stahování souborů ze složky
 // spouštění, aby nepadalo
 // postprodukce - ' místo ", ctrl+shift+f, chyby dle VSCode
 
@@ -26,9 +24,9 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 // passport 
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const User = require("./models/userModel");
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/userModel');
 
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');

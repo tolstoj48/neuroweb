@@ -1,5 +1,9 @@
 'use strict';
 
+/* ||| Todo:
+  - validace uživatele předělat
+*/
+
 const chai = require('chai')
       ,chaiHttp = require('chai-http')
       ,expect = chai.expect
