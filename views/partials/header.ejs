@@ -47,7 +47,9 @@
             Account
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if(currentUser.role === "Admin") { %>
               <li><a class="dropdown-item" href="/register">New user</a></li>
+              <% } %>
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
               <li><span class="dropdown-item">As: <%= currentUser.username %></span></li>
             </ul>

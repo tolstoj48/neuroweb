@@ -13,14 +13,15 @@ module.exports.register = (req, res) => {
 // new user creation
 module.exports.newUser = async (req, res) => {
   try {
-    const { email, username, password } = req.body
+    const { email, role, username, password } = req.body
     // into the db
-    const user = new User({ email, username })
+    const user = new User({ role, email, username })
     // registration with passport
-    await User.register(user, password)
+    await User.register( user, password)
     req.flash('success', 'User has been registered!')
     res.redirect('/')
   } catch (e) {
+    console.log("ehere aim")
     req.flash('error', e.message)
     res.redirect('register')
   }

@@ -63,7 +63,9 @@ module.exports.fastqs = (req, res) => {
   const testFolder = './data';
   let data = [];
 
+  // Getting the list of all files in the given directory
   fs.readdir(testFolder, (err, files) => {
+    if (err) createError(400, 'Files couldn´t be read from the directory!');
     files.forEach(file => {
       data.push(file)
     })

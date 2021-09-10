@@ -1,19 +1,14 @@
-// kb?
+// pokud je už přihlášen, tak nesmí na loginu se objevovat znovu přihlášení možnost
 
-// quality control - seznam souborů z nějaké složky a klik otevření v prohlížeči - dodělat
-// přihlašování, hashování uživatelů - otestovat
-
-// spouštení sktiptů - popis nějakýho cyklu - ? import -> po importu spuštění shell scriptu - pak nějaký výsledek a změna na webu? je možný získat teda ten skript, který to spouští?
+// spouštení skriptů - popis nějakýho cyklu - ? import -> po importu spuštění shell scriptu - pak nějaký výsledek a změna na webu? je možný získat teda ten skript, který to spouští?
 // jaká je celá ta architektura?
+// koncovka VC a bez mezer v názvu
 
 // otestovat - celou in-housedb, přihlašování, spouštění sktiptů
 
-// testy
+// testy - vše je za logováním, inhousedb, user vytvoření a poslání dat - vč. chyb, stahování souborů ze složky
 // spouštění, aby nepadalo
-// přihlašování
-// schema gene a všechny validace a v db se musí jmenovat tak, jak mi zadala ája, domluvit na oddělovačícch
-
-// struktura dle zadání
+// postprodukce - ' místo ", ctrl+shift+f, chyby dle VSCode
 
 // web dnalab.cz
 
@@ -44,6 +39,10 @@ const taskRouter = require('./routes/taskRouter');
 const commentsRouter = require('./routes/commentsRouter');
 const geneRouter = require('./routes/geneRouter');
 const userRouter = require('./routes/usersRouter');
+const fastqsRouter = require('./routes/fastqsRouter');
+
+// authentication
+const { isLoggedIn } = require('./middleware/isLoggedIn');
 
 // Credentials
 const { credentials } = require('./config')
@@ -63,7 +62,6 @@ const flash = require('connect-flash');
 const MongoDBStore = require('connect-mongo');
 // Db url
 const dbUrl = 'mongodb://localhost:27017/neuroweb';
-
 
 
 // Protection against sql injection
@@ -203,14 +201,15 @@ app.use('/tasks/', taskRouter);
 app.use('/ngs-com/', commentsRouter);
 app.use('/in-house-db/', geneRouter);
 app.use('/', userRouter);
+app.use('/fastqs/', fastqsRouter);
 
 // Catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(isLoggedIn,function (req, res, next) {
   next(createError(404, 'The page hasn´t been found!'));
 });
 
 // Error handler
-app.use(function (err, req, res, next) {
+app.use(isLoggedIn, function (err, req, res, next) {
   // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = err;

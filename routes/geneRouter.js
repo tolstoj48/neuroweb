@@ -5,27 +5,31 @@ const router = express.Router();
 const geneCtrl = require('../controllers/geneCtrl.js');
 // catchAsync - error handler pro async functions
 const catchAsync = require('../utilities/catchAsyncUtil');
+// authentication
+const { isLoggedIn } = require('../middleware/isLoggedIn');
+// authorization
+const authorize = require('../middleware/authorizeMiddleware');
 
 
 // Search inhouse db
 router.route('/search')
   // Search gene
-  .get(catchAsync(geneCtrl.searchGene));
+  .get(isLoggedIn, catchAsync(geneCtrl.searchGene));
 
 // Importing data to inhouse db
 router.route('/import-data')
   // Get import data page
-  .get(geneCtrl.importDataMainPage)
+  .get(isLoggedIn, authorize("Admin"), geneCtrl.importDataMainPage)
   // Post data and validate them
-  .post(catchAsync(geneCtrl.importData));
+  .post(isLoggedIn, authorize("Admin"), catchAsync(geneCtrl.importData));
 
 //Delete data
 router.route('/delete-data-confirm')
   //Get delete data confirm page
-  .get(geneCtrl.deleteDataConfirmPage)
+  .get(isLoggedIn, authorize("Admin"), geneCtrl.deleteDataConfirmPage)
 
 router.route('/delete-data')  
   //Get deleze data confirm
-  .get(catchAsync(geneCtrl.deleteData));
+  .get(isLoggedIn, authorize("Admin"), catchAsync(geneCtrl.deleteData));
 
 module.exports = router;

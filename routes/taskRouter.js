@@ -3,31 +3,33 @@
 const express = require('express');
 const router = express.Router();
 const taskCtrl = require('../controllers/taskCtrl.js');
-const { isLoggedIn, validateNewTask } = require('../middleware/taskValidationMiddleware');
+const { validateNewTask } = require('../middleware/taskValidationMiddleware');
 // catchAsync - error handler pro async functions
 const catchAsync = require('../utilities/catchAsyncUtil');
+// authentication
+const { isLoggedIn } = require('../middleware/isLoggedIn');
 
 
 // Basepage
 router.route('/new-task')
   // Create new task
-  .get(taskCtrl.new)
+  .get(isLoggedIn, taskCtrl.new)
   // Post new task
-  .post(validateNewTask, catchAsync(taskCtrl.postNewTask))
+  .post(isLoggedIn, validateNewTask, catchAsync(taskCtrl.postNewTask))
 
 // Edit task page
 router.route('/edit/:taskId')
 // Edit task info page
-  .get(catchAsync(taskCtrl.editTask))
+  .get(isLoggedIn, catchAsync(taskCtrl.editTask))
 // Patch task
-  .patch(validateNewTask, catchAsync(taskCtrl.updateTask))
+  .patch(isLoggedIn, validateNewTask, catchAsync(taskCtrl.updateTask))
 
 // Delete task page
 router.route('/delete/:taskId')
 // Delete task
-  .get(catchAsync(taskCtrl.confirmDeleteTask))
+  .get(isLoggedIn, catchAsync(taskCtrl.confirmDeleteTask))
 // Delete the task
-  .delete(catchAsync(taskCtrl.deleteTask))
+  .delete(isLoggedIn, catchAsync(taskCtrl.deleteTask))
 
 
 module.exports = router;

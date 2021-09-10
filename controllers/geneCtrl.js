@@ -21,7 +21,7 @@ const multer = require("multer")
 
 
 // Validation and views setup
-const fileS = 60000000000;
+const fileS = 6000000000;
 const allowedFiles = ".csv";
 const uploadFlag = true;
 
@@ -138,10 +138,10 @@ module.exports.importData = async (req, res, next) => {
     if (err instanceof multer.MulterError) {
       console.log(err);
       // Size errror and log
-      console.log(`Uploaded file is bigger then allowed size: ${fileS / 1000} kb.`)
+      console.log(`Uploaded file is bigger then allowed size: ${fileS / 1000000} MB.`)
       return res.status(400).send({
         result: "error",
-        message: `Uploaded file is bigger then allowed size ${fileS / 1000} kb.`
+        message: `Uploaded file is bigger then allowed size ${fileS / 1000000} MB.`
       })
       // Other uploading errors
     } else if (err) {

@@ -4,6 +4,14 @@ const Schema = mongoose.Schema
 
 // Basic mongoose schema withou password and name - not neccessary, added below
 const UserSchema = new Schema({
+  role: {
+    type: String,
+    required: true,
+    enum: [
+      'Admin',
+      'Normal'
+  ],
+  },
   email: {
     type: String,
     required: true,

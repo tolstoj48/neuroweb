@@ -1,6 +1,5 @@
 <% layout("layouts/index") %>
 <h1>fastqs</h1>
 <% for (let file of data) { %>
-
-      <%= file %>
+      <a href="/fastqs/download/<%= file %>"> <%= file %> <br>
 <% } %>

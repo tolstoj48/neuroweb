@@ -20,12 +20,11 @@
                 <div id="fetch-result"></div>
               </form>
               <div class="mt-5 fs-6 border-top fw-lighter">
-                <p class="mt-2">* Maximum size of the file: <%= fileS / 1000 %>kB</p>
-                <p></p>
-                <th scope="col"> ** Allowed files: <%= allowedFiles %> with separator "</th>
-                <th scope="col"> " and encodings utf-8.</p>
-                </th>
-                *** List can not contain empty lines under the last line.
+                <p class="mt-2">* Maximum size of the file: <%= fileS / 1000000 %>MB</p>
+                <p> ** Allowed files: <%= allowedFiles %> with separator "," and encodings utf-8.</p>
+                <p> *** List can not contain empty lines under the last line.</p>
+                <p> **** Columns have to have exact count, order and names: "Chr,Start,End,Ref,Alt,gNomen,Func_refGene,Gene_refGene,AF_GNOMAD,InterVar_automated,clinvar,MULTI_ALLELIC,HOM_VAR,HET_REF,HET_OTHER,HOM_REF,NO_CALL,OTHER_GT,VAR,CALLED,QUAL,AC,AF,HOM_VAR_samples,HET_REF_samples,HET_OTHER_samples,HOM_REF_samples,NO_CALL_samples,OTHER_GT_samples"</p>
+                <p> ***** No commas can be in the values except for the separators of the columns. </p>
               </div>
             </div>
           </div>

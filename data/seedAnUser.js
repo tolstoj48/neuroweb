@@ -10,11 +10,11 @@ const { credentials } = require('../config')
 // new user account
 async function createNewUser(){
   try {
-    const email = 'a@g.com'
-    const username = 'alena_10'
-    const user = new User({ email, username })
-    console.log(credentials.newUserPassword);
-    await User.register(user, credentials.newUserPassword)
+    const email = 'a@g.com';
+    const username = 'alena_10';
+    const role = 'Admin';
+    const user = new User({ role, email, username });
+    await User.register(user, credentials.newUserPassword);
   } catch(err) {
     console.log(err.message)
   }

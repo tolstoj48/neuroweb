@@ -27,15 +27,14 @@ const extension = (joi) => ({
 const Joi = BaseJoi.extend(extension);
 
 // JOI validation of newly created task
-const taskNewSchema = Joi.object({
-  date: Joi.string().trim().min(10).max(10).required().escapeHTML(),
-  to_do_task: Joi.string().trim().max(1500).allow(null, '').escapeHTML(),
-  who_wants_it: Joi.string().trim().max(50).allow(null, '').escapeHTML(),
-  done: Joi.string().trim().max(10).required().valid(
-    'true',
-    'false', 
-    'in process')
+const userNewSchema = Joi.object({
+  username: Joi.string().trim().max(100).required().escapeHTML(),
+  email: Joi.string().trim().max(100).required().escapeHTML(),
+  role: Joi.string().trim().max(100).required().valid(
+    'Admin',
+    'Normal')
     .escapeHTML(),
+  password: Joi.string().required().escapeHTML()
 });
 
-module.exports = { taskNewSchema };
+module.exports = { userNewSchema };
