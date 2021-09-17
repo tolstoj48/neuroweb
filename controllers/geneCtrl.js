@@ -3,7 +3,7 @@
 // Model import
 const Gene = require('../models/geneModel');
 
-  // Multer dependency - file upload
+// Multer dependency - file upload
 const multer = require("multer")
   // Filesystem dependency
   , fs = require("fs")
@@ -17,7 +17,7 @@ const multer = require("multer")
   , deleteFlashRedirect = require("../utilities/deleteFlashRedirect")
   , csvToJson = require("../utilities/csvToJson")
   , AppError = require("../utilities/appErrorUtil")
-  
+
 
 
 // Validation and views setup
@@ -159,56 +159,57 @@ module.exports.importData = async (req, res, next) => {
           result: "error",
           message: `There is no file for uploading data to in-house db on the server!`
         })
-      }
-      let arr = []
-      let jsonArray = []
+      } else {
+        let arr = []
+        let jsonArray = []
 
-      try {
-        // If there is file and no error, then convert the file to the JSON array *** DODĚLAT
-        jsonArray = await csvToJson.jsonArray(fileName)
-        // Validation with the JOI before saving to the db *** DODĚLAT
-        arr = await jsonJoiValidation.jsonValidationWithJoi(jsonArray)
-      } catch (e) {
-        console.log(e.message)
-      }
+        try {
+          // If there is file and no error, then convert the file to the JSON array 
+          jsonArray = await csvToJson.jsonArray(fileName)
+          // Validation with the JOI before saving to the db 
+          arr = await jsonJoiValidation.jsonValidationWithJoi(jsonArray)
+        } catch (e) {
+          console.log(e.message)
+        }
 
-      // If there are no errors, then import the data to the db
-      if (arr.length == 0) {
-        // Basic parsing and import to the in-house db
-        if (jsonArray.length > 0) {
-          await parseAndImport.pAndI(jsonArray)
+        // If there are no errors, then import the data to the db
+        if (arr.length == 0) {
+          // Basic parsing and import to the in-house db
+          if (jsonArray.length > 0) {
+            await parseAndImport.pAndI(jsonArray)
+          } else {
+            // Delete, flash, redirect uploaded file
+            deleteFlashRedirect.dFR(
+              res,
+              req,
+              fileName,
+              "error",
+              "No gene positions in the csv!")
+            // End fs.access
+            return
+          }
         } else {
-          // Delete, flash, redirect uploaded file
+          console.log(arr)
+          // // Delete, flash, redirect uploaded file
           deleteFlashRedirect.dFR(
             res,
             req,
             fileName,
             "error",
-            "No gene positions in the csv!")
-          // End fs.access
+            `No gene positions has been imported!!! Incorrect values on gene positons: ${arr}!`,
+          )
+          // ukončení fs.access
           return
         }
-      } else {
-        console.log(arr)
-        // // Delete, flash, redirect uploaded file
+        // Delete, flash, redirect uploaded file
         deleteFlashRedirect.dFR(
           res,
           req,
           fileName,
-          "error",
-          `No gene positions has been imported!!! Incorrect values on gene positons: ${arr}!`,
+          "success",
+          "The data import has been successfully completed."
         )
-        // ukončení fs.access
-        return
       }
-      // Delete, flash, redirect uploaded file
-      deleteFlashRedirect.dFR(
-        res,
-        req,
-        fileName,
-        "success",
-        "The data import has been successfully completed."
-      )
     })
   })
 }

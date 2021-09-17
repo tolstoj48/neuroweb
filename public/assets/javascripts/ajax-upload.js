@@ -1,4 +1,22 @@
 {
+  // check the name of the uploaded file
+  const file = document.getElementById("file")
+  file.addEventListener("change", event => {
+    const container = document.getElementById("fetch-result")
+    const inValid = new RegExp("[\\s]")
+    const result = inValid.test(event.target.files[0].name)
+    if (result) {
+      container.classList.add("alert")
+      container.classList.add("alert-danger")
+      container.innerHTML = `Remove spaces in the name of the input file. Then, try to upload again, please.`
+      event.target.value = ''
+    } else {
+      container.classList.remove("alert")
+      container.classList.remove("alert-danger")
+      container.innerHTML = ``
+    }
+  })
+
   // elements selection
   const loadingOverlay = document.getElementById("loading-overlay")
   const spinner = document.getElementById("spinner")
@@ -9,9 +27,9 @@
   }
   // hide spinner and block the inner content of the spinner div
   const hideSpinner = function hideSpinner() {
-     loadingOverlay.className = loadingOverlay.className.replace("show", "")
-     spinner.className = spinner.className.replace("show", "")
-   }
+    loadingOverlay.className = loadingOverlay.className.replace("show", "")
+    spinner.className = spinner.className.replace("show", "")
+  }
 
   // add event listener and do fetch response on submit
   document.getElementById("upload-form")
@@ -25,18 +43,19 @@
       // after submit need to show spinner
       showSpinner()
       // call fetch api and send the data
-      fetch("/in-house-db/import-data", { 
-        method: "post", 
+      fetch("/in-house-db/import-data", {
+        method: "post",
         credentials: "same-origin",
         headers: {
         },
-        body })
+        body
+      })
         .then(resp => {
           // if smaller then 200 status or not fullfiling all the conditions for the file in the controller 
-          if(resp.status < 200 || resp.status > 400 )
+          if (resp.status < 200 || resp.status > 400)
             throw new Error(`Request failed with status ${resp.status}`)
           // otherwise parse to json
-            return resp.json()
+          return resp.json()
         })
         .then(json => {
           // then hide the spinner
@@ -60,4 +79,5 @@
             `Please check whether the file fullfills all requirements and try a new upload: <a href="/in-house-db/import-data">zde</a>.`
         })
     })
+
 }
