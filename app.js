@@ -1,6 +1,6 @@
-// dodělat testy: joi validation na uživatele, model uživatel???(nevím), UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
+// dodělat testy:  UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
 
-// vložení špatného názvu souboru - něco kromě mezer ještě ne? 
+// vložení špatného názvu souboru - něco kromě mezer ještě ne dotázat se A? 
 
 // spouštení skriptů - popis nějakýho cyklu - ? import -> po importu spuštění shell scriptu - pak nějaký výsledek a změna na webu? je možný získat teda ten skript, který to spouští?
 // jaká je celá ta architektura?

@@ -30,7 +30,7 @@ const Joi = BaseJoi.extend(extension);
 const userNewSchema = Joi.object({
   username: Joi.string().trim().max(100).required().escapeHTML(),
   email: Joi.string().trim().max(100).required().escapeHTML(),
-  role: Joi.string().trim().max(100).required().valid(
+  role: Joi.string().trim().required().valid(
     'Admin',
     'Normal')
     .escapeHTML(),
