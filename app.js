@@ -1,5 +1,6 @@
-// 1. změnit jméno souboru dle reálnějšího scénáře a projít ten cyklus - vložení nového, analýza, smazání souboru
+// 1. fs.watch na annotated-files - kde bude hlídat upload systémově a nastaví status v db u všech daných na done
 // 2. upload UI pro file upload
+//
 
 // dodělat testy:  models test, pak UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
 
