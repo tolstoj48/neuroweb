@@ -38,6 +38,26 @@ module.exports.itShouldTestMaxConditionsComment = function itShouldTestMaxCondit
   });
 }
 
+// Tests maxLength mongoose validator
+module.exports.itShouldTestMaxConditionsUser = function itShouldTestMaxConditionsUser(oneUserData, User, chai, property) {
+  it(`shouldn´t create User with too long property ${property}`, function (done) {
+    let nameProperty = User.schema.obj[property];
+    let maxLength = nameProperty.maxLength;
+    let maxLengthValue = maxLength[0];
+    let maxLengthText = maxLength[1];
+    oneUserData[property] = ''.padStart(maxLengthValue + 2, '#');
+    const newUser = new User(oneUserData);
+    newUser.save(function (err) {
+      chai.expect(err).to.exist
+        .and.be.instanceof(Error)
+        // Should equal to particulat validator condition
+        .and.have.property('message', `user validation failed: ${property}: ${maxLengthText}`)
+      oneUserData[property] = ''.padStart(maxLengthValue, '#');
+      done();
+    });
+  });
+}
+
 // Tests minLength mongoose validator
 module.exports.itShouldTestMinConditions = function itShouldTestMinConsitions(oneTaskData, Task, chai, property) {
   it(`shouldn´t create Task with too short property ${property}`, function (done) {

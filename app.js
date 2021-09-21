@@ -1,4 +1,7 @@
-// dodělat testy:  UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
+// 1. změnit jméno souboru dle reálnějšího scénáře a projít ten cyklus - vložení nového, analýza, smazání souboru
+// 2. upload UI pro file upload
+
+// dodělat testy:  models test, pak UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
 
 // vložení špatného názvu souboru - něco kromě mezer ještě ne dotázat se A? 
 
@@ -9,6 +12,8 @@
 // testy - login a logout ui, neoprávněný přístup všude, inhousedb - import, delete data, nový uživatel, autorizace search všechny funkcionality, user vytvoření a poslání dat - vč. chyb, stahování souborů ze složky
 // spouštění, aby nepadalo
 // postprodukce - ' místo ", ctrl+shift+f, chyby dle VSCode
+
+// test - model file
 
 // web dnalab.cz
 
@@ -25,6 +30,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+
 // passport 
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -40,6 +46,9 @@ const commentsRouter = require('./routes/commentsRouter');
 const geneRouter = require('./routes/geneRouter');
 const userRouter = require('./routes/usersRouter');
 const fastqsRouter = require('./routes/fastqsRouter');
+
+// Analyzed data directory watch
+const monitor = require('./utilities/monitorAnalyzedDataDir');
 
 // authentication
 const { isLoggedIn } = require('./middleware/isLoggedIn');

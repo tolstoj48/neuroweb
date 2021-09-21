@@ -13,7 +13,7 @@ const { oneTaskData } = require('./test-data/taskData')
   , mockgoose = new Mockgoose(mongoose)
   , chai = require('chai')
   , assert = chai.assert
-  , { itShouldTestMinConditions, itShouldTestMaxConditionsTask, itShouldTestMaxConditionsComment } = require('./utils/minMaxUtil')
+  , { itShouldTestMinConditions, itShouldTestMaxConditionsTask, itShouldTestMaxConditionsComment, itShouldTestMaxConditionsUser } = require('./utils/minMaxUtil')
 
 describe('Initialize', function () {
   it('should successfully load the Task model', async () => {
@@ -428,6 +428,43 @@ describe('Model Test', function () {
         for (const property in Comment.schema.obj) {
           if (property !== 'done') {
             itShouldTestMaxConditionsComment(oneCommentData, Comment, chai, property);
+          }
+        }
+      });
+    });
+  });
+
+  describe('Mongoose validation tests - User', function () {
+    describe('required fields', function () {
+      it('shouldn´t create one user without role', function (done) {
+        delete oneUserData.role;
+        const newUser = new User(oneUserData);
+        newUser.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'User validation failed: role: Path `role` is required.')
+          oneUserData.role = 'Normal'
+          done();
+        });
+      });
+
+      it('shouldn´t create one user without email', function (done) {
+        delete oneUserData.email;
+        const newUser = new User(oneUserData);
+        newUser.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'User validation failed: email: Path `email` is required.')
+          oneUserData.email = 'p@trioska.cz'
+          done();
+        });
+      });
+
+      describe('check correct model - max and min length mongoose validators', function () {
+        // loop for lengths testing
+        for (const property in User.schema.obj) {
+          if (property !== 'done') {
+            itShouldTestMaxConditionsUser(oneUserData, User, chai, property);
           }
         }
       });

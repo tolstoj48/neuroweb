@@ -10,12 +10,12 @@ const UserSchema = new Schema({
     enum: [
       'Admin',
       'Normal'
-  ],
+    ],
   },
   email: {
     type: String,
     required: true,
-    unique: true, // není validace
+    unique: true, // not validation
   }
 })
 

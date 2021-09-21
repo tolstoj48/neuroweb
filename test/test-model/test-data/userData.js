@@ -4,7 +4,7 @@ const oneUserData = {
   username: 'petr',
   email: 'p@etrioska.cz',
   role: 'Normal',
-  paswword: 'process',
+  pasword: 'process',
 }
 
 module.exports.oneUserData = oneUserData;
