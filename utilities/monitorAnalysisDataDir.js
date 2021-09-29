@@ -1,7 +1,5 @@
 'use strict';
 
-// Skript zvnějšku bude nahrávat data to složky annotated-files
-
 const fs = require('fs')
   , File = require('../models/fileModel')
   , date = new Date()
@@ -22,9 +20,8 @@ fs.watch(directory, async (event, filename) => {
 
       // Check the existence of the file with the given name
       fs.access(fileDir, fs.F_OK, async (err) => {
-        // If anybody wants to delete existing file, just deletes it and sets the status in the db to done.
+        // If anybody wants to delete existing file, just deletes it and sets the status in the db to done to all the documents.
         if (err) {
-          console.log(err)
           await File.updateMany({ local_disk_name: `${filename}` }, { status: 'done' });
           console.error(`File has been deleted - cant be written in the db: ${fileDir}`);
           return

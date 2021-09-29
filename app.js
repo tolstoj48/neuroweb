@@ -1,6 +1,6 @@
-// 1. fs.watch na annotated-files - kde bude hlídat upload systémově a nastaví status v db u všech daných na done
-// 2. upload UI pro file upload
-//
+// 1. upload UI pro file upload
+//  - stránku s výpisem všech analyzovaných s příznakem a možností stažení a možností uploadu
+//  - mechanismus mazání - 
 
 // dodělat testy:  models test, pak UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
 
@@ -32,7 +32,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 
-// passport 
+// Passport 
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/userModel');
@@ -48,10 +48,12 @@ const geneRouter = require('./routes/geneRouter');
 const userRouter = require('./routes/usersRouter');
 const fastqsRouter = require('./routes/fastqsRouter');
 
-// Analyzed data directory watch
-const monitor = require('./utilities/monitorAnalyzedDataDir');
+// Analysis data directory watch
+const monitorAnalysisDataDir = require('./utilities/monitorAnalysisDataDir');
+// Annotated data directory watch
+const monitorAnnotatedDataDir = require('./utilities/monitorAnnotatedDataDir');
 
-// authentication
+// Authentication
 const { isLoggedIn } = require('./middleware/isLoggedIn');
 
 // Credentials

@@ -4,3 +4,4 @@
 3. seed an user account - data/seedAnUser.js run in node
 4. change credentials if needed
 5. setup scripts runing
+6. annotation extension in ./utilities/monitorAnnotatedDataDir.js

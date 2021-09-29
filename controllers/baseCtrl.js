@@ -1,9 +1,10 @@
 'use strict';
 
-const Task = require('../models/taskModel');
-const Comment = require('../models/commentModel');
-const Gene = require('../models/geneModel');
-const createError = require('http-errors');
+const Task = require('../models/taskModel')
+  , Comment = require('../models/commentModel')
+  , Gene = require('../models/geneModel')
+  , File = require('../models/fileModel')
+  , createError = require('http-errors')
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
