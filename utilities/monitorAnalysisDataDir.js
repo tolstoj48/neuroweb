@@ -26,10 +26,13 @@ fs.watch(directory, async (event, filename) => {
           console.error(`File has been deleted - cant be written in the db: ${fileDir}`);
           return
         }
+        
         // If file doesnt exist in db, write it to the db.
+        let annotated_filename = filename.slice(0, filename.search('.vcf')) + '_annotated' + filename.slice(filename.search('.vcf'))
         console.log('Not yet in the db. Document created.');
         await File.create({
           local_disk_name: filename,
+          annotated_filename: annotated_filename,
           status: 'processed',
           date_of_upload: date.toString(),
         })

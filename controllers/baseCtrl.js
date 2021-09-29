@@ -5,6 +5,8 @@ const Task = require('../models/taskModel')
   , Gene = require('../models/geneModel')
   , File = require('../models/fileModel')
   , createError = require('http-errors')
+  , fs = require('fs')
+  , path = require('path')
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
@@ -28,11 +30,36 @@ module.exports.inhousedb = async (req, res) => {
 }
 
 // Render annotation page
-module.exports.annotation = (req, res) => {
+module.exports.annotation = async (req, res) => {
+  let data = await File.find().sort({ date: 'asc', test: -1 });
   res.render('annotation', {
     layout: 'index',
     title: 'NGL - Annotation',
+    data,
   });
+}
+
+// Sends the file with fileName from the clicked link and on the address listed below
+module.exports.downloadAnnotatedFile = (req, res) => {
+  let { fileName } = req.params;
+  // Check the existence of the given file in the dir
+  fs.access(`./annotated-data/${fileName}`, (err) => {
+    // If there is no such file, redirect and flash
+    if (err) {
+      console.log('Error: ', err)
+      req.flash('error', `The file: ${fileName} is not available on the server, contact the admin of the web!`);
+      res.redirect(`/annotation`);
+    // Else, send the given file for download and log it
+    } else {
+      res.download(path.join(__dirname, '..', 'annotated-data/', `${fileName}`), function (err) {
+        if (err) {
+          console.log('Error: ', err)
+        } else {
+          console.log(`File: ${fileName} sent!`)
+        }
+      })
+    }
+  })
 }
 
 // Render filter page

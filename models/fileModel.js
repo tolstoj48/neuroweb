@@ -10,6 +10,12 @@ const fileSchema = new mongoose.Schema({
         minLength: [1, 'Field should be min. 1 characters'],
         maxLength: [100, 'Field should be max. 10 characters.'],
       },
+      annotated_filename: {
+        type: String,
+        required: true,
+        minLength: [1, 'Field should be min. 1 characters'],
+        maxLength: [100, 'Field should be max. 10 characters.'],
+      },
       status: {
         type: String,
         required: true,

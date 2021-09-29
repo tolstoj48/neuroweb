@@ -18,5 +18,6 @@ test/testui/screenshots
 test/test-try
 original-inhousedb.ejs
 /analysis-data
-/annotated-files
+/annotated-data
 /log
+/documentation

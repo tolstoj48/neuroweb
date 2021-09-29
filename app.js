@@ -1,6 +1,7 @@
-// 1. upload UI pro file upload
-//  - stránku s výpisem všech analyzovaných s příznakem a možností stažení a možností uploadu
-//  - mechanismus mazání - 
+// 1. upload UI pro file upload - podmínky souborů uploadovaných? dodělat upload viz inhousedb
+// upravit otestování modulu - annotated filename proeprty
+// 
+
 
 // dodělat testy:  models test, pak UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
 
@@ -47,6 +48,7 @@ const commentsRouter = require('./routes/commentsRouter');
 const geneRouter = require('./routes/geneRouter');
 const userRouter = require('./routes/usersRouter');
 const fastqsRouter = require('./routes/fastqsRouter');
+const annotationRouter = require('./routes/annotationRouter');
 
 // Analysis data directory watch
 const monitorAnalysisDataDir = require('./utilities/monitorAnalysisDataDir');
@@ -214,6 +216,7 @@ app.use('/ngs-com/', commentsRouter);
 app.use('/in-house-db/', geneRouter);
 app.use('/', userRouter);
 app.use('/fastqs/', fastqsRouter);
+app.use('/annotation/', annotationRouter);
 
 // Catch 404 and forward to error handler
 app.use(isLoggedIn,function (req, res, next) {

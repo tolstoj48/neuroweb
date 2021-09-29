@@ -16,10 +16,6 @@ router.route('/')
 router.route('/in-house-db')
   .get(isLoggedIn, baseCtrl.inhousedb)
 
-// Annotation
-router.route('/annotation')
-  .get(isLoggedIn, baseCtrl.annotation)
-
 // Filter
 router.route('/filter')
   .get(isLoggedIn, baseCtrl.filter)

@@ -13,7 +13,7 @@ module.exports.downloadAFile = (req, res) => {
     // Find the file in the directory - simple iteration - could be solved with better way
     for (let i = 0; i < files.length; i++) {
       if (files[i] === fileName) {
-        // Frome where is the file beeing sent
+        // From where is the file beeing sent
         res.download(path.join(__dirname, '..', 'data/', `${fileName}`), function (err) {
           if (err) { 
             console.log("Error: ", err);

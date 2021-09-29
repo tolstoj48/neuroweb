@@ -1,8 +1,6 @@
-'use strict';
-
 // Clear all the data from the in-house database
 const mongoose = require('mongoose');
-const Gene = require('../models/geneModel');
+const File = require('../models/fileModel');
 
 
 // připojení k DB - musí běžet
@@ -16,7 +14,7 @@ mongoose.connect('mongodb://localhost:27017/neuroweb', { useNewUrlParser: true, 
   });
 
 const clearDb = async () => {
-    await Gene.remove({})
+    await File.remove({})
       .then(data => {
         console.log('Db cleared!');
         // Imported data

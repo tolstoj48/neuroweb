@@ -48,14 +48,14 @@ module.exports.searchGene = async (req, res) => {
     data = await Gene.find({ gNomen: { '$regex': `${searchGnomen.trim()}`, '$options': 'i' } });
   } else if (searchGeneRefGene == '' || searchGeneRefGene == ' ') {
     // Fulltext search - GeneRefGene - needs non existent and empty
-    const dataNoGeneRefGene = await Gene.find({ GeneRefGene: { '$exists': false } });
-    const dataEmptyGeneRefGene = await Gene.find({ GeneRefGene: '' });
+    const dataNoGeneRefGene = await Gene.find({ Gene_refGene: { '$exists': false } });
+    const dataEmptyGeneRefGene = await Gene.find({ Gene_refGene: '' });
     data = dataNoGeneRefGene.concat(dataEmptyGeneRefGene);
     // Setup information for the search result - searched category
     searchedCategory = 'Gene_refGene';
   } else if (searchGeneRefGene) {
     // Fulltext search - geneRefGene
-    data = await Gene.find({ GeneRefGene: { '$regex': `${searchGeneRefGene.trim()}`, '$options': 'i' } });
+    data = await Gene.find({ Gene_refGene: { '$regex': `${searchGeneRefGene.trim()}`, '$options': 'i' } });
   } else {
     // Fulltext search - nothing filled in by the user
     data = await Gene.find();
