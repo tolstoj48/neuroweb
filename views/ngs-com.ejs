@@ -12,7 +12,9 @@
                 data-feather="edit"></i></a>
             <a class="delete" href="/ngs-com/delete/<%= comment._id %>"><i class="text-danger"
                 data-feather="trash-2"></i></a>
-            <strong class="ms-auto"> <%= comment.name %> </strong>
+            <strong class="ms-auto">
+              <%= comment.name %>
+            </strong>
           </button>
         </h2>
         <div id="<%= comment.name.replace(/ /g,'') %>" class="accordion-collapse collapse" aria-labelledby="headingOne"

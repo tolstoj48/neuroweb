@@ -6,9 +6,9 @@ const File = require('../models/fileModel')
 
 
 // Validation and views setup
-const fileS = 6000000000;
-const allowedFiles = ".vcf";
-const uploadFlag = true;
+const fileS = 6000000000
+  , allowedFiles = ".vcf"
+  , uploadFlag = true
 
 // Render annotation page
 module.exports.annotation = async (req, res) => {

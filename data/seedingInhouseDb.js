@@ -1,10 +1,11 @@
+'use strict';
+
 // Importing data into in-house database
-const mongoose = require('mongoose');
-const Gene = require('../models/geneModel');
+const mongoose = require('mongoose')
+  , Gene = require('../models/geneModel')
+  , { makeString } = require('../utilities/makeString')
 
-const { makeString } = require('../utilities/makeString')
-
-// připojení k DB - musí běžet
+// The connection to the DB must be on
 mongoose.connect('mongodb://localhost:27017/neuroweb', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connection open!')
@@ -19,16 +20,17 @@ const insertManyFunction = (numberOfTimes) => {
   for (let i = 0; i < numberOfTimes; i++) {
     // Insert data
     Gene.insertMany([
-      { Chr: makeString(15), 
-        Start: makeString(5), 
-        End: makeString(5), 
-        Ref: makeString(5), 
-        Alt: makeString(8), 
-        gNomen: makeString(6), 
-        Func_refGene: makeString(8), 
-        GeneRefGene: makeString(12), 
-        AF_GNOMAD: makeString(6), 
-        InterVar_automated: makeString(15) , 
+      {
+        Chr: makeString(15),
+        Start: makeString(5),
+        End: makeString(5),
+        Ref: makeString(5),
+        Alt: makeString(8),
+        gNomen: makeString(6),
+        Func_refGene: makeString(8),
+        GeneRefGene: makeString(12),
+        AF_GNOMAD: makeString(6),
+        InterVar_automated: makeString(15),
         clinvar: makeString(10),
         MULTI_ALLELIC: makeString(10),
         HOM_VAR: makeString(10),
@@ -58,7 +60,7 @@ const insertManyFunction = (numberOfTimes) => {
   }
 }
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
   mongoose.connection.close(function () {
     console.log('Mongoose disconnected on app termination');
     process.exit(0);

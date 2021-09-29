@@ -1,16 +1,14 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
-const fastqsCtrl = require('../controllers/fastqsCtrl');
-const { isLoggedIn } = require('../middleware/isLoggedIn');
+const express = require('express')
+  , router = express.Router()
+  , fastqsCtrl = require('../controllers/fastqsCtrl')
+  , { isLoggedIn } = require('../middleware/isLoggedIn')
 
 
 // Download a file from a directory
 router.route('/download/:fileName')
-// download a file
+  // Download a file
   .get(isLoggedIn, fastqsCtrl.downloadAFile)
-
-
 
 module.exports = router

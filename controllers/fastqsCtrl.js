@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs');
-const dataFolder = './data';
-const createError = require('http-errors');
-const path = require('path');
+const fs = require('fs')
+  , dataFolder = './data'
+  , createError = require('http-errors')
+  , path = require('path')
 
 // Sends the file with fileName from the clicked link and on the address listed below
 module.exports.downloadAFile = (req, res) => {
@@ -15,13 +15,13 @@ module.exports.downloadAFile = (req, res) => {
       if (files[i] === fileName) {
         // From where is the file beeing sent
         res.download(path.join(__dirname, '..', 'data/', `${fileName}`), function (err) {
-          if (err) { 
+          if (err) {
             console.log("Error: ", err);
           } else {
-          console.log("File sent!")
-        }
+            console.log("File sent!")
+          }
         });
-        
+
       }
     }
   })

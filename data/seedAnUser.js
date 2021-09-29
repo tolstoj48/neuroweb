@@ -1,21 +1,21 @@
 'use strict';
 
 const mongoose = require('mongoose')
-const User = require('../models/userModel')
-// Db url
-const dbUrl = 'mongodb://localhost:27017/neuroweb';
-// credentials
-const { credentials } = require('../config')
+  , User = require('../models/userModel')
+  // Db url
+  , dbUrl = 'mongodb://localhost:27017/neuroweb'
+  // Credentials
+  , { credentials } = require('../config')
 
-// new user account
-async function createNewUser(){
+// New user account
+async function createNewUser() {
   try {
-    const email = 'a@g.com';
-    const username = 'alena_10';
-    const role = 'Admin';
-    const user = new User({ role, email, username });
+    const email = 'a@g.com'
+    , username = 'alena_10'
+    , role = 'Admin'
+    , user = new User({ role, email, username })
     await User.register(user, credentials.newUserPassword);
-  } catch(err) {
+  } catch (err) {
     console.log(err.message)
   }
 }
@@ -29,7 +29,7 @@ mongoose.connect(dbUrl, {
   connectTimeoutMS: 3000,
 })
   .then(() => {
-    // ne v testovacím prostředí
+    // Not in the test env
     if (process.env.NODE_ENV !== 'test') console.log('Mongo DB connection open!');
     createNewUser();
   })

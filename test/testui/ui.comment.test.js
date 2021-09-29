@@ -1,7 +1,7 @@
 'use strict'
 
-const chai = require("chai");
-const expect = chai.expect;
+const chai = require("chai")
+  , expect = chai.expect
 
 const puppeteer = require("puppeteer");
 
@@ -28,7 +28,7 @@ describe("Neuroweb - UI Comment", function () {
     await browser.close();
   });
 
-  it("should get to the main page from new comment form", async function() {
+  it("should get to the main page from new comment form", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.click('a[href="/ngs-com/new-comment"]');
     await page.waitForSelector('a[href="/"]');
@@ -37,7 +37,7 @@ describe("Neuroweb - UI Comment", function () {
     expect(await page.content()).to.include(`<h1>NGS comments</h1>`);
   });
 
-  it("should create a new comment", async function() {
+  it("should create a new comment", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/ngs-com/new-comment"]');
     await page.click('a[href="/ngs-com/new-comment"]');
@@ -52,14 +52,14 @@ describe("Neuroweb - UI Comment", function () {
     await page.keyboard.press('Enter');
   });
 
-  it("should check new comment in the accordion has been created", async function() {
+  it("should check new comment in the accordion has been created", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.include(`<button class="accordion-button collapsed"`);
     expect(await page.content()).to.include(`<strong class="ms-auto"> Hello </strong>`);
-  } );
+  });
 
-  it("should edit comment from the list", async function() {
+  it("should edit comment from the list", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('.edit');
     await page.click(".edit");
@@ -84,7 +84,7 @@ describe("Neuroweb - UI Comment", function () {
     await page.keyboard.press('Enter');
   });
 
-  it("should check edits on edited comment in the list", async function() {
+  it("should check edits on edited comment in the list", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.include(`<button class="accordion-button collapsed"`);
@@ -92,7 +92,7 @@ describe("Neuroweb - UI Comment", function () {
   });
 
 
-  it("should get to the main page from edit comment form", async function() {
+  it("should get to the main page from edit comment form", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/"]');
     await page.click(".edit");
@@ -102,7 +102,7 @@ describe("Neuroweb - UI Comment", function () {
     expect(await page.content()).to.include(`<h1>NGS comments</h1>`);
   });
 
-  it("should get to the main page from delete comment form", async function() {
+  it("should get to the main page from delete comment form", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/"]');
     await page.click(".delete");
@@ -112,7 +112,7 @@ describe("Neuroweb - UI Comment", function () {
     expect(await page.content()).to.include(`<h1>NGS comments</h1>`);
   });
 
-  it("should delete comment from the list", async function() {
+  it("should delete comment from the list", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/"]');
     await page.click(".delete");
@@ -128,7 +128,7 @@ describe("Neuroweb - UI Comment", function () {
     await page.keyboard.press('Enter');
   });
 
-  it("should check edits on edited comment in the list", async function() {
+  it("should check edits on edited comment in the list", async function () {
     await page.goto("http://localhost:3000/ngs-com");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.not.include(`<strong class="ms-auto"> peklo </strong>`);

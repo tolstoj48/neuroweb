@@ -187,8 +187,9 @@ describe('Model Test', function () {
           assert.notExists(task);
           throw new Error('should not get here');
         } catch (err) {
-          // An error is expected, so it is an error if
-          // the 'should not get here' error is thrown
+          /* An error is expected, so it is an error if
+          the 'should not get here' error is thrown
+          */
           assert.notEqual(err.message, 'should not get here');
         }
       });
@@ -264,8 +265,9 @@ describe('Model Test', function () {
           assert.notExists(comment);
           throw new Error('should not get here');
         } catch (err) {
-          // An error is expected, so it is an error if
-          // the 'should not get here' error is thrown
+          /* An error is expected, so it is an error if
+          the 'should not get here' error is thrown
+          */
           assert.notEqual(err.message, 'should not get here');
         }
       });
@@ -358,8 +360,9 @@ describe('Model Test', function () {
           assert.notExists(user);
           throw new Error('should not get here');
         } catch (err) {
-          // An error is expected, so it is an error if
-          // the 'should not get here' error is thrown
+          /* An error is expected, so it is an error if
+           the 'should not get here' error is thrown
+          */
           assert.notEqual(err.message, 'should not get here');
         }
       });
@@ -394,7 +397,7 @@ describe('Model Test', function () {
       });
 
       describe('check correct model - max and min length mongoose validators', function () {
-        // loop for lengths testing
+        // Loop for lengths testing
         for (const property in Task.schema.obj) {
           if (property !== 'done') {
             if (['date'].includes(property)) {
@@ -424,7 +427,7 @@ describe('Model Test', function () {
       });
 
       describe('check correct model - max and min length mongoose validators', function () {
-        // loop for lengths testing
+        // Loop for lengths testing
         for (const property in Comment.schema.obj) {
           if (property !== 'done') {
             itShouldTestMaxConditionsComment(oneCommentData, Comment, chai, property);
@@ -461,7 +464,7 @@ describe('Model Test', function () {
       });
 
       describe('check correct model - max and min length mongoose validators', function () {
-        // loop for lengths testing
+        // Loop for lengths testing
         for (const property in User.schema.obj) {
           if (property !== 'done') {
             itShouldTestMaxConditionsUser(oneUserData, User, chai, property);

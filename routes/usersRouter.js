@@ -1,15 +1,14 @@
 'use strict';
 
-const express = require('express');
-const passport = require('passport');
-const router = express.Router();
-const catchAsync = require('../utilities/catchAsyncUtil');
-const { isLoggedIn } = require('../middleware/isLoggedIn');
-const { isLoggedInAndAuthenticated } = require('../middleware/isLoggedInAndAuthenticated');
-const authorize = require('../middleware/authorizeMiddleware');
-const { validateNewUser } = require('../middleware/userValidationMiddleware');
-// || CONTROLLER
-const usersCtrl = require('../controllers/usersCtrl');
+const express = require('express')
+  , passport = require('passport')
+  , router = express.Router()
+  , catchAsync = require('../utilities/catchAsyncUtil')
+  , { isLoggedIn } = require('../middleware/isLoggedIn')
+  , { isLoggedInAndAuthenticated } = require('../middleware/isLoggedInAndAuthenticated')
+  , authorize = require('../middleware/authorizeMiddleware')
+  , { validateNewUser } = require('../middleware/userValidationMiddleware')
+  , usersCtrl = require('../controllers/usersCtrl')
 
 // register page
 router.route('/register')
@@ -19,7 +18,7 @@ router.route('/register')
 // login view
 router.route('/login')
   .get(isLoggedInAndAuthenticated, usersCtrl.login)
-  .post(passport.authenticate('local', {failureFlash: true, failureRedirect: '/login'}), usersCtrl.authentication)
+  .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), usersCtrl.authentication)
 
 
 router.get('/logout', isLoggedIn, usersCtrl.logout);

@@ -13,7 +13,7 @@ module.exports.validateNewComment = (req, res, next) => {
   validatedObj = commentNewSchema.validate(validatedObj).value;
   error = commentNewSchema.validate(validatedObj).error;
 
-  if(error) {
+  if (error) {
     const msg = error.details.map(el => el.message).join(',')
     next(createError(400, msg));
   } else {

@@ -22,10 +22,10 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: [
-          'true',
-          'false',
-          'in process'
-      ],
+            'true',
+            'false',
+            'in process'
+        ],
     },
 });
 

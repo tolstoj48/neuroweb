@@ -1,6 +1,8 @@
+'use strict';
+
 const mongoose = require('mongoose')
-const passportLocalMongoose = require('passport-local-mongoose')
-const Schema = mongoose.Schema
+  , passportLocalMongoose = require('passport-local-mongoose')
+  , Schema = mongoose.Schema
 
 // Basic mongoose schema withou password and name - not neccessary, added below
 const UserSchema = new Schema({
@@ -19,8 +21,8 @@ const UserSchema = new Schema({
   }
 })
 
-// adding plugin  passport-local-mongoose checks uniqueness of user names, adds data field user and password
+// Adding plugin  passport-local-mongoose checks uniqueness of user names, adds data field user and password
 UserSchema.plugin(passportLocalMongoose)
 
-// export modulu
+// Export of the model
 module.exports = mongoose.model('User', UserSchema)

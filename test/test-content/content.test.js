@@ -1,17 +1,8 @@
 'use strict'
 
-/* ||| To do:
-  
-*/
-
-// obsahy stran
-// přihlášení
-// funkcionality
-
-const chai = require('chai');
-const expect = chai.expect;
-
-const puppeteer = require('puppeteer');
+const chai = require('chai')
+  , expect = chai.expect
+  , puppeteer = require('puppeteer')
 
 function testContent(page, specificArray, contentArray) {
   const resultArray = specificArray.concat(contentArray);
@@ -25,10 +16,10 @@ function testContent(page, specificArray, contentArray) {
 }
 
 const testedContentArray = [
-`<input type="date" class="form-control" id="date" name="date"`,
-`<textarea class="form-control" id="to-do-task" name="to_do_task`,
-`<input class="form-control" id="who-wants-it" name="who_wants_it" placeholder="Your name..." maxlength="50"`,
-`<select class="form-select" id="done" name="done"`,
+  `<input type="date" class="form-control" id="date" name="date"`,
+  `<textarea class="form-control" id="to-do-task" name="to_do_task`,
+  `<input class="form-control" id="who-wants-it" name="who_wants_it" placeholder="Your name..." maxlength="50"`,
+  `<select class="form-select" id="done" name="done"`,
 ]
 
 describe('Neuroweb - content after login', function () {
@@ -68,7 +59,7 @@ describe('Neuroweb - content after login', function () {
     await page.waitForSelector('#to-do-list');
     expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
   });
-  
+
   it('should test creation of new task: /tasks/new-task', async function () {
     await page.goto('http://localhost:3000/tasks/new-task');
     await page.waitForSelector('legend');
@@ -86,7 +77,7 @@ describe('Neuroweb - content after login', function () {
     await page.goto('http://localhost:3000');
     await page.click('.delete');
     await page.waitForSelector('legend');
-    await testContent(page, [`<legend>Confirm the delete of the task</legend>`], testedContentArray);  
+    await testContent(page, [`<legend>Confirm the delete of the task</legend>`], testedContentArray);
   });
 
   it('should test inhouse db content: /in-house-db', async function () {
@@ -107,13 +98,13 @@ describe('Neuroweb - content after login', function () {
     await page.waitForSelector('main');
     expect(await page.content()).to.include(`<h1 id="title" class="mt-2 mb-3">Delete the data from the in-house database</h1>`);
   });
-  
+
   it('should test inhouse db content: /annotation', async function () {
     await page.goto('http://localhost:3000/annotation');
     await page.waitForSelector('main');
     expect(await page.content()).to.include(`<h1>Annotation</h1>`);
   });
-  
+
   it('should test inhouse db content: /filter', async function () {
     await page.goto('http://localhost:3000/filter');
     await page.waitForSelector('main');

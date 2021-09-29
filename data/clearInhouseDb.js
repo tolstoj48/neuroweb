@@ -1,11 +1,11 @@
 'use strict';
 
 // Clear all the data from the in-house database
-const mongoose = require('mongoose');
-const Gene = require('../models/geneModel');
+const mongoose = require('mongoose')
+  , Gene = require('../models/geneModel')
 
 
-// připojení k DB - musí běžet
+// The connection to the DB must be on
 mongoose.connect('mongodb://localhost:27017/neuroweb', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connection open!')
@@ -16,17 +16,17 @@ mongoose.connect('mongodb://localhost:27017/neuroweb', { useNewUrlParser: true, 
   });
 
 const clearDb = async () => {
-    await Gene.remove({})
-      .then(data => {
-        console.log('Db cleared!');
-        // Imported data
-        console.log(data);
-        // End process
-        process.emit('SIGINT');
-      });
-  }
+  await Gene.remove({})
+    .then(data => {
+      console.log('Db cleared!');
+      // Imported data
+      console.log(data);
+      // End process
+      process.emit('SIGINT');
+    });
+}
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
   mongoose.connection.close(function () {
     console.log('Mongoose disconnected on app termination');
     process.exit(0);

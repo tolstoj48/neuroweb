@@ -1,7 +1,7 @@
 'use strict';
 
-const taskReqValidationSchema = require('../utilities/taskReqValidationSchema');
-const { taskNewSchema } = taskReqValidationSchema;
+const taskReqValidationSchema = require('../utilities/taskReqValidationSchema')
+  , { taskNewSchema } = taskReqValidationSchema;
 
 const createError = require('http-errors');
 
@@ -13,7 +13,7 @@ module.exports.validateNewTask = (req, res, next) => {
   validatedObj = taskNewSchema.validate(validatedObj).value;
   error = taskNewSchema.validate(validatedObj).error;
 
-  if(error) {
+  if (error) {
     const msg = error.details.map(el => el.message).join(',')
     next(createError(400, msg));
   } else {

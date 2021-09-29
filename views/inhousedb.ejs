@@ -1,9 +1,9 @@
 <% layout("layouts/index") %>
 
-<% layout("layouts/index") %>
-  <h1 class="mt-2">In-house database</h1>
-  <% if(currentUser.role === "Admin") { %>
-  <a href="/in-house-db/import-data" class="btn btn-lg btn-outline-primary strong mt-3">+ Import data</a>
-  <a href="/in-house-db/delete-data-confirm" class="btn btn-lg btn-outline-primary strong mt-3">+ Delete data</a>
-  <% } %>
-  <%- include("./partials/search-db") %>
+  <% layout("layouts/index") %>
+    <h1 class="mt-2">In-house database</h1>
+    <% if(currentUser.role==="Admin" ) { %>
+      <a href="/in-house-db/import-data" class="btn btn-lg btn-outline-primary strong mt-3">+ Import data</a>
+      <a href="/in-house-db/delete-data-confirm" class="btn btn-lg btn-outline-primary strong mt-3">+ Delete data</a>
+      <% } %>
+        <%- include("./partials/search-db") %>

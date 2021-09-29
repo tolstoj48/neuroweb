@@ -1,43 +1,43 @@
 <% layout("layouts/index") %>
-<h1>Annotation</h1>
-<a href="/annotation/upload-data" class="btn btn-lg btn-outline-primary strong mt-3">+ Upload data</a>
-<table class="table table-hover mt-3" id="to-do-list">
-  <thead>
-    <tr>
-      <th scope="col">Name of the uploaded file</th>
-      <th scope="col">Status of annotation</th>
-      <th scope="col">Date of the upload</th>
-      <th scope="col">Download</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% for (let file of data) { %>
+  <h1>Annotation</h1>
+  <a href="/annotation/upload-data" class="btn btn-lg btn-outline-primary strong mt-3">+ Upload data</a>
+  <table class="table table-hover mt-3" id="to-do-list">
+    <thead>
       <tr>
-        <td>
-          <%= file.local_disk_name %>
-        </td>
-        <td>
-          <% if (file.status == "done") { %>
-            <i class="me-3 text-success" data-feather="check"></i>
-          <% } else if (file.status == "process") { %> 
-            <i class="me-3 text-danger" data-feather="x"></i>
-            <% } else { %>
-              <i class="me-3 text-warning" data-feather="truck"></i>
-          <% } %>
-        </td>
-        <td>
-          <%= file.date_of_upload %>
-        </td>
-        <td>
-          <% if (file.status == "done") { %>
-          <a href="/annotation/download/<%= file.annotated_filename %>">
-            <i class="me-3 text-warning" data-feather="download"></i>
-          </a>
-          <% } else { %>
-            processed
-          <% } %>
-        </td>
+        <th scope="col">Name of the uploaded file</th>
+        <th scope="col">Status of annotation</th>
+        <th scope="col">Date of the upload</th>
+        <th scope="col">Download</th>
       </tr>
-      <% } %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% for (let file of data) { %>
+        <tr>
+          <td>
+            <%= file.local_disk_name %>
+          </td>
+          <td>
+            <% if (file.status=="done" ) { %>
+              <i class="me-3 text-success" data-feather="check"></i>
+              <% } else if (file.status=="process" ) { %>
+                <i class="me-3 text-danger" data-feather="x"></i>
+                <% } else { %>
+                  <i class="me-3 text-warning" data-feather="truck"></i>
+                  <% } %>
+          </td>
+          <td>
+            <%= file.date_of_upload %>
+          </td>
+          <td>
+            <% if (file.status=="done" ) { %>
+              <a href="/annotation/download/<%= file.annotated_filename %>">
+                <i class="me-3 text-warning" data-feather="download"></i>
+              </a>
+              <% } else { %>
+                processed
+                <% } %>
+          </td>
+        </tr>
+        <% } %>
+    </tbody>
+  </table>

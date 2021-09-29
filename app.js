@@ -1,32 +1,3 @@
-// 1. upload UI pro file upload - podmínky souborů uploadovaných? dodělat upload viz inhousedb
-// upravit otestování modulu - annotated filename proeprty
-// 
-
-
-// dodělat testy:  models test, pak UI testy - stávající pi přihlášení a přidat na databázi, uživatele, přihlášení, fastqs
-
-// vložení špatného názvu souboru - něco kromě mezer ještě ne dotázat se A? 
-
-// spouštení skriptů - popis nějakýho cyklu - ? import -> po importu spuštění shell scriptu - pak nějaký výsledek a změna na webu? je možný získat teda ten skript, který to spouští?
-// jaká je celá ta architektura?
-// koncovka VC a bez mezer v názvu
-
-// testy - login a logout ui, neoprávněný přístup všude, inhousedb - import, delete data, nový uživatel, autorizace search všechny funkcionality, user vytvoření a poslání dat - vč. chyb, stahování souborů ze složky
-// spouštění, aby nepadalo
-// postprodukce - ' místo ", ctrl+shift+f, chyby dle VSCode
-
-// test - model file
-
-// web dnalab.cz
-
-// mozzila/chrome
-
-// validace, pretifikace, správně váýznamnově html
-
-// instalace node.js do ubuntu: https://github.com/nodesource/distributions/blob/master/README.md
-// postgresql by mělo být na každém ubuntu
-// vkládání dat do db pomocí: https://stackoverflow.com/questions/2987433/how-to-import-csv-file-data-into-a-postgresql-table
-
 'use strict';
 
 const createError = require('http-errors');
@@ -93,11 +64,11 @@ mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  // nutné kůli importu velkých objemů dat - třeba 50000 - v milisekundách
+  // Needed to setup for imports of bigger files
   connectTimeoutMS: 3000,
 })
   .then(() => {
-    // ne v testovacím prostředí
+    // Not in the testing env
     if (process.env.NODE_ENV !== 'test') console.log('Mongo DB connection open!')
   })
   .catch(err => {
@@ -105,7 +76,7 @@ mongoose.connect(dbUrl, {
     console.log(err)
   })
 
-// Mongo pro session setup
+// Mongo for session setup
 const store = MongoDBStore.create({
   mongoUrl: dbUrl,
   secret: credentials.secretMongoDBStore,
@@ -121,7 +92,7 @@ store.on('error', function (e) {
 //Session setup
 const sessionOptions = {
   store,
-  // Chnage cookie name is better
+  // Change cookie name is better
   name: 'neurowebSessJmeno',
   secret: credentials.secretSession,
   resave: false,
@@ -136,7 +107,7 @@ const sessionOptions = {
   }
 }
 
-// Esj engine
+// Ejs engine
 app.engine('ejs', engine);
 // Import ejs
 app.set('view engine', 'ejs');
@@ -181,15 +152,15 @@ app.use(methodOverride('_method'));
 // Use flash
 app.use(flash())
 
-// passport, musí být pod app.use session a celé je nutné pro perzistentní přihlášení uživatele
+// Passport, must be below app.use session, all is needed for presistent login
 app.use(passport.initialize())
 app.use(passport.session())
 
-// vlastní strategie - autentikce pomocí User modelu, authenticate je z mongoose modelu
+// Own strategy - autentikce using User model, authenticate is from the mongoose model
 passport.use(new LocalStrategy(User.authenticate()))
-// jak ukládáme uživatele v session
+// The way we save user in the session
 passport.serializeUser(User.serializeUser())
-// jak uživatele vytahujeme ze session
+// The way we retriev user from the session
 passport.deserializeUser(User.deserializeUser())
 
 
@@ -209,7 +180,7 @@ app.use(cookieParser());
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 
-// || Routers
+// Routers
 app.use('/', indexRouter);
 app.use('/tasks/', taskRouter);
 app.use('/ngs-com/', commentsRouter);
@@ -219,7 +190,7 @@ app.use('/fastqs/', fastqsRouter);
 app.use('/annotation/', annotationRouter);
 
 // Catch 404 and forward to error handler
-app.use(isLoggedIn,function (req, res, next) {
+app.use(isLoggedIn, function (req, res, next) {
   next(createError(404, 'The page hasn´t been found!'));
 });
 

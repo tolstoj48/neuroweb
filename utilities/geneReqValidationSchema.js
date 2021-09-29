@@ -8,11 +8,11 @@ const extension = (joi) => ({
   type: 'string',
   base: joi.string(),
   messages: {
-      'string.escapeHTML': `{{#label}} can´t include HTML!`
+    'string.escapeHTML': `{{#label}} can´t include HTML!`
   },
   rules: {
-      escapeHTML: {
-      }
+    escapeHTML: {
+    }
   }
 });
 

@@ -1,10 +1,9 @@
 'use strict'
 
-const chai = require("chai");
-const assert = chai.assert;
-const expect = chai.expect;
-
-const puppeteer = require("puppeteer");
+const chai = require("chai")
+  , assert = chai.assert
+  , expect = chai.expect
+  , puppeteer = require("puppeteer")
 
 describe("Neuroweb - UI General and Task", function () {
   this.timeout(15000);
@@ -86,14 +85,14 @@ describe("Neuroweb - UI General and Task", function () {
 
   it("should get incorrect link", async function () {
     await page.goto("http://localhost:3000/incorrect-url");
-    // h4 titulek 404
+    // H4 title 404
     assert.include(
       await page.$eval('body .alert', el => el.textContent),
       "The page hasn´t been found!"
     );
   });
 
-  it("should get to the main page from new task form", async function() {
+  it("should get to the main page from new task form", async function () {
     await page.goto("http://localhost:3000");
     await page.click('a[href="/tasks/new-task"]');
     await page.waitForSelector('a[href="/"]');
@@ -102,7 +101,7 @@ describe("Neuroweb - UI General and Task", function () {
     expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
   });
 
-  it("should create a new task", async function() {
+  it("should create a new task", async function () {
     await page.goto("http://localhost:3000");
     await page.click('a[href="/tasks/new-task"]');
     await page.waitForSelector('a[href="/"]');
@@ -113,13 +112,13 @@ describe("Neuroweb - UI General and Task", function () {
     await page.click('#submitBtn');
   });
 
-  it("should check new task in the list has been created", async function() {
+  it("should check new task in the list has been created", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.include(`<td>\n            Hello\n          </td>`);
-  } );
+  });
 
-  it("should edit task from the list", async function() {
+  it("should edit task from the list", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     await page.click(".edit");
@@ -140,13 +139,13 @@ describe("Neuroweb - UI General and Task", function () {
     await page.click('#submitBtn');
   });
 
-  it("should check edits on edited task in the list", async function() {
+  it("should check edits on edited task in the list", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.include(`<td>\n            peklo\n          </td>`);
-  } );
+  });
 
-  it("should get to the main page from edit task form", async function() {
+  it("should get to the main page from edit task form", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     await page.click(".edit");
@@ -156,7 +155,7 @@ describe("Neuroweb - UI General and Task", function () {
     expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
   });
 
-  it("should get to the main page from delete task form", async function() {
+  it("should get to the main page from delete task form", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     await page.click(".delete");
@@ -166,26 +165,16 @@ describe("Neuroweb - UI General and Task", function () {
     expect(await page.content()).to.include(`<h1 class="mt-2">To do list</h1>`);
   });
 
-  it("should delete task from the list", async function() {
+  it("should delete task from the list", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     await page.click(".delete");
-    await page.click('#deleteBtn'); 
+    await page.click('#deleteBtn');
   });
 
-  it("should check edits on edited task in the list", async function() {
+  it("should check edits on edited task in the list", async function () {
     await page.goto("http://localhost:3000");
     await page.waitForSelector('a[href="/"]');
     expect(await page.content()).to.not.include(`<td>\n            peklo\n          </td>`);
   });
-  
-  //
-  // it("should visit and check ui of the login page", async function () {
-  //   await page.goto("http://localhost:3033/prihlasit", { 'waitUntil' : 'domcontentloaded' });
-  //   await page.waitForSelector('#username');
-  //   await page.waitForSelector('#password');
-  //   // login button
-  //   await page.waitForSelector('body > main > div > div > div > div > div > form > div > button');
-  // })
-
 })

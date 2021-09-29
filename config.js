@@ -7,4 +7,4 @@ const env = process.env.NODE_ENV || 'development'
 const credentials = require(`./.credentials.${env}.json`)
 
 // Export modul
-module.exports = { credentials } 
+module.exports = { credentials }

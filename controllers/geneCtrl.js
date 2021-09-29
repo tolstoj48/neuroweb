@@ -7,7 +7,7 @@ const Gene = require('../models/geneModel');
 const multer = require("multer")
   // Filesystem dependency
   , fs = require("fs")
-  // nodejs path
+  // Nodejs path
   , path = require("path")
   // Validation of the JSON array with JOI
   , jsonJoiValidation = require("../utilities/jsonValidationWithJoi")
@@ -21,9 +21,9 @@ const multer = require("multer")
 
 
 // Validation and views setup
-const fileS = 6000000000;
-const allowedFiles = ".csv";
-const uploadFlag = true;
+const fileS = 6000000000
+  , allowedFiles = '.csv'
+  , uploadFlag = true
 
 
 // Search db for gNomen position
@@ -90,7 +90,7 @@ module.exports.importDataMainPage = (req, res) => {
 }
 
 // Validate data and save them to the in-house db
-module.exports.importData = async (req, res, next) => {
+module.exports.importData = async (req, res) => {
   // Variable with the name of the file
   const fileName = "db.csv"
   // If uploaded file exists, delete it
@@ -190,7 +190,7 @@ module.exports.importData = async (req, res, next) => {
           }
         } else {
           console.log(arr)
-          // // Delete, flash, redirect uploaded file
+          // Delete, flash, redirect uploaded file
           deleteFlashRedirect.dFR(
             res,
             req,

@@ -9,8 +9,8 @@
               <form id="upload-form" class="needs-validation" enctype="multipart/form-data" action="/import-data"
                 method="POST" novalidate>
                 <div class="input-group mb-5">
-                  <input type="file" class="form-control" name="genes" id="file" aria-describedby="inputGroupFileAddon04"
-                    aria-label="Upload" accept=".vcf" required>
+                  <input type="file" class="form-control" name="genes" id="file"
+                    aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept=".vcf" required>
                   <button class="btn btn-outline-success">Upload the file</button>
                 </div>
                 <!-- Spinner div -->
@@ -23,7 +23,9 @@
                 <p class="mt-2">* Maximum size of the file: <%= fileS / 1000000 %>MB</p>
                 <p> ** Allowed files: <%= allowedFiles %> with separator "," and encodings utf-8.</p>
                 <p> ??? *** List can not contain empty lines under the last line.</p>
-                <p> ??? **** Columns have to have exact count, order and names: "Chr,Start,End,Ref,Alt,gNomen,Func_refGene,Gene_refGene,AF_GNOMAD,InterVar_automated,clinvar,MULTI_ALLELIC,HOM_VAR,HET_REF,HET_OTHER,HOM_REF,NO_CALL,OTHER_GT,VAR,CALLED,QUAL,AC,AF,HOM_VAR_samples,HET_REF_samples,HET_OTHER_samples,HOM_REF_samples,NO_CALL_samples,OTHER_GT_samples"</p>
+                <p> ??? **** Columns have to have exact count, order and names:
+                  "Chr,Start,End,Ref,Alt,gNomen,Func_refGene,Gene_refGene,AF_GNOMAD,InterVar_automated,clinvar,MULTI_ALLELIC,HOM_VAR,HET_REF,HET_OTHER,HOM_REF,NO_CALL,OTHER_GT,VAR,CALLED,QUAL,AC,AF,HOM_VAR_samples,HET_REF_samples,HET_OTHER_samples,HOM_REF_samples,NO_CALL_samples,OTHER_GT_samples"
+                </p>
                 <p> ??? ***** No commas can be in the values except for the separators of the columns. </p>
               </div>
             </div>

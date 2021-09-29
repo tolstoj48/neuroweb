@@ -1,14 +1,14 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
-const baseCtrl = require('../controllers/baseCtrl');
-// catchAsync - error handler pro async functions
-const catchAsync = require('../utilities/catchAsyncUtil');
-// authentication
-const { isLoggedIn } = require('../middleware/isLoggedIn');
+const express = require('express')
+  , router = express.Router()
+  , baseCtrl = require('../controllers/baseCtrl')
+  // CatchAsync - error handler pro async functions
+  , catchAsync = require('../utilities/catchAsyncUtil')
+  // Authentication
+  , { isLoggedIn } = require('../middleware/isLoggedIn')
 
-// basepage
+// Basepage
 router.route('/')
   .get(isLoggedIn, catchAsync(baseCtrl.home))
 
@@ -39,7 +39,6 @@ router.route('/bam-crams')
 // NGS comments
 router.route('/ngs-com')
   .get(isLoggedIn, baseCtrl.ngscom)
-
 
 
 module.exports = router;

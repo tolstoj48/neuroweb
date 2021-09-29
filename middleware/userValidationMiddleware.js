@@ -1,8 +1,8 @@
 'use strict';
 
-const userReqValidationSchema = require('../utilities/userReqValidationSchema');
-const { userNewSchema } = userReqValidationSchema;
-const createError = require('http-errors');
+const userReqValidationSchema = require('../utilities/userReqValidationSchema')
+  , { userNewSchema } = userReqValidationSchema
+  , createError = require('http-errors')
 
 // Validate created user
 module.exports.validateNewUser = (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports.validateNewUser = (req, res, next) => {
   validatedObj = userNewSchema.validate(validatedObj).value;
   error = userNewSchema.validate(validatedObj).error;
 
-  if(error) {
+  if (error) {
     const msg = error.details.map(el => el.message).join(',')
     next(createError(400, msg));
   } else {

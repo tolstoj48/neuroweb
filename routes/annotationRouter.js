@@ -1,11 +1,11 @@
 'use strict';
 
-const express = require('express');
-const router = express.Router();
-const annotationCtrl = require('../controllers/annotationCtrl.js');
-const { isLoggedIn } = require('../middleware/isLoggedIn');
-// catchAsync - error handler pro async functions
-const catchAsync = require('../utilities/catchAsyncUtil');
+const express = require('express')
+  , router = express.Router()
+  , annotationCtrl = require('../controllers/annotationCtrl.js')
+  , { isLoggedIn } = require('../middleware/isLoggedIn')
+  // CatchAsync - error handler pro async functiona
+  , catchAsync = require('../utilities/catchAsyncUtil')
 
 
 // Annotation
