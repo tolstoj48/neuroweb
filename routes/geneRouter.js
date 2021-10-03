@@ -14,14 +14,14 @@ const express = require('express')
 // Search inhouse db
 router.route('/search')
   // Search gene
-  .get(isLoggedIn, catchAsync(geneCtrl.searchGene));
+  .get(isLoggedIn, catchAsync(geneCtrl.searchGene))
 
 // Importing data to inhouse db
 router.route('/import-data')
   // Get import data page
   .get(isLoggedIn, authorize("Admin"), geneCtrl.importDataMainPage)
   // Post data and validate them
-  .post(isLoggedIn, authorize("Admin"), catchAsync(geneCtrl.importData));
+  .post(isLoggedIn, authorize("Admin"), catchAsync(geneCtrl.importData))
 
 //Delete data
 router.route('/delete-data-confirm')
@@ -30,6 +30,6 @@ router.route('/delete-data-confirm')
 
 router.route('/delete-data')
   //Get deleze data confirm
-  .get(isLoggedIn, authorize("Admin"), catchAsync(geneCtrl.deleteData));
+  .get(isLoggedIn, authorize("Admin"), catchAsync(geneCtrl.deleteData))
 
 module.exports = router;

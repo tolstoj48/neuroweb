@@ -79,7 +79,6 @@ module.exports.searchGene = async (req, res) => {
 
 // Get import data main page
 module.exports.importDataMainPage = (req, res) => {
-
   res.render('genes/import-data', {
     layout: 'index',
     title: 'NGL - import data to inhouse db',

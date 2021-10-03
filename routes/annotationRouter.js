@@ -19,5 +19,7 @@ router.route('/download/:fileName')
 // File upload for annotation
 router.route('/upload-data')
   .get(isLoggedIn, annotationCtrl.uploadFileForAnotation)
+// Post data and validate them
+  .post(isLoggedIn, catchAsync(annotationCtrl.importData))
 
 module.exports = router;

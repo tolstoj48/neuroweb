@@ -44,8 +44,8 @@
       const containerStructure = document.querySelector(".structure")
       // After submit need to show spinner
       showSpinner()
-      // Call fetch api and send the data
-      fetch("/in-house-db/import-data", {
+      // Call fetch api and send the data - to its location pathname
+      fetch(location.pathname, {
         method: "post",
         credentials: "same-origin",
         headers: {
@@ -78,7 +78,7 @@
         .catch(err => {
           hideSpinner()
           container.innerHTML = `<b>There has been an error during upload. ` +
-            `Please check whether the file fullfills all requirements and try a new upload: <a href="/in-house-db/import-data">zde</a>.`
+            `Please check whether the file fullfills all requirements and try a new upload: <a href="/in-house-db/import-data">here</a>.`
         })
     })
 
