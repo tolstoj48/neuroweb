@@ -13,7 +13,7 @@ const fileS = 6000000000
 
 // Render annotation page
 module.exports.annotation = async (req, res) => {
-  let data = await File.find().sort({ date: 'asc', test: -1 });
+  let data = await File.find().sort({ date_of_upload: 'desc' });
   res.render('annotations/annotation', {
     layout: 'index',
     title: 'NGL - Annotation',
@@ -72,8 +72,11 @@ module.exports.importData = async (req, res) => {
     storage: storage,
     fileFilter: function (req, file, callback) {
       const ext = path.extname(file.originalname)
-      if (ext !== '.vcf') {
+      if (ext !== '.vcf' && ext !== '.gz') {
         return callback(new AppError(`Allowed types of files are: ${allowedFiles}!`), false)
+      }
+      if (fs.existsSync(`./analysis-data/${file.originalname}`)) {
+        return callback(new AppError(`A file with the same name already exists on the server. Please, change the name or ask the admin of the web.`), false)
       }
       callback(null, true)
     },
@@ -84,25 +87,17 @@ module.exports.importData = async (req, res) => {
 
   // Calling multer with the setup
   upload(req, res, (err) => {
-    // If an error
-    if (err instanceof multer.MulterError) {
-      console.log(err);
-      // Size errror and log
-      console.log(`Uploaded file is bigger then allowed size: ${fileS / 1000000} MB.`)
+    if (err) {
+      // Different type of errors
+      console.log(err.message)
       return res.status(400).send({
         result: 'error',
-        message: `Uploaded file is bigger then allowed size ${fileS / 1000000} MB.`
+        message: err.message
       })
-      // Other uploading errors
-    } else if (err) {
-      // Different type of errors
-      req.flash('error', err.message)
-      console.log(err.message)
-      return res.redirect(400, 'annotation/upload-data')
     }
 
-    // Only if there is uploded file otherwise not finished upload
-    fs.access(`./analysis-data/${req.file.filename}`, fs.constants.F_OK, async (err) => {
+    // Only if there is uploaded file otherwise not finished upload
+    fs.access(`./analysis-data/${req.file.filename}`, fs.constants.F_OK, (err) => {
       //If there is no file then there must be end, otherwise finished
       if (err) {
         res.status(400).send({
@@ -110,7 +105,6 @@ module.exports.importData = async (req, res) => {
           message: 'The file has not been uploaded on the server!'
         })
       } else {
-
         // Redirect uploaded file
         return res.send({ result: 'success' })
       }

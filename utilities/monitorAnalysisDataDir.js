@@ -28,7 +28,7 @@ fs.watch(directory, async (event, filename) => {
         }
         
         // If file doesnt exist in db, write it to the db.
-        let annotated_filename = filename.slice(0, filename.search('.vcf')) + '_annotated' + filename.slice(filename.search('.vcf'))
+        let annotated_filename = filename.slice(0, filename.search('.vcf')) + '_annotated.txt'
         console.log('Not yet in the db. Document created.');
         await File.create({
           local_disk_name: filename,

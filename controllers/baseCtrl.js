@@ -10,7 +10,7 @@ const Task = require('../models/taskModel')
 
 // Render page with useful links
 module.exports.home = async (req, res) => {
-  let data = await Task.find().sort({ date: 'asc', test: -1 });
+  let data = await Task.find().sort({ date: 'asc' });
   res.render('main', {
     layout: 'index',
     title: 'NGL - HUB',
@@ -31,7 +31,7 @@ module.exports.inhousedb = async (req, res) => {
 
 // Render annotation page
 module.exports.annotation = async (req, res) => {
-  let data = await File.find().sort({ date: 'asc', test: -1 });
+  let data = await File.find().sort({ date: 'asc' });
   res.render('annotation', {
     layout: 'index',
     title: 'NGL - Annotation',
@@ -116,12 +116,10 @@ module.exports.bamcrams = (req, res) => {
 
 // Render ngs-com page
 module.exports.ngscom = async (req, res) => {
-  const data = await Comment.find().sort({ name: 'asc', test: -1 });
+  const data = await Comment.find().sort({ name: 'asc' });
   res.render('ngs-com', {
     layout: 'index',
     title: 'NGL - NGS Comments',
     data
   });
 }
-
-

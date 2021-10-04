@@ -135,9 +135,8 @@ module.exports.importData = async (req, res) => {
   upload(req, res, (err) => {
     // If an error
     if (err instanceof multer.MulterError) {
-      console.log(err);
+      console.log(err.message);
       // Size errror and log
-      console.log(`Uploaded file is bigger then allowed size: ${fileS / 1000000} MB.`)
       return res.status(400).send({
         result: "error",
         message: `Uploaded file is bigger then allowed size ${fileS / 1000000} MB.`

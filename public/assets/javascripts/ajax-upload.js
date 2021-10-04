@@ -54,11 +54,9 @@
       })
         .then(resp => {
           // If smaller then 200 status or not fullfiling all the conditions for the file in the controller 
-          if (resp.status < 200 || resp.status > 400)
-            throw new Error(`Request failed with status ${resp.status}`)
-          // Otherwise parse to json
+          if (resp.status < 200 || resp.status > 400) throw new Error(`Request failed with status ${resp.status}`)
           return resp.json()
-        })
+          })
         .then(json => {
           // Then hide the spinner
           hideSpinner()
@@ -77,8 +75,10 @@
         // If error thrown from inside fetch api
         .catch(err => {
           hideSpinner()
+          container.classList.add("alert")
+          container.classList.add("alert-danger")
           container.innerHTML = `<b>There has been an error during upload. ` +
-            `Please check whether the file fullfills all requirements and try a new upload: <a href="/in-house-db/import-data">here</a>.`
+            `Please check whether the file fullfills all requirements and try a new upload: <a href="${location.pathname}">here</a>.`
         })
     })
 

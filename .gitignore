@@ -21,3 +21,4 @@ original-inhousedb.ejs
 /annotated-data
 /log
 /documentation
+*.html
