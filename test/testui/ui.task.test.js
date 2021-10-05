@@ -20,10 +20,19 @@ describe("Neuroweb - UI General and Task", function () {
         height: 1080
       }
     })
-    page = await browser.newPage()
+    page = await browser.newPage();
+    await page.goto('http://localhost:3000/login');
+    await page.waitForSelector('#username');
+    await page.focus('#username');
+    await page.keyboard.type('petr');
+    await page.focus('#password');
+    await page.keyboard.type('Alena');
+    await page.keyboard.press('Enter');
+    await page.waitForNavigation();
   });
 
   after(async function () {
+    await page.goto('http://localhost:3000/logout');
     await page.close();
     await browser.close();
   });

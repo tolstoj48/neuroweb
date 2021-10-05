@@ -51,7 +51,7 @@ module.exports.itShouldTestMaxConditionsUser = function itShouldTestMaxCondition
       chai.expect(err).to.exist
         .and.be.instanceof(Error)
         // Should equal to particulat validator condition
-        .and.have.property('message', `user validation failed: ${property}: ${maxLengthText}`)
+        .and.have.property('message', `User validation failed: ${property}: ${maxLengthText}`)
       oneUserData[property] = ''.padStart(maxLengthValue, '#');
       done();
     });

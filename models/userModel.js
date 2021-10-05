@@ -18,6 +18,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true, // not validation
+    maxLength: [100, 'Field should be max. 10 characters.']
   }
 })
 

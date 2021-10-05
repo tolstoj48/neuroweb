@@ -1,3 +1,5 @@
+'use strict';
+
 const oneTaskData = {
   date: '2021-08-05',
   who_wants_it: 'petrioska',

@@ -75,6 +75,7 @@ module.exports.importData = async (req, res) => {
       if (ext !== '.vcf' && ext !== '.gz') {
         return callback(new AppError(`Allowed types of files are: ${allowedFiles}!`), false)
       }
+      // If the file does already exists on the HDD, then just generate AppError
       if (fs.existsSync(`./analysis-data/${file.originalname}`)) {
         return callback(new AppError(`A file with the same name already exists on the server. Please, change the name or ask the admin of the web.`), false)
       }
