@@ -36,8 +36,7 @@
             <% for (let gene of data) { %>
               <tr class="searched-row">
                 <td>
-                  <% gene.gNomenID=gene.gNomen.replace(/[:>
-                    <] /g, "-" ) %>
+                  <% gene.gNomenID=gene.gNomen.replace(/[:><]/g, "-" ) %>
                       <a class="btn btn-danger" data-bs-toggle="collapse" href="#<%= gene.gNomenID %>" role="button">
                         ... </p>
                 </td>

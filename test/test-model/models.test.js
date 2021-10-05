@@ -517,228 +517,199 @@ describe('Model Test', function () {
         await newgene.save();
       })
 
-    after(async function () {
-      await Gene.deleteOne({ NO_CALL: 'String' });
+      after(async function () {
+        await Gene.deleteOne({ NO_CALL: 'String' });
+      });
+
+      it('should have one entry', async function () {
+        const arrayOfGenes = await Gene.find({});
+        assert.exists(arrayOfGenes);
+        assert.isArray(arrayOfGenes);
+        assert.lengthOf(arrayOfGenes, 1);
+      })
+
+      it('should have particular gNomen', async function () {
+        const arrayOfgenes = await Gene.find({});
+        for (let gene of arrayOfgenes) {
+          assert.match(gene['gNomen'], /String/, 'correct key');
+        }
+      });
+
+      it('shouldn´ have particular date_of_upload', async function () {
+        const arrayOfGenes = await Gene.find({});
+        for (let gene of arrayOfGenes) {
+          assert.notMatch(gene['String'], /String/, 'regexp does not match');
+        }
+      });
+
     });
 
-    it('should have one entry', async function () {
-      const arrayOfGenes = await Gene.find({});
-      assert.exists(arrayOfGenes);
-      assert.isArray(arrayOfGenes);
-      assert.lengthOf(arrayOfGenes, 1);
-    })
+    describe('read a gene', function () {
+      before(async function () {
+        let newGene = new Gene(oneGeneData);
+        await newGene.save();
+      });
 
-    it('should have particular gNomen', async function () {
-      const arrayOfgenes = await Gene.find({});
-      for (let gene of arrayOfgenes) {
-        assert.match(gene['gNomen'], /String/, 'correct key');
-      }
-    });
+      after(async function () {
+        await Gene.deleteOne({ gNomen: 'String' });
+      });
 
-    it('shouldn´ have particular date_of_upload', async function () {
-      const arrayOfGenes = await Gene.find({});
-      for (let gene of arrayOfGenes) {
-        assert.notMatch(gene['String'], /String/, 'regexp does not match');
-      }
-    });
+      it('should have proper gene', async function () {
+        const gene = await Gene.find({ gNomen: 'String' });
+        assert.exists(gene);
+        assert.deepEqual({
+          Chr: gene[0].Chr,
+          Start: gene[0].Start,
+          End: gene[0].End,
+          Ref: gene[0].Ref,
+          Alt: gene[0].Alt,
+          gNomen: gene[0].gNomen,
+          Func_refGene: gene[0].Func_refGene,
+          Gene_refGene: gene[0].Gene_refGene,
+          AF_GNOMAD: gene[0].AF_GNOMAD,
+          InterVar_automated: gene[0].InterVar_automated,
+          clinvar: gene[0].clinvar,
+          MULTI_ALLELIC: gene[0].MULTI_ALLELIC,
+          HOM_VAR: gene[0].HOM_VAR,
+          HET_REF: gene[0].HET_REF,
+          HET_OTHER: gene[0].HET_OTHER,
+          HOM_REF: gene[0].HOM_REF,
+          NO_CALL: gene[0].NO_CALL,
+          OTHER_GT: gene[0].OTHER_GT,
+          VAR: gene[0].VAR,
+          CALLED: gene[0].CALLED,
+          QUAL: gene[0].QUAL,
+          AC: gene[0].AC,
+          AF: gene[0].AF,
+          HOM_VAR_samples: gene[0].HOM_VAR_samples,
+          HET_REF_samples: gene[0].HET_REF_samples,
+          HET_OTHERSamples: gene[0].HET_OTHERSamples,
+          HOM_REF_samples: gene[0].HOM_REF_samples,
+          NO_CALL_samples: gene[0].NO_CALL_samples,
+          OTHER_GT_samples: gene[0].OTHER_GT_samples,
+        },
+          oneGeneData
+          )
+      });
 
-  });
-
-  describe('read a gene', function () {
-    before(async function () {
-      let newGene = new Gene(oneGeneData);
-      await newGene.save();
-    });
-
-    after(async function () {
-      await Gene.deleteOne({ gNomen: 'String' });
-    });
-
-    it('should have proper gene', async function () {
-      const gene = await Gene.find({ gNomen: 'String' });
-      assert.exists(gene);
-      assert.deepEqual({
-        Chr: gene[0].Chr,
-        Start: gene[0].Start,
-        End: gene[0].End,
-        Ref: gene[0].Ref,
-        Alt: gene[0].Alt,
-        gNomen: gene[0].gNomen,
-        Func_refGene: gene[0].Func_refGene,
-        Gene_refGene: gene[0].Gene_refGene,
-        AF_GNOMAD: gene[0].AF_GNOMAD,
-        InterVar_automated: gene[0].InterVar_automated,
-        clinvar: gene[0].clinvar,
-        MULTI_ALLELIC: gene[0].MULTI_ALLELIC,
-        HOM_VAR: gene[0].HOM_VAR,
-        HET_REF: gene[0].HET_REF,
-        HET_OTHER: gene[0].HET_OTHER,
-        HOM_REF: gene[0].HOM_REF,
-        NO_CALL: gene[0].NO_CALL,
-        OTHER_GT: gene[0].OTHER_GT,
-        VAR: gene[0].VAR,
-        CALLED: gene[0].CALLED,
-        QUAL: gene[0].QUAL,
-        AC: gene[0].AC,
-        AF: gene[0].AF,
-        HOM_VAR_samples: gene[0].HOM_VAR_samples,
-        HET_REF_samples: gene[0].HET_REF_samples,
-        HET_OTHERSamples: gene[0].HET_OTHERSamples,
-        HOM_REF_samples: gene[0].HOM_REF_samples,
-        NO_CALL_samples: gene[0].NO_CALL_samples,
-        OTHER_GT_samples: gene[0].OTHER_GT_samples,
-      },
-        {
-          Chr: 'String',
-          Start: 'String',
-          End: 'String',
-          Ref: 'String',
-          Alt: 'String',
-          gNomen: 'String',
-          Func_refGene: 'String',
-          Gene_refGene: 'String',
-          AF_GNOMAD: 'String',
-          InterVar_automated: 'String',
-          clinvar: 'String',
-          MULTI_ALLELIC: 'String',
-          HOM_VAR: 'String',
-          HET_REF: 'String',
-          HET_OTHER: 'String',
-          HOM_REF: 'String',
-          NO_CALL: 'String',
-          OTHER_GT: 'String',
-          VAR: 'String',
-          CALLED: 'String',
-          QUAL: 'String',
-          AC: 'String',
-          AF: 'String',
-          HOM_VAR_samples: 'String',
-          HET_REF_samples: 'String',
-          HET_OTHERSamples: 'String',
-          HOM_REF_samples: 'String',
-          NO_CALL_samples: 'String',
-          OTHER_GT_samples: 'String',
-        })
-    });
-
-    // Negativce test that throws should be in try catch block and ensure, that AssertionError is thrown
-    it('unknown gene should fail', async function () {
-      try {
-        const gene = await gene.find({ gNomen: 'badkey12' });
-        assert.notExists(gene);
-        throw new Error('should not get here');
-      } catch (err) {
-        /* An error is expected, so it is an error if
-        the 'should not get here' error is thrown
-        */
-        assert.notEqual(err.message, 'should not get here');
-      }
-    });
-  });
-});
-
-
-describe('Mongoose validation tests - Task', function () {
-  describe('required fields', function () {
-    it('shouldn´t create one task without date', function (done) {
-      delete oneTaskData.date;
-      const newTask = new Task(oneTaskData);
-      newTask.save(function (err) {
-        chai.expect(err).to.exist
-          .and.be.instanceof(Error)
-          .and.have.property('message', 'Task validation failed: date: Path `date` is required.')
-        oneTaskData.date = '2021-07-30'
-        done();
+      // Negativce test that throws should be in try catch block and ensure, that AssertionError is thrown
+      it('unknown gene should fail', async function () {
+        try {
+          const gene = await gene.find({ gNomen: 'badkey12' });
+          assert.notExists(gene);
+          throw new Error('should not get here');
+        } catch (err) {
+          /* An error is expected, so it is an error if
+          the 'should not get here' error is thrown
+          */
+          assert.notEqual(err.message, 'should not get here');
+        }
       });
     });
+  });
 
-    it('shouldn´t create one task without done', function (done) {
-      delete oneTaskData.done;
-      const newTask = new Task(oneTaskData);
-      newTask.save(function (err) {
-        chai.expect(err).to.exist
-          .and.be.instanceof(Error)
-          .and.have.property('message', 'Task validation failed: done: Path `done` is required.')
-        oneTaskData.done = 'in process'
-        done();
+
+  describe('Mongoose validation tests - Task', function () {
+    describe('required fields', function () {
+      it('shouldn´t create one task without date', function (done) {
+        delete oneTaskData.date;
+        const newTask = new Task(oneTaskData);
+        newTask.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'Task validation failed: date: Path `date` is required.')
+          oneTaskData.date = '2021-07-30'
+          done();
+        });
       });
-    });
 
-    describe('check correct model - max and min length mongoose validators', function () {
-      // Loop for lengths testing
-      for (const property in Task.schema.obj) {
-        if (property !== 'done') {
-          if (['date'].includes(property)) {
-            itShouldTestMinConditions(oneTaskData, Task, chai, property);
-            itShouldTestMaxConditionsTask(oneTaskData, Task, chai, property);
-          } else {
-            itShouldTestMaxConditionsTask(oneTaskData, Task, chai, property);
+      it('shouldn´t create one task without done', function (done) {
+        delete oneTaskData.done;
+        const newTask = new Task(oneTaskData);
+        newTask.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'Task validation failed: done: Path `done` is required.')
+          oneTaskData.done = 'in process'
+          done();
+        });
+      });
+
+      describe('check correct model - max and min length mongoose validators', function () {
+        // Loop for lengths testing
+        for (const property in Task.schema.obj) {
+          if (property !== 'done') {
+            if (['date'].includes(property)) {
+              itShouldTestMinConditions(oneTaskData, Task, chai, property);
+              itShouldTestMaxConditionsTask(oneTaskData, Task, chai, property);
+            } else {
+              itShouldTestMaxConditionsTask(oneTaskData, Task, chai, property);
+            }
           }
         }
-      }
-    });
-  });
-});
-
-describe('Mongoose validation tests - Comment', function () {
-  describe('required fields', function () {
-    it('shouldn´t create one comment without name', function (done) {
-      delete oneCommentData.name;
-      const newComment = new Comment(oneCommentData);
-      newComment.save(function (err) {
-        chai.expect(err).to.exist
-          .and.be.instanceof(Error)
-          .and.have.property('message', 'comment validation failed: name: Path `name` is required.')
-        oneCommentData.name = 'Testovací komentář'
-        done();
       });
     });
+  });
 
-    describe('check correct model - max and min length mongoose validators', function () {
-      // Loop for lengths testing
-      for (const property in Comment.schema.obj) {
-        if (property !== 'done') {
-          itShouldTestMaxConditionsComment(oneCommentData, Comment, chai, property);
+  describe('Mongoose validation tests - Comment', function () {
+    describe('required fields', function () {
+      it('shouldn´t create one comment without name', function (done) {
+        delete oneCommentData.name;
+        const newComment = new Comment(oneCommentData);
+        newComment.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'comment validation failed: name: Path `name` is required.')
+          oneCommentData.name = 'Testovací komentář'
+          done();
+        });
+      });
+
+      describe('check correct model - max and min length mongoose validators', function () {
+        // Loop for lengths testing
+        for (const property in Comment.schema.obj) {
+          if (property !== 'done') {
+            itShouldTestMaxConditionsComment(oneCommentData, Comment, chai, property);
+          }
         }
-      }
+      });
     });
   });
-});
 
-describe('Mongoose validation tests - User', function () {
-  describe('required fields', function () {
-    it('shouldn´t create one user without role', function (done) {
-      delete oneUserData.role;
-      const newUser = new User(oneUserData);
-      newUser.save(function (err) {
-        chai.expect(err).to.exist
-          .and.be.instanceof(Error)
-          .and.have.property('message', 'User validation failed: role: Path `role` is required.')
-        oneUserData.role = 'Normal'
-        done();
+  describe('Mongoose validation tests - User', function () {
+    describe('required fields', function () {
+      it('shouldn´t create one user without role', function (done) {
+        delete oneUserData.role;
+        const newUser = new User(oneUserData);
+        newUser.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'User validation failed: role: Path `role` is required.')
+          oneUserData.role = 'Normal'
+          done();
+        });
       });
-    });
 
-    it('shouldn´t create one user without email', function (done) {
-      delete oneUserData.email;
-      const newUser = new User(oneUserData);
-      newUser.save(function (err) {
-        chai.expect(err).to.exist
-          .and.be.instanceof(Error)
-          .and.have.property('message', 'User validation failed: email: Path `email` is required.')
-        oneUserData.email = 'p@trioska.cz'
-        done();
+      it('shouldn´t create one user without email', function (done) {
+        delete oneUserData.email;
+        const newUser = new User(oneUserData);
+        newUser.save(function (err) {
+          chai.expect(err).to.exist
+            .and.be.instanceof(Error)
+            .and.have.property('message', 'User validation failed: email: Path `email` is required.')
+          oneUserData.email = 'p@trioska.cz'
+          done();
+        });
       });
-    });
 
-    describe('check correct model - max and min length mongoose validators', function () {
-      // Loop for lengths testing
-      for (const property in User.schema.obj) {
-        if (property !== 'role') {
-          itShouldTestMaxConditionsUser(oneUserData, User, chai, property);
+      describe('check correct model - max and min length mongoose validators', function () {
+        // Loop for lengths testing
+        for (const property in User.schema.obj) {
+          if (property !== 'role') {
+            itShouldTestMaxConditionsUser(oneUserData, User, chai, property);
+          }
         }
-      }
+      });
     });
   });
-});
 });
