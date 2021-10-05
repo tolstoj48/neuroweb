@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-uis": "mocha ui.task.test && mocha ui.comment.test && mocha ui.inhousedb.test && mocha ui.annotation.test && mocha ui.fastqs.test && mocha ui.user.test",
+    "test-uis": "mocha ui.task.test && mocha ui.comment.test && mocha ui.inhousedb.test && mocha ui.annotation.test",
     "test-annotation": "mocha ui.annotation.test",
     "test-comment": "mocha ui.comment.test",
     "test-inhousedb": "mocha ui.inhousedb.test",
-    "test-task": "mocha ui.task.test",
-    "test-user": "mocha ui.user.test"
+    "test-task": "mocha ui.task.test"
 
   },
   "author": "",

@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all-tests": "cd testexport PATH=$PATH:/c/Users/Petr.Musil/Desktop/ms_prace/skriptyent && npm run test && cd .. && cd testui && npm run test-uis && cd .. && cd test-model && npm run test && cd .. && cd test-joi-validation && npm run test"
+    "all-tests": "cd test-content && npm run test && cd .. && cd testui && npm run test-uis && cd .. && cd test-model && npm run test && cd .. && cd test-joi-validation && npm run test",
+    "test-contents": "cd test-content && npm run test",
+    "test-uis": "cd testui && npm run test-uis",
+    "test-models": "cd test-model && npm run test",
+    "test-jois": "cd test-joi-validation && npm run test"
+
   },
   "author": "",
   "license": "ISC",
