@@ -4,7 +4,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 
-// Passport 
+// Passport
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/userModel');
@@ -45,8 +45,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 // Mongodb for sessions
 const MongoDBStore = require('connect-mongo');
-// Db url
-const dbUrl = 'mongodb://localhost:27017/neuroweb';
+// Db url - always depends on the IP address of mongodb container
+const dbUrl = 'mongodb://172.18.0.2:27017/neuroweb';
 
 
 // Protection against sql injection

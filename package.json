@@ -33,7 +33,7 @@
     "popper.js": "^1.16.1",
     "rotating-file-stream": "^2.1.5",
     "sanitize-html": "^2.4.0",
-    "tinymce": "^5.8.2"
+    "tinymce": "^5.10.4"
   },
   "devDependencies": {
     "eslint": "^7.31.0",

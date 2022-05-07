@@ -3,7 +3,7 @@
 const mongoose = require('mongoose')
   , User = require('../models/userModel')
   // Db url
-  , dbUrl = 'mongodb://localhost:27017/neuroweb'
+  , dbUrl = 'mongodb://172.18.0.2:27017/neuroweb'
   // Credentials
   , { credentials } = require('../config')
 
@@ -11,9 +11,9 @@ const mongoose = require('mongoose')
 async function createNewUser() {
   try {
     const email = 'a@g.com'
-    , username = 'alena_10'
-    , role = 'Admin'
-    , user = new User({ role, email, username })
+      , username = 'alena_10'
+      , role = 'Admin'
+      , user = new User({ role, email, username })
     await User.register(user, credentials.newUserPassword);
   } catch (err) {
     console.log(err.message)

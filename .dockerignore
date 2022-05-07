@@ -1,0 +1,25 @@
+# Ignoring the logs directory
+log/*.*
+
+# Ignoring git, docker files and cache folders
+.git
+.cache
+.gitignore
+.dockerignore
+Dockerfile
+
+# Ignoring all the markdown and class files
+*.md
+**/*.class
+
+# Ignoring data
+analysis-data/*.*
+annotated-data/*.*
+uploads/*.*
+
+# Ignoring node_modules
+node_modules
+
+# Ignoring tests
+test
+

@@ -1,0 +1,24 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/cocto/neuroweb/mongoDbData:/data/db
+  web:
+    build: ../
+    container_name: neuroweb-app
+    restart: always
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../:/opt/neuroweb
+    links:
+      - mongodb
+volumes:
+  db:
